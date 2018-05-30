@@ -41,7 +41,7 @@ exports.up = function(knex, Promise) {
     table.text('notes');
     table.string('img_url').notNullable();
     table.timestamp('sold_at');
-    table.table.timestamps(true, true);
+    table.timestamps(true, true);
   });
 };
 
