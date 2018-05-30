@@ -1,5 +1,5 @@
 const express = require('express');
-// const routes = require('./routes/routes');
+const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
 
 const server = express();
@@ -12,7 +12,7 @@ server.use(
 );
 server.use(bodyParser.json());
 
-// server.use('/api', routes);
+server.use('/api', routes);
 
 server.listen(PORT, () => {
   process.stdout.write(`Server listening on port: ${PORT}`);
