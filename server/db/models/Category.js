@@ -9,7 +9,7 @@ class Category extends bookshelf.Model {
   }
 
   Items() {
-    return this.hasMany('Item', 'category');
+    return this.hasMany('Item', 'category_id');
   }
 }
 
