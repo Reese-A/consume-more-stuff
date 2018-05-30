@@ -1,21 +1,21 @@
 const express = require('express');
-// const routes = require('./routes');
+// const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
 
-const app = express();
+const server = express();
 const PORT = process.env.PORT || 9001;
 
-app.use(
+server.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
-app.use(bodyParser.json());
+server.use(bodyParser.json());
 
-// app.use('/api', routes);
+// server.use('/api', routes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   process.stdout.write(`Server listening on port: ${PORT}`);
 });
 
-module.exports = app;
+module.exports = server;
