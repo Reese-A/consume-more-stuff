@@ -16,7 +16,11 @@ class Sidebar extends React.Component {
           </li>
           <li>
             <span>Categories</span>
-            <ul />
+            <ul>
+              {this.props.categories.map(category => {
+                return <li key={category.id}>{category.name}</li>;
+              })}
+            </ul>
           </li>
         </ul>
       </div>
