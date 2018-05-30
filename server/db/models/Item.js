@@ -9,15 +9,15 @@ class Item extends bookshelf.Model {
   }
 
   condition() {
-    return this.belongsTo('Condition', 'condition');
+    return this.belongsTo('Condition', 'condition_id');
   }
 
   category() {
-    return this.belongsTo('Category', 'category');
+    return this.belongsTo('Category', 'category_id');
   }
 
   status() {
-    return this.belongsTo('Status', 'status');
+    return this.belongsTo('Status', 'status_id');
   }
 
   owner() {
