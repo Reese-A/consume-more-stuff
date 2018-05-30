@@ -5,13 +5,21 @@ import logo from './logo.svg';
 import './App.css';
 
 import { loadCategories } from '../../redux/actions/category-actions';
+import { loadConditions } from '../../redux/actions/condition-actions';
+import { loadStatuses } from '../../redux/actions/status-actions';
+import { loadUsers } from '../../redux/actions/user-actions';
+import { loadItems } from '../../redux/actions/item-actions';
 
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
 import Main from '../../components/Main/Main';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    console.log(this.props);
     return (
       <div>
         <Header />
@@ -22,12 +30,20 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.loadCategories();
+    this.props.loadConditions();
+    this.props.loadStatuses();
+    this.props.loadUsers();
+    this.props.loadItems();
   }
 }
 
 const mapStateToProps = state => {
   return {
-    categories: state.category
+    categories: state.category,
+    conditions: state.condition,
+    statuses: state.status,
+    users: state.users,
+    items: state.item
   };
 };
 
@@ -35,6 +51,18 @@ const mapDispatchToProps = dispatch => {
   return {
     loadCategories: () => {
       dispatch(loadCategories());
+    },
+    loadConditions: () => {
+      dispatch(loadConditions());
+    },
+    loadStatuses: () => {
+      dispatch(loadStatuses());
+    },
+    loadUsers: () => {
+      dispatch(loadUsers());
+    },
+    loadItems: () => {
+      dispatch(loadItems());
     }
   };
 };
