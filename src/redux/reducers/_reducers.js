@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import category from './catergory-reducer';
+import category from './category-reducer';
 import condition from './condition-reducer';
 import item from './item-reducer';
 import status from './status-reducer';
