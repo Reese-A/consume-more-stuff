@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "HomeContent.scss"
+        "Home.scss"
     ],
     "names": [],
-    "file": "HomeContent.css"
+    "file": "Home.css"
 }
