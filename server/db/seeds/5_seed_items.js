@@ -1,10 +1,10 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name')
+  return knex('items')
     .del()
     .then(function() {
       // Inserts seed entries
-      return knex('table_name').insert([
+      return knex('items').insert([
         {
           id: 1,
           description: 'Refrigerator of Tears',
