@@ -6,15 +6,17 @@ import './App.css';
 
 import { loadCategories } from '../../redux/actions/category-actions';
 
-import Home from '../../components/Home/Home';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import Header from '../../components/Header/Header';
+import Main from '../../components/Main/Main';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Sidebar />
-        <Home />
+        <Main />
       </div>
     );
   }
