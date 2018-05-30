@@ -21,4 +21,5 @@ yarn-debug.log*
 yarn-error.log*
 
 setup.sql
-knexfile.js
+
+.env
