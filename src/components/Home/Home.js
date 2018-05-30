@@ -1,10 +1,12 @@
 import React from 'react';
 
-class HomeContent extends React.Component {
-  constructor() {}
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return <div>Home Content</div>;
   }
 }
 
-export default HomeContent;
+export default Home;
