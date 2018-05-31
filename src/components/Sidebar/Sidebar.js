@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import './Sidebar.css';
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,11 @@ class Sidebar extends React.Component {
           </li>
           <li>
             <span>Categories</span>
-            <ul />
+            <ul>
+              {this.props.categories.map(category => {
+                return <li key={category.id}>{category.name}</li>;
+              })}
+            </ul>
           </li>
         </ul>
       </div>

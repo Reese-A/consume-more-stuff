@@ -1,1 +1,10 @@
-/* No CSS *//*# sourceMappingURL=App.css.map */
+#app {
+  display: grid;
+  grid-template-rows: 64px 90%;
+  grid-template-columns: 200px 80%;
+}
+
+#app header {
+  grid-area: 1/1/1/3;
+}
+/*# sourceMappingURL=App.css.map */
