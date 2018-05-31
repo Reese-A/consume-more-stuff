@@ -1,1 +1,22 @@
-/* No CSS *//*# sourceMappingURL=Header.css.map */
+header {
+  display: grid;
+  grid-template-columns: 15% 1fr 15%;
+  background: #252833;
+}
+
+header * {
+  color: white;
+}
+
+header #header_logo {
+  justify-self: center;
+  align-self: center;
+  font-size: 1.5rem;
+}
+
+header #login_button {
+  grid-area: 1/3/1/3;
+  justify-self: center;
+  align-self: center;
+}
+/*# sourceMappingURL=Header.css.map */

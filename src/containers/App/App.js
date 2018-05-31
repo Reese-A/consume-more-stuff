@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     console.log(this.props);
     return (
-      <div>
+      <div id="app">
         <Header />
         <Sidebar />
         <Main />
