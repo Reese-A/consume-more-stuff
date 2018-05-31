@@ -1,1 +1,13 @@
-/* No CSS *//*# sourceMappingURL=Sidebar.css.map */
+#sidebar {
+  background: grey;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  padding-left: 24px;
+}
+
+#sidebar ul li {
+  margin: 8px 0px;
+}
+/*# sourceMappingURL=Sidebar.css.map */

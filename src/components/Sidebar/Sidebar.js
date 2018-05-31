@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import './Sidebar.css';
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
