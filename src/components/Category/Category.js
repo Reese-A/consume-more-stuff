@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import Card from '../Card/Card';
 
@@ -15,11 +15,13 @@ class Category extends React.Component {
     const category = this.props.categories.find(category => {
       return category.name === name;
     });
+
+    if (!category) return <Redirect to="/" />;
+
     const id = category ? category.id : undefined;
 
     let items = this.props.items[id] || [];
 
-    console.log(items);
     return (
       <div id="category">
         <span className="category_title">{this.props.match.params.name}</span>
