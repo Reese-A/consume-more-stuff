@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import moment from 'moment';
 import Card from '../Card/Card';
 
 import './All.css';
@@ -15,9 +15,15 @@ class All extends React.Component {
       return [...items, ...itemArr];
     }, []);
 
+    items.sort((a, b) => {
+      return moment(b.created_at).diff(moment(a.created_at));
+    });
+
+    console.log(items);
+
     return (
       <div id="all_items">
-        <span className="all_title">{this.props.match.params.name}</span>
+        <span className="all_title">All Items</span>
         <div className="all_items_container">
           {items.map(item => {
             return (
