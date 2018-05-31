@@ -1,1 +1,20 @@
-/* No CSS *//*# sourceMappingURL=Card.css.map */
+.card {
+  margin: 16px;
+  height: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-rows: 200px 1fr 1fr;
+}
+
+.card .card_image {
+  height: 200px;
+  width: 250px;
+  grid-area: 1/1/1/1;
+}
+
+.card .card_price {
+  grid-area: 1/1/1/1;
+  /* position: relative; */
+  margin: 16px;
+}
+/*# sourceMappingURL=Card.css.map */
