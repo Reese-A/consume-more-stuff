@@ -1,7 +1,7 @@
 .row {
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  // overflow: scroll;
   .row_title {
     margin: 16px;
     text-transform: capitalize;
@@ -10,5 +10,6 @@
   }
   .row_container {
     display: flex;
+    overflow: scroll;
   }
 }

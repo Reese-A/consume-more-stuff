@@ -1,7 +1,6 @@
 .row {
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 }
 
 .row .row_title {
@@ -13,5 +12,6 @@
 
 .row .row_container {
   display: flex;
+  overflow: scroll;
 }
 /*# sourceMappingURL=Row.css.map */
