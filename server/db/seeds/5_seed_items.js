@@ -18,7 +18,7 @@ exports.seed = function(knex, Promise) {
         item.created_at = faker.date.past(2);
         item.updated_at = item.created_at;
         item.owner = 1;
-        item.img_url = faker.image.imageUrl();
+        item.img_url = 'https://via.placeholder.com/250x250';
         items.push(item);
       }
       return knex('items').insert(items);
