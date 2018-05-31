@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import Category from '../Category/Category';
 import Login from '../../containers/Login/Login';
 import All from '../All/All';
+import Register from '../../containers/Register/Register';
 
 const Main = props => {
   return (
@@ -14,6 +15,7 @@ const Main = props => {
         <Route exact path="/category/:name" component={Category} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/all" component={All} />
+        <Route exact path="/register" component={Register} />
       </Switch>
     </main>
   );
