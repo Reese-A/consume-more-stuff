@@ -1,7 +1,7 @@
 #app {
   display: grid;
   grid-template-rows: 64px 1fr;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px calc(100vw - 200px);
 }
 
 #app header {
