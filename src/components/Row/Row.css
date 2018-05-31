@@ -1,1 +1,17 @@
-/* No CSS *//*# sourceMappingURL=Row.css.map */
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.row .row_title {
+  margin: 16px;
+  text-transform: capitalize;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+.row .row_container {
+  display: flex;
+  overflow: scroll;
+}
+/*# sourceMappingURL=Row.css.map */

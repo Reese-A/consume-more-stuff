@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  // overflow: scroll;
+  .row_title {
+    margin: 16px;
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: 100;
+  }
+  .row_container {
+    display: flex;
+    overflow: scroll;
+  }
+}
