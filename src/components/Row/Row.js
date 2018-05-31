@@ -20,7 +20,6 @@ class Row extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     categories: state.category,
     items: state.item
