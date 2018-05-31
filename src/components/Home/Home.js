@@ -4,13 +4,15 @@ import { withRouter } from 'react-router-dom';
 
 import Row from '../Row/Row';
 
+import './Home.css';
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div id="home_content">
+      <div id="home">
         {this.props.categories.map(category => {
           return (
             <Row
