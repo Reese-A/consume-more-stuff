@@ -4,25 +4,21 @@ import { withRouter } from 'react-router-dom';
 
 import Card from '../Card/Card';
 
-import './Category.css';
+import './All.css';
 
 class All extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { name } = this.props.match.params;
-    const category = this.props.categories.find(category => {
-      return category.name === name;
-    });
-    const id = category ? category.id : undefined;
-
-    let items = this.props.items[id] || [];
+    const items = Object.values(this.props.items).reduce((items, itemArr) => {
+      return [...items, ...itemArr];
+    }, []);
 
     return (
-      <div id="category">
-        <span className="category_title">{this.props.match.params.name}</span>
-        <div className="category_container">
+      <div id="all_items">
+        <span className="all_title">{this.props.match.params.name}</span>
+        <div className="all_items_container">
           {items.map(item => {
             return (
               <Card
