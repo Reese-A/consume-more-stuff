@@ -32,6 +32,11 @@ class Sidebar extends React.Component {
               })}
             </ul>
           </li>
+          <li>
+            <NavLink exact to="/all">
+              All
+            </NavLink>
+          </li>
         </ul>
       </div>
     );
