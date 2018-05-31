@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 
 import Card from '../Card/Card';
 
+import './Row.css';
+
 class Row extends Component {
   constructor(props) {
     super(props);
@@ -12,19 +14,21 @@ class Row extends Component {
   render() {
     const items = this.props.items[this.props.categoryId] || [];
     return (
-      <div>
+      <div className="row">
         <div className="row_title">{this.props.categoryName}</div>
-        {items.map(item => {
-          return (
-            <Card
-              key={item.id}
-              description={item.description}
-              price={item.price}
-              img_url={item.img_url}
-              created_at={item.created_at}
-            />
-          );
-        })}
+        <div className="row_container">
+          {items.slice(0, 5).map(item => {
+            return (
+              <Card
+                key={item.id}
+                description={item.description}
+                price={item.price}
+                img_url={item.img_url}
+                created_at={item.created_at}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
