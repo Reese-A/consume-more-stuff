@@ -21,7 +21,6 @@ exports.seed = function(knex, Promise) {
         item.img_url = faker.image.imageUrl();
         items.push(item);
       }
-      console.log(items);
       return knex('items').insert(items);
       //     {
       //       id: 1,
