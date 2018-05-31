@@ -11,8 +11,13 @@ class Header extends Component {
     return (
       <header id="header">
         <div id="header_logo">CMS</div>
-        <div id="login_button">
-          <Link to="/login">Login</Link>
+        <div id="auth_buttons">
+          <Link id="login_button" to="/login">
+            Login
+          </Link>
+          <Link id="register_button" to="/register">
+            Register
+          </Link>
         </div>
       </header>
     );
