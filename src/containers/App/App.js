@@ -13,7 +13,7 @@ import Main from '../../components/Main/Main';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div id="app">
         <Header />
         <Sidebar />
         <Main />
