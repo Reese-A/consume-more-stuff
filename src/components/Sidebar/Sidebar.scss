@@ -1,11 +1,19 @@
 #sidebar {
   background: grey;
+  a {
+    text-decoration: none;
+    color: inherit;
+    .active {
+      background: red;
+    }
+  }
   ul {
     list-style-type: none;
     padding-left: 24px;
 
     li {
       margin: 8px 0px;
+      text-transform: capitalize;
     }
   }
 }

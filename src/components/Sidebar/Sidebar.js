@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import './Sidebar.css';
 
@@ -14,13 +14,21 @@ class Sidebar extends React.Component {
       <div id="sidebar" className="sidebar">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink exact to="/">
+              Home
+            </NavLink>
           </li>
           <li>
             <span>Categories</span>
             <ul>
               {this.props.categories.map(category => {
-                return <li key={category.id}>{category.name}</li>;
+                return (
+                  <li key={category.id}>
+                    <NavLink exact to={`/category/${category.name}`}>
+                      {category.name}
+                    </NavLink>
+                  </li>
+                );
               })}
             </ul>
           </li>
@@ -31,7 +39,6 @@ class Sidebar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     categories: state.category
   };
