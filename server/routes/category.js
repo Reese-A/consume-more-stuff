@@ -20,6 +20,7 @@ router.route('/items').get((req, res) => {
           {
             items: qb => {
               qb.limit(limit);
+              qb.orderBy('created_at', 'desc');
             }
           }
         ]
