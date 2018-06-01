@@ -8,10 +8,13 @@
   grid-template-rows: 200px 1fr 1fr;
 }
 
-.card .card_image {
+.card .image_link {
+  grid-area: 1/1/1/1;
+}
+
+.card .image_link .card_image {
   height: 200px;
   width: 250px;
-  grid-area: 1/1/1/1;
 }
 
 .card .card_price {

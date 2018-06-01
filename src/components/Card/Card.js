@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Card.css';
 
 class Card extends Component {
@@ -10,9 +11,13 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        <img className="card_image" src={this.props.img_url} />
+        <Link className="image_link" to={`/item/${this.props.id}`}>
+          <img className="card_image" src={this.props.img_url} />
+        </Link>
         <div className="card_price">${this.props.price}</div>
-        <div className="card_description">{this.props.description}</div>
+        <div className="card_description">
+          <Link to={`/item/${this.props.id}`}>{this.props.description}</Link>
+        </div>
         <div className="card_created_at">{this.props.created_at}</div>
       </div>
     );
