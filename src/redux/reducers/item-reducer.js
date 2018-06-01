@@ -1,4 +1,4 @@
-import { LOAD_ITEMS, LOAD_ITEM } from '../actions/item-actions';
+import { LOAD_ITEMS, LOAD_ITEM, NEW_ITEM } from '../actions/item-actions';
 
 const initialState = [];
 
@@ -12,8 +12,14 @@ export const items = (state = initialState, action) => {
         items[item.category_id].push(item);
         return items;
       }, {});
-      console.log(items);
       return items;
+      break;
+    case NEW_ITEM:
+      const item = action.item;
+      const oldItems = { ...state };
+      oldItems[item.category_id].push(item);
+      return oldItems;
+      break;
     default:
       return state;
   }

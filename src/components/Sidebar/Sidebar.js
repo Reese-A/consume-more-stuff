@@ -37,6 +37,11 @@ class Sidebar extends React.Component {
               All
             </NavLink>
           </li>
+          <li>
+            <NavLink exact to="/item/new-item">
+              New Item
+            </NavLink>
+          </li>
         </ul>
       </div>
     );
@@ -56,4 +61,4 @@ const mapStateToProps = state => {
 //     }
 //   };
 // };
-export default connect(mapStateToProps, null)(Sidebar);
+export default withRouter(connect(mapStateToProps, null)(Sidebar));
