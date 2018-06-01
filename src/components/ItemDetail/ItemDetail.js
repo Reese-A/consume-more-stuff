@@ -22,7 +22,7 @@ class ItemDetail extends Component {
     const condition = this.props.item.condition
       ? this.props.item.condition.name
       : null;
-return (
+    return (
       <div id="item_detail">
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
