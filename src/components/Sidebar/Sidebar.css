@@ -7,10 +7,6 @@
   color: inherit;
 }
 
-#sidebar a .active {
-  background: red;
-}
-
 #sidebar ul {
   list-style-type: none;
   padding-left: 24px;
@@ -19,5 +15,9 @@
 #sidebar ul li {
   margin: 8px 0px;
   text-transform: capitalize;
+}
+
+#sidebar .active {
+  background: red;
 }
 /*# sourceMappingURL=Sidebar.css.map */
