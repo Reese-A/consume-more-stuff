@@ -4,7 +4,6 @@ import { loadItem } from '../../redux/actions/item-actions';
 import { Link } from 'react-router-dom';
 
 import './ItemDetail.css';
-
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,7 @@ class ItemDetail extends Component {
     const condition = this.props.item.condition
       ? this.props.item.condition.name
       : null;
-    return (
+return (
       <div id="item_detail">
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
