@@ -34,9 +34,6 @@ class ItemDetail extends Component {
           <ul id="details_box">
             <div id="details_header">Item Details</div>
             <li id="item_condition">Condition: {condition}</li>
-            <li>make</li>
-            <li>model</li>
-            <li>dimensions</li>
             {this.props.make ? (
               <li id="item_make">Make: {this.props.make}</li>
             ) : null}
