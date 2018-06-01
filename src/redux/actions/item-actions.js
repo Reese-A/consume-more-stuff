@@ -1,5 +1,6 @@
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const LOAD_ITEM = 'LOAD_ITEM';
+export const NEW_ITEM = 'NEW_ITEM';
 
 export const loadItems = () => {
   return dispatch => {
@@ -21,6 +22,25 @@ export const loadItem = id => {
       .then(item => {
         return dispatch({
           type: LOAD_ITEM,
+          item
+        });
+      });
+  };
+};
+
+export const newItem = data => {
+  return dispatch => {
+    return fetch(`/item`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(item => {
+        return dispatch({
+          type: NEW_ITEM,
           item
         });
       });
