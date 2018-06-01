@@ -15,9 +15,9 @@ const Main = props => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/category/:name" component={Category} />
-        <Route exact path="/login" component={Login} />
+        {/* <Route exact path="/login" component={Login} /> */}
         <Route exact path="/all" component={All} />
-        <Route exact path="/register" component={Register} />
+        {/* <Route exact path="/register" component={Register} /> */}
         <Route exact path="/item/new-item" component={NewItem} />
         <Route exact path="/item/:id" component={ItemDetail} />
       </Switch>
