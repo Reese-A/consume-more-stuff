@@ -29,6 +29,7 @@ class All extends React.Component {
             return (
               <Card
                 key={item.id}
+                id={item.id}
                 description={item.description}
                 price={item.price}
                 img_url={'http://via.placeholder.com/250x200'}

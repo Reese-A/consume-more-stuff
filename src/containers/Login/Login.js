@@ -26,11 +26,12 @@ class Login extends Component {
   render() {
     return (
       <form id="login_form" onSubmit={this.handleSubmit}>
+        <div id="login_title">Login as existing user</div>
         <label htmlFor="login_email">Email: </label>
         <input
+          id="login_email"
           type="text"
           name="email"
-          id="login_email"
           value={this.state.email}
           onChange={this.emailChangeHandler}
         />
@@ -38,9 +39,9 @@ class Login extends Component {
 
         <label htmlFor="login_password">Password: </label>
         <input
+          id="login_password"
           type="password"
           name="password"
-          id="login_password"
           value={this.state.password}
           onChange={this.passwordChangeHandler}
         />
