@@ -14,7 +14,7 @@ class ItemDetail extends Component {
 
   render() {
     console.log(this.props.item);
-    return <div>Hello World</div>;
+    return <div>Hello World!</div>;
   }
 }
 
