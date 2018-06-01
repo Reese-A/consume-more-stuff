@@ -11,7 +11,6 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/items').get((req, res) => {
-  console.log(req.query.limit);
   const limit = req.query.limit;
   return Category.fetchAll().then(categories => {
     const promises = categories.map(category => {
