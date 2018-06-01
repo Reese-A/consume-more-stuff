@@ -4,6 +4,7 @@ require('dotenv').config();
 
 module.exports = {
   development: {
+    // debug: true,
     client: 'pg',
     connection: {
       host: 'localhost',
@@ -18,7 +19,6 @@ module.exports = {
     seeds: {
       directory: path.join(__dirname, 'server/db/seeds')
     }
-    // debug: true
   },
 
   staging: {
