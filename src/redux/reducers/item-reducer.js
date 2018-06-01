@@ -1,8 +1,8 @@
-import { LOAD_ITEMS } from '../actions/item-actions';
+import { LOAD_ITEMS, LOAD_ITEM } from '../actions/item-actions';
 
 const initialState = [];
 
-const item = (state = initialState, action) => {
+export const items = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ITEMS:
       const items = action.items.reduce((items, item) => {
@@ -18,5 +18,11 @@ const item = (state = initialState, action) => {
       return state;
   }
 };
-
-export default item;
+export const item = (state = {}, action) => {
+  switch (action.type) {
+    case LOAD_ITEM:
+      return action.item;
+    default:
+      return state;
+  }
+};

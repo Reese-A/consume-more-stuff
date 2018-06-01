@@ -43,7 +43,7 @@ const mapStateToProps = state => {
     conditions: state.condition,
     statuses: state.status,
     users: state.users,
-    items: state.item
+    items: state.items
   };
 };
 

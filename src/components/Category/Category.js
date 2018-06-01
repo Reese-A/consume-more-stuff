@@ -46,7 +46,7 @@ class Category extends React.Component {
 const mapStateToProps = state => {
   return {
     categories: state.category,
-    items: state.item
+    items: state.items
   };
 };
 
