@@ -21,6 +21,7 @@ class Row extends Component {
             return (
               <Card
                 key={item.id}
+                id={item.id}
                 description={item.description}
                 price={item.price}
                 img_url={item.img_url}
@@ -37,7 +38,7 @@ class Row extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.category,
-    items: state.item
+    items: state.items
   };
 };
 
