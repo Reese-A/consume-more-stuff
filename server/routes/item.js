@@ -9,4 +9,13 @@ router.route('/').get((req, res) => {
   });
 });
 
+router.route('/:id').get((req, res) => {
+  const id = req.params.id;
+  return new Item({ id })
+    .fetch({ withRelated: ['condition', 'category', 'status', 'owner'] })
+    .then(item => {
+      return res.json(item);
+    });
+});
+
 module.exports = router;
