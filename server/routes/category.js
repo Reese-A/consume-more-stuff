@@ -20,13 +20,12 @@ router.route('/items').get((req, res) => {
   return Category.fetchAll()
     .then(categories => {
       const promises = categories.map(category => {
-        return new Category({
-          id: category.id
-        }).fetch({
+        return new Category({ id: category.id }).fetch({
           withRelated: [
             {
               items: qb => {
                 qb.limit(limit);
+                qb.orderBy('created_at', 'desc');
               }
             }
           ]
