@@ -6,10 +6,15 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    return Item.fetchAll({}).then(items => {
-      return res.json(items);
-    });
+    return Item.fetchAll({})
+      .then(items => {
+        return res.json(items);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   })
+
   .post((req, res) => {
     const {
       description,
@@ -37,9 +42,14 @@ router
       status_id: 1
     };
 
-    return new Item(newItem).save().then(item => {
-      return res.json(item);
-    });
+    return new Item(newItem)
+      .save()
+      .then(item => {
+        return res.json(item);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 
 router.route('/:id').get((req, res) => {
@@ -48,6 +58,9 @@ router.route('/:id').get((req, res) => {
     .fetch({ withRelated: ['condition', 'category', 'status', 'owner'] })
     .then(item => {
       return res.json(item);
+    })
+    .catch(err => {
+      console.log(err);
     });
 });
 

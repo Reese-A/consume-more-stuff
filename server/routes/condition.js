@@ -4,9 +4,13 @@ const Condition = require('../db/models/Condition');
 const router = express.Router();
 
 router.route('/').get((req, res) => {
-  return Condition.fetchAll({}).then(conditions => {
-    return res.json(conditions);
-  });
+  return Condition.fetchAll({})
+    .then(conditions => {
+      return res.json(conditions);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
