@@ -1,8 +1,24 @@
-#app {
+#app_main {
   min-height: 100vh;
   display: grid;
   grid-template-rows: 64px 1fr;
   grid-template-columns: 200px calc(100vw - 200px);
+  header {
+    grid-area: 1/1/1/3;
+  }
+}
+#app_login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 64px 1fr;
+  header {
+    grid-area: 1/1/1/3;
+  }
+}
+#app_register {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 64px 1fr;
   header {
     grid-area: 1/1/1/3;
   }
