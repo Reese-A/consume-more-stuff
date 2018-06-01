@@ -9,4 +9,13 @@ router.route('/').get((req, res) => {
   });
 });
 
+router.route('/:name').get((req, res) => {
+  const name = req.params.name;
+  return new Category({ name })
+    .fetch({ withRelated: 'items' })
+    .then(category => {
+      return res.json(category);
+    });
+});
+
 module.exports = router;
