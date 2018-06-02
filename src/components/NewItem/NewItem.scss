@@ -7,6 +7,7 @@
   }
   form {
     display: grid;
+    max-width: 500px;
     * {
       text-transform: capitalize;
     }

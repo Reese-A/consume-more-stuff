@@ -10,6 +10,7 @@
 
 #new_item form {
   display: grid;
+  max-width: 500px;
 }
 
 #new_item form * {
