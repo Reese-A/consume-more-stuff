@@ -18,7 +18,7 @@ class Row extends Component {
       <div className="row">
         <div className="row_title">{this.props.categoryName}</div>
         <div className="row_container">
-          {items.slice(0, 5).map(item => {
+          {items.map(item => {
             return (
               <Card
                 key={item.id}

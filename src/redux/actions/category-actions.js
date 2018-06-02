@@ -1,5 +1,5 @@
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
-export const LOAD_CATEGORY_ITEMS = 'LOAD_CATEGORY_ITEMS';
+export const LOAD_ALL_CATEGORY_ITEMS = 'LOAD_ALL_CATEGORY_ITEMS';
 
 export const loadCategories = () => {
   return dispatch => {
@@ -14,13 +14,13 @@ export const loadCategories = () => {
   };
 };
 
-export const loadCategoryItems = limit => {
+export const loadAllCategoryItems = limit => {
   return dispatch => {
     return fetch(`/category/items?limit=${limit}`)
       .then(res => res.json())
       .then(categories => {
         return dispatch({
-          type: LOAD_CATEGORY_ITEMS,
+          type: LOAD_ALL_CATEGORY_ITEMS,
           categories
         });
       });

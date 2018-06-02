@@ -1,5 +1,5 @@
 import { LOAD_ITEMS, LOAD_ITEM, NEW_ITEM } from '../actions/item-actions';
-import { LOAD_CATEGORY_ITEMS } from '../actions/category-actions';
+import { LOAD_ALL_CATEGORY_ITEMS } from '../actions/category-actions';
 
 import store from '../../index';
 
@@ -15,7 +15,7 @@ export const items = (state = {}, action) => {
       }, {});
       return items;
     }
-    case LOAD_CATEGORY_ITEMS: {
+    case LOAD_ALL_CATEGORY_ITEMS: {
       const items = action.categories.reduce((items, category) => {
         items[category.id] = category.items;
         return items;

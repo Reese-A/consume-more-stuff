@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { loadCategoryItems } from '../../redux/actions/category-actions';
+import { loadAllCategoryItems } from '../../redux/actions/category-actions';
 
 import Row from '../Row/Row';
 
@@ -13,7 +13,7 @@ class Home extends React.Component {
     super(props);
   }
   componentDidMount() {
-    this.props.loadCategoryItems(5);
+    this.props.loadAllCategoryItems(5);
   }
   render() {
     return (
@@ -40,8 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadCategoryItems: limit => {
-      dispatch(loadCategoryItems(limit));
+    loadAllCategoryItems: limit => {
+      dispatch(loadAllCategoryItems(limit));
     }
   };
 };
