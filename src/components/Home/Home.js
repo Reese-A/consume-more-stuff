@@ -13,7 +13,7 @@ class Home extends React.Component {
     super(props);
   }
   componentDidMount() {
-    this.props.loadCategoryItems();
+    this.props.loadCategoryItems(5);
   }
   render() {
     return (
@@ -40,8 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadCategoryItems: () => {
-      dispatch(loadCategoryItems());
+    loadCategoryItems: limit => {
+      dispatch(loadCategoryItems(limit));
     }
   };
 };

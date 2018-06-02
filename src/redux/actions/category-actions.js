@@ -14,9 +14,9 @@ export const loadCategories = () => {
   };
 };
 
-export const loadCategoryItems = () => {
+export const loadCategoryItems = limit => {
   return dispatch => {
-    return fetch('/category/items?limit=5')
+    return fetch(`/category/items?limit=${limit}`)
       .then(res => res.json())
       .then(categories => {
         return dispatch({
