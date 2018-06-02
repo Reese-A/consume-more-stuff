@@ -1,1 +1,19 @@
-/* No CSS *//*# sourceMappingURL=NewItem.css.map */
+#new_item {
+  margin: 32px;
+  display: grid;
+}
+
+#new_item #new_item_title {
+  font-size: 1.5rem;
+  margin: 16px;
+}
+
+#new_item form {
+  display: grid;
+}
+
+#new_item form * {
+  margin: 8px;
+  height: 32px;
+}
+/*# sourceMappingURL=NewItem.css.map */
