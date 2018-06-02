@@ -36,22 +36,33 @@ class NewItem extends React.Component {
       <div id="new_item">
         <span id="new_item_title">Add An Item</span>
         <form>
-          <input type="text" name="description" required />
-          <input type="number" name="price" />
-          <input type="text" name="units" />
+          <input
+            type="text"
+            name="description"
+            placeholder="Description"
+            required
+          />
+          <input type="number" name="price" placeholder="Price" />
+          <input type="text" name="units" placeholder="Units" />
 
-          <input type="text" name="make" />
-          <input type="text" name="model" />
-          <input type="text" name="dimensions" />
-          <textarea type="text" name="notes" />
-          <input type="file" name="img" />
+          <input type="text" name="make" placeholder="Manufacturer" />
+          <input type="text" name="model" placeholder="Model" />
+          <input type="text" name="dimensions" placeholder="Dimensions" />
+          <textarea type="text" name="notes" placeholder="Product Notes" />
+          <input type="file" name="img" placeholder="Image" />
+          <div id="new_item_category_container" className="select_container">
+            <label htmlFor="new_item_category">Category</label>
+            <select name="category" id="new_item_category" required>
+              {categoryOptions}
+            </select>
+          </div>
+          <div id="new_item_condition_container" className="select_container">
+            <label htmlFor="new_item_condition">Condition</label>
+            <select name="condition" id="new_item_condition" required>
+              {conditionOptions}
+            </select>
+          </div>
 
-          <select name="category" id="new_item_category" required>
-            {categoryOptions}
-          </select>
-          <select name="condition" id="new_item_condition" required>
-            {conditionOptions}
-          </select>
           <button type="submit">Add Item</button>
         </form>
       </div>

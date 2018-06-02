@@ -13,7 +13,29 @@
 }
 
 #new_item form * {
+  text-transform: capitalize;
+}
+
+#new_item form input,
+#new_item form textarea,
+#new_item form select {
+  text-transform: uppercase;
   margin: 8px;
-  height: 32px;
+  height: 42px;
+  padding-left: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+#new_item form textarea {
+  padding-top: 16px;
+}
+
+#new_item form .select_container label {
+  width: 150px;
+}
+
+#new_item form .select_container select {
+  width: 100px;
 }
 /*# sourceMappingURL=NewItem.css.map */
