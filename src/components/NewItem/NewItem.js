@@ -9,11 +9,22 @@ import './NewItem.css';
 class NewItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      // description: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(data) {
     console.log(data);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value }, () => {
+      console.log(this.state);
+    });
   }
 
   render() {
@@ -40,25 +51,75 @@ class NewItem extends React.Component {
             type="text"
             name="description"
             placeholder="Description"
+            onChange={this.handleChange}
             required
           />
-          <input type="number" name="price" placeholder="Price" />
-          <input type="text" name="units" placeholder="Units" />
+          <div id="new_item_price_container">
+            <input
+              type="number"
+              name="price_value"
+              placeholder="Price"
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              name="price_units"
+              placeholder="Units"
+              onChange={this.handleChange}
+            />
+          </div>
 
-          <input type="text" name="make" placeholder="Manufacturer" />
-          <input type="text" name="model" placeholder="Model" />
-          <input type="text" name="dimensions" placeholder="Dimensions" />
-          <textarea type="text" name="notes" placeholder="Product Notes" />
-          <input type="file" name="img" placeholder="Image" />
+          <input
+            type="text"
+            name="make"
+            placeholder="Manufacturer"
+            onChange={this.handleChange}
+          />
+          <input
+            type="text"
+            name="model"
+            placeholder="Model"
+            onChange={this.handleChange}
+          />
+          <input
+            type="text"
+            name="dimensions"
+            placeholder="Dimensions"
+            onChange={this.handleChange}
+          />
+          <textarea
+            type="text"
+            name="notes"
+            placeholder="Product Notes"
+            onChange={this.handleChange}
+          />
+          {/* <input type="file" name="img" placeholder="Image" /> */}
+          <input
+            type="url"
+            name="img_url"
+            placeholder="Image URL"
+            onChange={this.handleChange}
+          />
+
           <div id="new_item_category_container" className="select_container">
             <label htmlFor="new_item_category">Category</label>
-            <select name="category" id="new_item_category" required>
+            <select
+              name="category"
+              id="new_item_category"
+              required
+              onChange={this.handleChange}
+            >
               {categoryOptions}
             </select>
           </div>
           <div id="new_item_condition_container" className="select_container">
             <label htmlFor="new_item_condition">Condition</label>
-            <select name="condition" id="new_item_condition" required>
+            <select
+              name="condition"
+              id="new_item_condition"
+              required
+              onChange={this.handleChange}
+            >
               {conditionOptions}
             </select>
           </div>
