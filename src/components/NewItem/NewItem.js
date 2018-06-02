@@ -17,7 +17,35 @@ class NewItem extends React.Component {
   }
 
   render() {
-    return <div>New Item</div>;
+    const categoryOptions = this.props.categories.map(category => {
+      return (
+        <option key={category.id} value={category.id}>
+          {category.name}
+        </option>
+      );
+    });
+
+    const conditionOptions = this.props.conditions.map(condition => {
+      return (
+        <option key={condition.id} value={condition.id}>
+          {condition.name}
+        </option>
+      );
+    });
+    return (
+      <div className="new_item">
+        <form>
+          <input type="text" />
+          <input type="text" />
+          <select name="category" id="new_item_category">
+            {categoryOptions}
+          </select>
+          <select name="condition" id="new_item_condition">
+            {conditionOptions}
+          </select>
+        </form>
+      </div>
+    );
   }
 }
 
