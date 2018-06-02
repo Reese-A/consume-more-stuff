@@ -1,5 +1,8 @@
 import { LOAD_ITEMS, LOAD_ITEM, NEW_ITEM } from '../actions/item-actions';
-import { LOAD_ALL_CATEGORY_ITEMS } from '../actions/category-actions';
+import {
+  LOAD_CATEGORY_ITEMS,
+  LOAD_ALL_CATEGORY_ITEMS
+} from '../actions/category-actions';
 
 import store from '../../index';
 
@@ -21,6 +24,9 @@ export const items = (state = {}, action) => {
         return items;
       }, {});
       return items;
+    }
+    case LOAD_CATEGORY_ITEMS: {
+      return action.items;
     }
     case NEW_ITEM: {
       const item = action.item;
