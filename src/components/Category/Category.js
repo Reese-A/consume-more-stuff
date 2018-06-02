@@ -2,46 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 
-import { loadAllCategoryItems } from '../../redux/actions/category-actions';
+import {
+  loadAllCategoryItems,
+  loadCategoryItems
+} from '../../redux/actions/category-actions';
 
 import Card from '../Card/Card';
 
 import './Category.css';
+
+const LIMIT = 10;
 
 class Category extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    console.log('componentDidMount');
-
-    this.props.loadAllCategoryItems();
+    const { name } = this.props.match.params;
+    this.props.loadCategoryItems(name, 1, LIMIT);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    console.log('getDerivedStateFromProps');
-
-    return state;
-  }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('componentDidUpdate');
-
-    console.log(prevProps);
-    console.log(prevState);
-    console.log(snapshot);
+    const { name } = this.props.match.params;
 
     if (prevProps.items === this.props.items) {
-      this.props.loadAllCategoryItems(Math.floor(Math.random() * 5));
+      this.props.loadCategoryItems(name, 1, LIMIT);
     }
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('update');
-  //   console.log(nextProps);
-  //   next.Props;
-  //   // this.props.loadAllCategoryItems(3);
-  //   return true;
-  // }
   render() {
     const { name } = this.props.match.params;
     const category = this.props.categories.find(category => {
@@ -87,6 +75,9 @@ const mapDispatchToProps = dispatch => {
   return {
     loadAllCategoryItems: limit => {
       dispatch(loadAllCategoryItems(limit));
+    },
+    loadCategoryItems: (name, page, limit) => {
+      dispatch(loadCategoryItems(name, page, limit));
     }
   };
 };

@@ -26,7 +26,12 @@ export const items = (state = {}, action) => {
       return items;
     }
     case LOAD_CATEGORY_ITEMS: {
-      return action.items;
+      if (!action.category) return state;
+
+      const items = {
+        [action.category.id]: action.category.items
+      };
+      return items;
     }
     case NEW_ITEM: {
       const item = action.item;

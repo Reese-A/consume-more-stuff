@@ -28,17 +28,14 @@ export const loadAllCategoryItems = limit => {
   };
 };
 
-export const loadCategoryItems = (id, page, limit) => {
-  console.log('ACTION');
-  console.log(id, page, limit);
+export const loadCategoryItems = (name, page, limit) => {
   return dispatch => {
-    return fetch(`/category/${id}?page=${page}&limit=${limit}`)
+    return fetch(`/category/${name}?page=${page}&limit=${limit}`)
       .then(res => res.json())
-      .then(items => {
-        console.log('ITEMS', items);
+      .then(category => {
         return dispatch({
           type: LOAD_CATEGORY_ITEMS,
-          items
+          category
         });
       });
   };
