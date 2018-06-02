@@ -7,13 +7,20 @@
   }
   form {
     display: grid;
+    max-width: 500px;
     * {
       text-transform: capitalize;
+    }
+    input::placeholder,
+    textarea::placeholder,
+    select::placeholder {
+      text-transform: uppercase;
     }
     input,
     textarea,
     select {
-      text-transform: uppercase;
+      text-transform: unset;
+
       margin: 8px;
       height: 42px;
       padding-left: 16px;

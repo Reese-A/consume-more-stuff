@@ -10,16 +10,23 @@
 
 #new_item form {
   display: grid;
+  max-width: 500px;
 }
 
 #new_item form * {
   text-transform: capitalize;
 }
 
+#new_item form input::placeholder,
+#new_item form textarea::placeholder,
+#new_item form select::placeholder {
+  text-transform: uppercase;
+}
+
 #new_item form input,
 #new_item form textarea,
 #new_item form select {
-  text-transform: uppercase;
+  text-transform: unset;
   margin: 8px;
   height: 42px;
   padding-left: 16px;
