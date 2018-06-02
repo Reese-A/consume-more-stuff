@@ -40,6 +40,31 @@ router.route('/items').get((req, res) => {
     });
 });
 
+router.route('/:name').get((req, res) => {
+  const name = req.params.name;
+  const page = req.query.page > 0 ? req.query.page : 1;
+  const limit = req.query.limit;
+
+  return new Category()
+    .where({ name })
+    .fetch({
+      withRelated: [
+        {
+          items: qb => {
+            qb.limit(limit);
+            qb.offset((page - 1) * limit);
+          }
+        }
+      ]
+    })
+    .then(category => {
+      return res.json(category);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 router.route('/:id').get((req, res) => {
   const id = req.params.id;
   const page = req.query.page;
