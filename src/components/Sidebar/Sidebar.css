@@ -1,5 +1,10 @@
 #sidebar {
-  background: grey;
+  background: rgba(241, 241, 241, 0.7);
+  box-shadow: inset 0 0 1px 0px rgba(0, 0, 0, 0.15);
+}
+
+#sidebar * {
+  padding: 4px 4px;
 }
 
 #sidebar a {
@@ -13,11 +18,22 @@
 }
 
 #sidebar ul li {
-  margin: 8px 0px;
+  font-weight: 600;
+  margin: 10px 0px;
   text-transform: capitalize;
 }
 
+#sidebar ul li ul {
+  padding-left: 16px;
+}
+
+#sidebar ul li ul li {
+  font-weight: 200;
+}
+
 #sidebar .active {
-  background: red;
+  box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.55);
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
 }
 /*# sourceMappingURL=Sidebar.css.map */
