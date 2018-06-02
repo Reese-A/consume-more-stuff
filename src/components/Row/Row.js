@@ -12,7 +12,6 @@ class Row extends Component {
   }
 
   render() {
-    console.log(this.props.items);
     const items = this.props.items[this.props.categoryId] || [];
     return (
       <div className="row">
