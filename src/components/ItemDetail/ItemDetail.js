@@ -22,6 +22,7 @@ class ItemDetail extends Component {
     const condition = this.props.item.condition
       ? this.props.item.condition.name
       : null;
+    console.log('ITEMDETAIL', this.props.item);
     return (
       <div id="item_detail">
         <div id="item_main">
@@ -85,7 +86,7 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    item: state.item
+    item: state.items
   };
 };
 

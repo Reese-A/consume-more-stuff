@@ -18,6 +18,9 @@ export const items = (state = {}, action) => {
       }, {});
       return items;
     }
+    case LOAD_ITEM: {
+      return action.item;
+    }
     case LOAD_ALL_CATEGORY_ITEMS: {
       const items = action.categories.reduce((items, category) => {
         items[category.id] = category.items;
@@ -28,9 +31,7 @@ export const items = (state = {}, action) => {
     case LOAD_CATEGORY_ITEMS: {
       if (!action.category) return state;
 
-      const items = {
-        [action.category.id]: action.category.items
-      };
+      const items = { [action.category.id]: action.category.items };
       return items;
     }
     case NEW_ITEM: {
@@ -43,11 +44,11 @@ export const items = (state = {}, action) => {
       return state;
   }
 };
-export const item = (state = {}, action) => {
-  switch (action.type) {
-    case LOAD_ITEM:
-      return action.item;
-    default:
-      return state;
-  }
-};
+// export const item = (state = {}, action) => {
+//   switch (action.type) {
+//     case LOAD_ITEM:
+//       return action.item;
+//     default:
+//       return state;
+//   }
+// };
