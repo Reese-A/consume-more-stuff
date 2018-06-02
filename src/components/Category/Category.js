@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 
+import { loadAllCategoryItems } from '../../redux/actions/category-actions';
+
 import Card from '../Card/Card';
 
 import './Category.css';
@@ -10,6 +12,36 @@ class Category extends React.Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    console.log('componentDidMount');
+
+    this.props.loadAllCategoryItems();
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('getDerivedStateFromProps');
+
+    return state;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('componentDidUpdate');
+
+    console.log(prevProps);
+    console.log(prevState);
+    console.log(snapshot);
+
+    if (prevProps.items === this.props.items) {
+      this.props.loadAllCategoryItems(Math.floor(Math.random() * 5));
+    }
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('update');
+  //   console.log(nextProps);
+  //   next.Props;
+  //   // this.props.loadAllCategoryItems(3);
+  //   return true;
+  // }
   render() {
     const { name } = this.props.match.params;
     const category = this.props.categories.find(category => {
@@ -51,4 +83,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Category);
+const mapDispatchToProps = dispatch => {
+  return {
+    loadAllCategoryItems: limit => {
+      dispatch(loadAllCategoryItems(limit));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);
