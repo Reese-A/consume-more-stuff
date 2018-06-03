@@ -72,7 +72,7 @@ const mapStateToProps = state => {
     categories: state.category,
     conditions: state.condition,
     statuses: state.status,
-    users: state.users,
+    users: state.user,
     items: state.items
   };
 };
