@@ -32,7 +32,6 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 passport.serializeUser((user, done) => {
-  console.log('serializing');
   return done(null, {
     id: user.id,
     email: user.email
@@ -40,7 +39,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserializing');
   new User({
     id: user.id
   })
@@ -61,8 +59,7 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new LocalStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password'
+      usernameField: 'email'
     },
     function(email, password, done) {
       return new User({
@@ -70,15 +67,14 @@ passport.use(
       })
         .fetch()
         .then(user => {
-          user = user.toJSON();
           console.log(user);
+          user = user.toJSON();
 
           if (user === null) {
             return done(null, false, {
               message: 'bad email or password'
             });
           } else {
-            console.log(password, user.password);
             bcrypt.compare(password, user.password).then(res => {
               if (res) {
                 console.log(res);

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { registerUser, loginUser } from '../../redux/actions/user-actions';
 
 class Register extends Component {
   constructor(props) {
@@ -8,9 +10,11 @@ class Register extends Component {
       email: '',
       name: '',
       password: '',
-      confirm: ''
+      confirm: '',
+      hideErr: true
     };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.emailChangeHandler = this.emailChangeHandler.bind(this);
     this.nameChangeHandler = this.nameChangeHandler.bind(this);
     this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
@@ -37,9 +41,22 @@ class Register extends Component {
     this.setState({ confirm: value });
   }
 
+  handleSubmit(event) {
+    console.log('submit fired');
+    event.preventDefault();
+    if (this.state.password === this.state.confirm) {
+      this.props.registerUser(this.state);
+      console.log('REGISTER FINISHED');
+    } else {
+      return this.setState({
+        hideErr: false
+      });
+    }
+  }
+
   render() {
     return (
-      <form id="register_form" onSubmit={this.handSubmit}>
+      <form id="register_form" onSubmit={this.handleSubmit}>
         <div id="register_title">Register new user</div>
         <label htmlFor="email">Email: </label>
         <input
@@ -85,10 +102,22 @@ class Register extends Component {
         />
         <br />
 
+        <div hidden={this.state.hideErr}>Passwords must match</div>
         <button type="submit">Submit</button>
       </form>
     );
   }
 }
 
-export default Register;
+const mapDispatchToProps = dispatch => {
+  return {
+    registerUser: data => {
+      dispatch(registerUser(data));
+    },
+    loginUser: data => {
+      dispatch(loginUser(data));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Register);
