@@ -1,4 +1,4 @@
-import { LOAD_ITEMS, LOAD_ITEM, NEW_ITEM } from '../actions/item-actions';
+import { LOAD_ITEMS, LOAD_ITEM, ADD_NEW_ITEM } from '../actions/item-actions';
 import {
   LOAD_CATEGORY_ITEMS,
   LOAD_ALL_CATEGORY_ITEMS
@@ -34,11 +34,12 @@ export const items = (state = {}, action) => {
       const items = { [action.category.id]: action.category.items };
       return items;
     }
-    case NEW_ITEM: {
-      const item = action.item;
-      const oldItems = { ...state };
-      oldItems[item.category_id].push(item);
-      return oldItems;
+    case ADD_NEW_ITEM: {
+      // const item = action.item;
+      // const items = { ...state };
+      // items[item.category_id].push(item);
+      // return items;
+      return action.item;
     }
     default:
       return state;
