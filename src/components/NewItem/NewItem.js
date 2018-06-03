@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
-import { newItem } from '../../redux/actions/item-actions';
+import { addNewItem } from '../../redux/actions/item-actions';
 
 import './NewItem.css';
 
@@ -35,11 +35,40 @@ class NewItem extends React.Component {
     event.preventDefault();
 
     console.log(this.state);
+    const {
+      description,
+      price_value,
+      price_currency,
+      make,
+      model,
+      dimensions_value,
+      dimensions_units,
+      notes,
+      img_url,
+      category,
+      condition
+    } = this.state;
+    const item = {
+      description,
+      make,
+      model,
+      notes,
+      img_url,
+      category_id: category,
+      condition_id: condition
+    };
+    if (dimensions_value && dimensions_units) {
+      item.dimensions = `${dimensions_value} ${dimensions_units}`;
+    }
+    if (price_value && price_currency) {
+      item.price = `${price_value} ${price_currency}`.trim() || undefined;
+    }
+
+    this.props.addNewItem(item);
   }
 
   handleChange(event) {
     let { name, value } = event.target;
-    console.log(/[A-Za-z0-9_]/.test(value));
 
     name = name.trim().toLowerCase();
     value = value.trim().toLowerCase();
@@ -84,8 +113,8 @@ class NewItem extends React.Component {
             name="description"
             placeholder="Description"
             onChange={this.handleChange}
-            pattern="[A-Za-z0-9 ]*"
-            // required
+            pattern="([A-Za-z0-9]+ ?)*"
+            required
             autoFocus
           />
           <div id="new_item_price_container">
@@ -100,6 +129,7 @@ class NewItem extends React.Component {
               name="price_currency"
               placeholder="Currency"
               onChange={this.handleChange}
+              pattern="([A-Za-z]+ ?)*"
             />
           </div>
 
@@ -107,14 +137,14 @@ class NewItem extends React.Component {
             type="text"
             name="make"
             placeholder="Manufacturer"
-            pattern="\w"
+            pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
           <input
             type="text"
             name="model"
             placeholder="Model"
-            pattern="\w"
+            pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
 
@@ -123,14 +153,15 @@ class NewItem extends React.Component {
               type="text"
               name="dimensions_value"
               placeholder="Dimensions"
-              pattern=" *\d *x *\d *x *\d *"
+              pattern=" *([0-9]+.?[0-9]*){1,1} *[xX] *([0-9]+.?[0-9]*){1,1} *[xX] *([0-9]+.?[0-9]*){1,1} *"
               onChange={this.handleChange}
             />
             <input
               type="text"
-              name="dimensions_currency"
+              name="dimensions_units"
               placeholder="Currency"
               onChange={this.handleChange}
+              pattern="([A-Za-z]+ ?)*"
             />
           </div>
 
@@ -189,8 +220,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    newItem: data => {
-      dispatch(newItem(data));
+    addNewItem: data => {
+      dispatch(addNewItem(data));
     }
   };
 };
