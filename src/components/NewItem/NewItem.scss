@@ -11,20 +11,38 @@
     * {
       text-transform: capitalize;
     }
+    input::placeholder,
+    textarea::placeholder,
+    select::placeholder {
+      text-transform: uppercase;
+    }
     input,
     textarea,
     select {
-      text-transform: uppercase;
+      text-transform: unset;
+
       margin: 8px;
       height: 42px;
       padding-left: 16px;
       border: 1px solid rgba($color: #000000, $alpha: 0.1);
       border-radius: 4px;
       // text-align: justify;
+      box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1);
     }
     textarea {
       padding-top: 16px;
     }
+    :focus {
+      outline: none;
+      transition: all 0.5s ease-in-out;
+      box-shadow: inset 0 0 12px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    input:not(:placeholder-shown):invalid {
+      transition: all 0.5s ease-in-out;
+      border: 1px solid salmon;
+    }
+
     .select_container {
       label {
         width: 150px;
