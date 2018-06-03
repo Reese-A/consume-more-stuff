@@ -10,18 +10,50 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // description: ''
+      condition: undefined,
+      category: undefined
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(data) {
-    console.log(data);
+  static getDerivedStateFromProps(props, state) {
+    if (state.condition && state.category) return state;
+    const stateChanges = {};
+
+    if (props.conditions.length > 0) {
+      stateChanges.condition = props.conditions[0].id;
+    }
+    if (props.categories.length > 0) {
+      stateChanges.category = props.categories[0].id;
+    }
+    // return state;
+    return stateChanges;
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    console.log(this.state);
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    console.log(/[A-Za-z0-9_]/.test(value));
 
+    name = name.trim().toLowerCase();
+    value = value.trim().toLowerCase();
+
+    if (name === 'category') value = Number(value);
+    if (name === 'condition') value = Number(value);
+
+    // if (name === 'dimensions_value') {
+    //   const split = value.toLowerCase().split('x');
+    //   const cleaned = split.map(value => {
+    //     return value.trim();
+    //   });
+    //   console.log(cleaned);
+    // }
     this.setState({ [name]: value }, () => {
       console.log(this.state);
     });
@@ -46,13 +78,15 @@ class NewItem extends React.Component {
     return (
       <div id="new_item">
         <span id="new_item_title">Add An Item</span>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="description"
             placeholder="Description"
             onChange={this.handleChange}
-            required
+            pattern="[A-Za-z0-9 ]*"
+            // required
+            autoFocus
           />
           <div id="new_item_price_container">
             <input
@@ -63,8 +97,8 @@ class NewItem extends React.Component {
             />
             <input
               type="text"
-              name="price_units"
-              placeholder="Units"
+              name="price_currency"
+              placeholder="Currency"
               onChange={this.handleChange}
             />
           </div>
@@ -73,20 +107,33 @@ class NewItem extends React.Component {
             type="text"
             name="make"
             placeholder="Manufacturer"
+            pattern="\w"
             onChange={this.handleChange}
           />
           <input
             type="text"
             name="model"
             placeholder="Model"
+            pattern="\w"
             onChange={this.handleChange}
           />
-          <input
-            type="text"
-            name="dimensions"
-            placeholder="Dimensions"
-            onChange={this.handleChange}
-          />
+
+          <div id="new_item_dimensions_container">
+            <input
+              type="text"
+              name="dimensions_value"
+              placeholder="Dimensions"
+              pattern=" *\d *x *\d *x *\d *"
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              name="dimensions_currency"
+              placeholder="Currency"
+              onChange={this.handleChange}
+            />
+          </div>
+
           <textarea
             type="text"
             name="notes"
@@ -106,8 +153,9 @@ class NewItem extends React.Component {
             <select
               name="category"
               id="new_item_category"
-              required
+              value={this.state.category}
               onChange={this.handleChange}
+              required
             >
               {categoryOptions}
             </select>
@@ -117,8 +165,9 @@ class NewItem extends React.Component {
             <select
               name="condition"
               id="new_item_condition"
-              required
+              value={this.state.condition}
               onChange={this.handleChange}
+              required={true}
             >
               {conditionOptions}
             </select>
