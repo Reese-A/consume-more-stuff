@@ -62,7 +62,7 @@ class App extends Component {
     this.props.loadCategories();
     this.props.loadConditions();
     this.props.loadStatuses();
-    // this.props.loadUsers();
+    this.props.loadUsers();
     // this.props.loadItems();
   }
 }
