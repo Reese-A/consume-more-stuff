@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../redux/actions/user-actions';
 
 class Login extends Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class Login extends Component {
       password: ''
     };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.emailChangeHandler = this.emailChangeHandler.bind(this);
     this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
   }
@@ -21,6 +24,13 @@ class Login extends Component {
   passwordChangeHandler(event) {
     const { value } = event.target;
     this.setState({ password: value });
+  }
+
+  handleSubmit(event) {
+    console.log('submit fired');
+    event.preventDefault();
+    this.props.loginUser(this.state);
+    console.log('LOGIN FINISHED');
   }
 
   render() {
@@ -53,4 +63,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: data => {
+      dispatch(loginUser(data));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
