@@ -92,18 +92,28 @@ class NewItem extends React.Component {
 
   handleFiles(event) {
     const { files } = event.target;
+    const validFiles = [];
 
     const preview = document.getElementById('preview');
     preview.innerHTML = '';
-
-    const validFiles = [];
 
     Object.values(files).forEach(file => {
       // const file = files[i];
       if (!file.type.startsWith('image/')) {
         return;
       }
-      validFiles.push(file);
+      const data = new FormData();
+      data.append('file', file);
+      // data.append('filename', file.name);
+      console.log(file);
+      fetch('/upload', {
+        method: 'POST',
+        body: data
+      })
+        .then(res => res.json())
+        .then(data => console.log('Success:', data))
+        .catch(error => console.error('Error:', error));
+      validFiles.push(data);
 
       const imgElem = document.createElement('img');
       imgElem.file = file;
@@ -114,6 +124,7 @@ class NewItem extends React.Component {
         return event => {
           // console.log(event);
           imgElem.src = event.target.result;
+
           this.setState({ img_url: validFiles }, () => {
             console.log(this.state);
           });
