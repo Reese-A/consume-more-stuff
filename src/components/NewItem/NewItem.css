@@ -17,6 +17,20 @@
   text-transform: capitalize;
 }
 
+#new_item form #new_item_img_file {
+  padding-top: 16px;
+}
+
+#new_item form #preview {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#new_item form #preview img {
+  height: 100px;
+  margin: 4px;
+}
+
 #new_item form input::placeholder,
 #new_item form textarea::placeholder,
 #new_item form select::placeholder {

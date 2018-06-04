@@ -11,6 +11,19 @@
     * {
       text-transform: capitalize;
     }
+    #new_item_img_file {
+      padding-top: 16px;
+    }
+
+    #preview {
+      display: flex;
+      justify-content: space-evenly;
+      img {
+        height: 100px;
+        margin: 4px;
+      }
+    }
+
     input::placeholder,
     textarea::placeholder,
     select::placeholder {
