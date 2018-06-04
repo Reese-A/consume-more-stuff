@@ -194,7 +194,7 @@ class NewItem extends React.Component {
             <input
               type="text"
               name="dimensions_units"
-              placeholder="Currency"
+              placeholder="Units"
               onChange={this.handleChange}
               pattern="([A-Za-z]+ ?)*"
             />
