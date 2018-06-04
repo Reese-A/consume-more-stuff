@@ -1,5 +1,7 @@
 const express = require('express');
 const AWS = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 require('dotenv').config();
 
 const Item = require('../db/models/Item');
@@ -57,19 +59,24 @@ router
       img_url
     } = req.body;
 
-    const newItem = {
-      description,
-      condition_id,
-      category_id,
-      price,
-      make,
-      model,
-      dimensions,
-      notes,
-      img_url: 'http://via.placeholder.com/250x200',
-      owner: 1,
-      status_id: 1
-    };
+    // const newItem = {
+    //   description,
+    //   condition_id,
+    //   category_id,
+    //   price,
+    //   make,
+    //   model,
+    //   dimensions,
+    //   notes,
+    //   img_url: 'http://via.placeholder.com/250x200',
+    //   owner: 1,
+    //   status_id: 1
+    // };
+
+    console.log(req.body);
+    console.log(img_url);
+
+    return res.json({ message: 'In Development' });
 
     return new Item(newItem)
       .save()
