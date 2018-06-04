@@ -105,5 +105,3 @@ server.use('/api', routes);
 server.listen(PORT, () => {
   process.stdout.write(`Server listening on port: ${PORT}`);
 });
-
-module.exports = server;

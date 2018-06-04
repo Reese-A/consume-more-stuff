@@ -65,20 +65,4 @@ router.route('/:name').get((req, res) => {
     });
 });
 
-router.route('/:id').get((req, res) => {
-  const id = req.params.id;
-  const page = req.query.page;
-  const limit = req.query.limit;
-  return new Item()
-    .where({ category_id: id })
-    .orderBy('created_at', 'desc')
-    .fetchPage({ pageSize: limit, page })
-    .then(items => {
-      return res.json(items);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
 module.exports = router;

@@ -1,7 +1,10 @@
+import { loadState } from '../../localStorage';
+
 export const LOAD_USERS = 'LOAD_USERS';
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOAD_USER = 'LOAD_USER';
 
 export const loadUsers = () => {
   return dispatch => {
@@ -13,6 +16,16 @@ export const loadUsers = () => {
           users
         });
       });
+  };
+};
+
+export const loadUser = () => {
+  return dispatch => {
+    const persistedState = loadState();
+    return dispatch({
+      type: LOAD_USER,
+      user: persistedState ? persistedState.user : {}
+    });
   };
 };
 

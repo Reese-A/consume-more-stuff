@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../redux/actions/user-actions';
 import './Header.css';
 
 class Header extends Component {
   constructor(props) {
     super(props);
+
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    this.props.logoutUser();
+    localStorage.removeItem('state');
   }
 
   render() {
@@ -20,10 +29,21 @@ class Header extends Component {
           <Link id="register_button" to="/register">
             Register
           </Link>
+          <a id="logout_button" onClick={this.logout}>
+            Logout
+          </a>
         </div>
       </header>
     );
   }
 }
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutUser: () => {
+      dispatch(logoutUser());
+    }
+  };
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Header));

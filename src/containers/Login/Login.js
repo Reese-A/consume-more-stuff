@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/actions/user-actions';
+import { saveState } from '../../localStorage';
 
 class Login extends Component {
   constructor(props) {
@@ -33,6 +34,12 @@ class Login extends Component {
     console.log('LOGIN FINISHED');
   }
 
+  componentDidUpdate() {
+    console.log('componentdidupdate');
+    const user = this.props.user ? this.props.user : {};
+    saveState({ user: user });
+  }
+
   render() {
     return (
       <form id="login_form" onSubmit={this.handleSubmit}>
@@ -62,6 +69,11 @@ class Login extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -71,4 +83,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
