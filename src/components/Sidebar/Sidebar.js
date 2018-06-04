@@ -37,11 +37,13 @@ class Sidebar extends React.Component {
               All
             </NavLink>
           </li>
-          <li>
-            <NavLink exact to="/item/new-item">
-              New Item
-            </NavLink>
-          </li>
+          {this.props.user.id ? (
+            <li>
+              <NavLink exact to="/item/new-item">
+                New Item
+              </NavLink>
+            </li>
+          ) : null}
         </ul>
       </div>
     );
@@ -50,7 +52,8 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.category
+    categories: state.category,
+    user: state.user
   };
 };
 

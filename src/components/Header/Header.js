@@ -14,7 +14,12 @@ class Header extends Component {
   logout() {
     this.props.logoutUser();
     localStorage.removeItem('state');
+    this.props.history.push('/');
   }
+
+  // componentDidMount() {
+  //   this.props.loadUser();
+  // }
 
   render() {
     return (
@@ -22,28 +27,44 @@ class Header extends Component {
         <div id="header_logo">
           <Link to="/">CMS</Link>
         </div>
-        <div id="auth_buttons">
-          <Link id="login_button" to="/login">
-            Login
-          </Link>
-          <Link id="register_button" to="/register">
-            Register
-          </Link>
-          <a id="logout_button" onClick={this.logout}>
-            Logout
-          </a>
-        </div>
+
+        {this.props.user.id ? (
+          <div className="auth_elements">
+            <div id="user_greeting"> Hello, {this.props.user.name} </div>
+            <a id="logout_button" onClick={this.logout}>
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div className="auth_elements">
+            <Link id="login_button" to="/login">
+              Login
+            </Link>
+            <Link id="register_button" to="/register">
+              Register
+            </Link>
+          </div>
+        )}
       </header>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
+    // loadUser: () => {
+    //   dispatch(loadUser());
+    // },
     logoutUser: () => {
       dispatch(logoutUser());
     }
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Header));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

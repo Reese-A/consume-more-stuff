@@ -4,6 +4,7 @@ import { loadItem } from '../../redux/actions/item-actions';
 import { Link } from 'react-router-dom';
 
 import './ItemDetail.css';
+
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
@@ -22,9 +23,16 @@ class ItemDetail extends Component {
     const condition = this.props.item.condition
       ? this.props.item.condition.name
       : null;
+    const owner = this.props.item.owner ? this.props.item.owner.id : null;
     console.log('ITEMDETAIL', this.props.item);
     return (
       <div id="item_detail">
+        {this.props.user.id === Number(owner) ? (
+          <Link id="edit_button" to={`item/${this.props.match.params.id}/edit`}>
+            {' '}
+            Edit Item{' '}
+          </Link>
+        ) : null}
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
           <span id="item_price">{this.props.item.price}</span>
@@ -34,40 +42,33 @@ class ItemDetail extends Component {
           <ul id="details_box">
             <div id="details_header">Item Details</div>
             <li id="item_condition">Condition: {condition}</li>
-            {this.props.make ? (
-              <li id="item_make">Make: {this.props.make}</li>
+            {this.props.item.make ? (
+              <li id="item_make">Make: {this.props.item.make}</li>
             ) : null}
-            {this.props.model ? (
-              <li id="item_model">Model: {this.props.model}</li>
+            {this.props.item.model ? (
+              <li id="item_model">Model: {this.props.item.model}</li>
             ) : null}
-            {this.props.dimensions ? (
-              <li id="item_dimensions">Dimensions: {this.props.dimensions}</li>
+            {this.props.item.dimensions ? (
+              <li id="item_dimensions">
+                Dimensions: {this.props.item.dimensions}
+              </li>
             ) : null}
           </ul>
           <div id="item_notes">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam
-            illo excepturi quos quisquam sit in quod voluptatum necessitatibus,
-            sequi, cumque dolores ipsa dolorem. Eligendi, ut! Nihil sequi natus
-            maiores. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Maxime nam illo excepturi quos quisquam sit in quod voluptatum
-            necessitatibus, sequi, cumque dolores ipsa dolorem. Eligendi, ut!
-            Nihil sequi natus maiores. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Maxime nam illo excepturi quos quisquam sit in
-            quod voluptatum necessitatibus, sequi, cumque dolores ipsa dolorem.
-            Eligendi, ut! Nihil sequi natus maiores. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Maxime nam illo excepturi quos
-            quisquam sit in quod voluptatum necessitatibus, sequi, cumque
-            dolores ipsa dolorem. Eligendi, ut! Nihil sequi natus maiores.Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Maxime nam illo
-            excepturi quos quisquam sit in quod voluptatum necessitatibus,
-            sequi, cumque dolores ipsa dolorem. Eligendi, ut! Nihil sequi natus
-            maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Maxime nam illo excepturi quos quisquam sit in quod voluptatum
-            necessitatibus, sequi,cumque dolores ipsa dolorem. Eligendi, ut!
-            Nihil sequi natus maiores. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Maxime nam illo excepturi quos quisquam sit in
-            quod voluptatum necessitatibus, sequi,cumque dolores ipsa dolorem.
-            Eligendi, ut! Nihil sequi natus maiores.{this.props.item.notes}
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis
+            nihil fuga error necessitatibus deserunt distinctio quod, explicabo
+            unde voluptatem nam incidunt qui consectetur ipsa veritatis eligendi
+            ipsum placeat id? Distinctio! Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Repellat enim eum asperiores praesentium velit
+            eaque architecto consequuntur tempora, voluptatem perspiciatis
+            fugiat quo soluta ex eos, impedit numquam inventore cumque quasi.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+            doloribus facere quas ipsam, rem fugit iusto, laborum totam debitis
+            quam temporibus non minima amet eos unde quia vitae! Ducimus,
+            voluptas! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Ratione ex repudiandae dicta quam quasi nesciunt accusamus neque
+            ducimus quaerat at voluptates veritatis assumenda, dignissimos
+            corporis, alias nemo, cumque quia placeat. {this.props.item.notes}
           </div>
         </div>
         <div id="item_footer">
@@ -86,7 +87,8 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    item: state.items
+    item: state.items,
+    user: state.user
   };
 };
 

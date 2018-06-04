@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
+import { withRouter } from 'react-router-dom';
+
+import './Login.css';
 
 class Login extends Component {
   constructor(props) {
@@ -38,27 +41,32 @@ class Login extends Component {
     console.log('componentdidupdate');
     const user = this.props.user ? this.props.user : {};
     saveState({ user: user });
+    if (Object.keys(user).length > 0) {
+      this.props.history.push('/');
+    }
   }
 
   render() {
     return (
       <form id="login_form" onSubmit={this.handleSubmit}>
         <div id="login_title">Login as existing user</div>
-        <label htmlFor="login_email">Email: </label>
         <input
           id="login_email"
-          type="text"
+          type="email"
           name="email"
+          placeholder="email"
+          required
           value={this.state.email}
           onChange={this.emailChangeHandler}
         />
         <br />
 
-        <label htmlFor="login_password">Password: </label>
         <input
           id="login_password"
           type="password"
           name="password"
+          placeholder="password"
+          required
           value={this.state.password}
           onChange={this.passwordChangeHandler}
         />
@@ -83,4 +91,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
