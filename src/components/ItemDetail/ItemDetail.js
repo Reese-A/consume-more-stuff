@@ -34,41 +34,19 @@ class ItemDetail extends Component {
           <ul id="details_box">
             <div id="details_header">Item Details</div>
             <li id="item_condition">Condition: {condition}</li>
-            {this.props.make ? (
-              <li id="item_make">Make: {this.props.make}</li>
+            {this.props.item.make ? (
+              <li id="item_make">Make: {this.props.item.make}</li>
             ) : null}
-            {this.props.model ? (
-              <li id="item_model">Model: {this.props.model}</li>
+            {this.props.item.model ? (
+              <li id="item_model">Model: {this.props.item.model}</li>
             ) : null}
-            {this.props.dimensions ? (
-              <li id="item_dimensions">Dimensions: {this.props.dimensions}</li>
+            {this.props.item.dimensions ? (
+              <li id="item_dimensions">
+                Dimensions: {this.props.item.dimensions}
+              </li>
             ) : null}
           </ul>
-          <div id="item_notes">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam
-            illo excepturi quos quisquam sit in quod voluptatum necessitatibus,
-            sequi, cumque dolores ipsa dolorem. Eligendi, ut! Nihil sequi natus
-            maiores. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Maxime nam illo excepturi quos quisquam sit in quod voluptatum
-            necessitatibus, sequi, cumque dolores ipsa dolorem. Eligendi, ut!
-            Nihil sequi natus maiores. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Maxime nam illo excepturi quos quisquam sit in
-            quod voluptatum necessitatibus, sequi, cumque dolores ipsa dolorem.
-            Eligendi, ut! Nihil sequi natus maiores. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Maxime nam illo excepturi quos
-            quisquam sit in quod voluptatum necessitatibus, sequi, cumque
-            dolores ipsa dolorem. Eligendi, ut! Nihil sequi natus maiores.Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Maxime nam illo
-            excepturi quos quisquam sit in quod voluptatum necessitatibus,
-            sequi, cumque dolores ipsa dolorem. Eligendi, ut! Nihil sequi natus
-            maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Maxime nam illo excepturi quos quisquam sit in quod voluptatum
-            necessitatibus, sequi,cumque dolores ipsa dolorem. Eligendi, ut!
-            Nihil sequi natus maiores. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Maxime nam illo excepturi quos quisquam sit in
-            quod voluptatum necessitatibus, sequi,cumque dolores ipsa dolorem.
-            Eligendi, ut! Nihil sequi natus maiores.{this.props.item.notes}
-          </div>
+          <div id="item_notes">{this.props.item.notes}</div>
         </div>
         <div id="item_footer">
           <div id="item_created_at">
