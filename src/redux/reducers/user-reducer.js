@@ -1,5 +1,6 @@
 import {
   LOAD_USERS,
+  LOAD_USER,
   REGISTER_USER,
   LOGIN_USER,
   LOGOUT_USER
@@ -11,11 +12,14 @@ const user = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_USERS:
       return action.users;
+    case LOAD_USER:
+      return action.user;
     case REGISTER_USER:
       console.log(action);
       return action.user;
     case LOGIN_USER:
-      console.log('LOGIN REDUCER');
+      return action.user;
+    case LOGOUT_USER:
       return action.user;
     default:
       return state;
