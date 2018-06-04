@@ -11,7 +11,7 @@ import Card from '../Card/Card';
 
 import './Category.css';
 
-const LIMIT = 10;
+const LIMIT = 25;
 
 class Category extends React.Component {
   constructor(props) {

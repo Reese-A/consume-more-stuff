@@ -1,17 +1,19 @@
 const express = require('express');
 
-const category = require('./category');
 const condition = require('./condition');
-const item = require('./item');
+const category = require('./category');
 const status = require('./status');
+const upload = require('./upload');
+const item = require('./item');
 const user = require('./user');
 
 const router = express.Router();
 
-router.use('/category', category);
 router.use('/condition', condition);
-router.use('/item', item);
+router.use('/category', category);
 router.use('/status', status);
+router.use('/upload', upload);
+router.use('/item', item);
 router.use('/user', user);
 
 module.exports = router;

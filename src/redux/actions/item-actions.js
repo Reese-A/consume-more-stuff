@@ -1,6 +1,6 @@
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const LOAD_ITEM = 'LOAD_ITEM';
-export const NEW_ITEM = 'NEW_ITEM';
+export const ADD_NEW_ITEM = 'ADD_NEW_ITEM';
 
 export const loadItems = () => {
   return dispatch => {
@@ -28,7 +28,7 @@ export const loadItem = id => {
   };
 };
 
-export const newItem = data => {
+export const addNewItem = data => {
   return dispatch => {
     return fetch(`/item`, {
       method: 'POST',
@@ -39,8 +39,9 @@ export const newItem = data => {
     })
       .then(res => res.json())
       .then(item => {
+        console.log(item);
         return dispatch({
-          type: NEW_ITEM,
+          type: ADD_NEW_ITEM,
           item
         });
       });

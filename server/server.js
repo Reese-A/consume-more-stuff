@@ -1,11 +1,14 @@
 const express = require('express');
-const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const Redis = require('connect-redis')(session);
+
+const routes = require('./routes/_routes');
 
 const User = require('./db/models/User');
 
@@ -18,6 +21,8 @@ server.use(
   })
 );
 server.use(bodyParser.json());
+server.use(cookieParser());
+server.use(fileUpload());
 
 server.use(
   session({
@@ -100,5 +105,3 @@ server.use('/api', routes);
 server.listen(PORT, () => {
   process.stdout.write(`Server listening on port: ${PORT}`);
 });
-
-module.exports = server;

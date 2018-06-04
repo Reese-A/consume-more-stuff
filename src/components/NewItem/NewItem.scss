@@ -11,6 +11,19 @@
     * {
       text-transform: capitalize;
     }
+    #new_item_img_file {
+      padding-top: 16px;
+    }
+
+    #preview {
+      display: flex;
+      justify-content: space-evenly;
+      img {
+        height: 100px;
+        margin: 4px;
+      }
+    }
+
     input::placeholder,
     textarea::placeholder,
     select::placeholder {
@@ -20,7 +33,6 @@
     textarea,
     select {
       text-transform: unset;
-
       margin: 8px;
       height: 42px;
       padding-left: 16px;
@@ -44,12 +56,63 @@
     }
 
     .select_container {
+      display: flex;
+      margin: 8px;
+      padding-left: 16px;
+      height: 42px;
       label {
-        width: 150px;
+        width: 80px;
+        /* justify-self: center; */
+        align-self: center;
+        text-transform: uppercase;
+        font-weight: 200;
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.75);
       }
       select {
-        width: 100px;
+        width: 159px;
+        align-self: center;
       }
+    }
+    button {
+      justify-self: center;
+      text-transform: uppercase;
+      width: 100px;
+      height: 32px;
+      margin: 16px;
+      // background: rgb(131, 255, 122);
+      // color: white;
+      border: none;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+  form:valid {
+    button {
+      border-radius: 8px;
+      background: green;
+      color: white;
+      font-weight: 800;
+      transition: all 0.5s ease-in-out;
+    }
+    button:hover {
+      // box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+      font-weight: 600;
+      border: 2px solid greenyellow;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  form:invalid {
+    button {
+      border-radius: 8px;
+      border: none;
+      opacity: 0.5;
+    }
+    button:hover {
+      background: salmon;
+      color: white;
+      font-weight: 800;
+      opacity: 1;
+      transition: all 0.5s ease-in-out;
     }
   }
 }

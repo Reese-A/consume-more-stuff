@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
-import { newItem } from '../../redux/actions/item-actions';
+import { addNewItem } from '../../redux/actions/item-actions';
 
 import './NewItem.css';
 
@@ -15,6 +15,7 @@ class NewItem extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFiles = this.handleFiles.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -35,18 +36,48 @@ class NewItem extends React.Component {
     event.preventDefault();
 
     console.log(this.state);
+    const {
+      description,
+      price_value,
+      price_currency,
+      make,
+      model,
+      dimensions_value,
+      dimensions_units,
+      notes,
+      img_url,
+      category,
+      condition
+    } = this.state;
+    const item = {
+      description,
+      make,
+      model,
+      notes,
+      img_url,
+      category_id: category,
+      condition_id: condition
+    };
+    if (dimensions_value && dimensions_units) {
+      item.dimensions = `${dimensions_value} ${dimensions_units}`;
+    }
+    if (price_value && price_currency) {
+      item.price = `${price_value} ${price_currency}`.trim() || undefined;
+    }
+
+    this.props.addNewItem(item);
   }
 
   handleChange(event) {
-    let { name, value } = event.target;
-    console.log(/[A-Za-z0-9_]/.test(value));
+    let { name, value, files } = event.target;
 
     name = name.trim().toLowerCase();
     value = value.trim().toLowerCase();
 
     if (name === 'category') value = Number(value);
     if (name === 'condition') value = Number(value);
-
+    if (name === 'img_file') value = files;
+    console.log(new FormData());
     // if (name === 'dimensions_value') {
     //   const split = value.toLowerCase().split('x');
     //   const cleaned = split.map(value => {
@@ -56,6 +87,39 @@ class NewItem extends React.Component {
     // }
     this.setState({ [name]: value }, () => {
       console.log(this.state);
+    });
+  }
+
+  handleFiles(event) {
+    const { files } = event.target;
+
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '';
+
+    const validFiles = [];
+
+    Object.values(files).forEach(file => {
+      // const file = files[i];
+      if (!file.type.startsWith('image/')) {
+        return;
+      }
+      validFiles.push(file);
+
+      const imgElem = document.createElement('img');
+      imgElem.file = file;
+      preview.appendChild(imgElem);
+
+      const reader = new FileReader();
+      reader.onload = (imgElem => {
+        return event => {
+          // console.log(event);
+          imgElem.src = event.target.result;
+          this.setState({ img_url: validFiles }, () => {
+            console.log(this.state);
+          });
+        };
+      })(imgElem);
+      reader.readAsDataURL(file);
     });
   }
 
@@ -84,8 +148,8 @@ class NewItem extends React.Component {
             name="description"
             placeholder="Description"
             onChange={this.handleChange}
-            pattern="[A-Za-z0-9 ]*"
-            // required
+            pattern="([A-Za-z0-9]+ ?)*"
+            required
             autoFocus
           />
           <div id="new_item_price_container">
@@ -100,6 +164,7 @@ class NewItem extends React.Component {
               name="price_currency"
               placeholder="Currency"
               onChange={this.handleChange}
+              pattern="([A-Za-z]+ ?)*"
             />
           </div>
 
@@ -107,14 +172,14 @@ class NewItem extends React.Component {
             type="text"
             name="make"
             placeholder="Manufacturer"
-            pattern="\w"
+            pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
           <input
             type="text"
             name="model"
             placeholder="Model"
-            pattern="\w"
+            pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
 
@@ -123,14 +188,15 @@ class NewItem extends React.Component {
               type="text"
               name="dimensions_value"
               placeholder="Dimensions"
-              pattern=" *\d *x *\d *x *\d *"
+              pattern=" *([0-9]+.?[0-9]*){1,1} *[xX] *([0-9]+.?[0-9]*){1,1} *[xX] *([0-9]+.?[0-9]*){1,1} *"
               onChange={this.handleChange}
             />
             <input
               type="text"
-              name="dimensions_currency"
-              placeholder="Currency"
+              name="dimensions_units"
+              placeholder="Units"
               onChange={this.handleChange}
+              pattern="([A-Za-z]+ ?)*"
             />
           </div>
 
@@ -140,7 +206,17 @@ class NewItem extends React.Component {
             placeholder="Product Notes"
             onChange={this.handleChange}
           />
-          {/* <input type="file" name="img" placeholder="Image" /> */}
+          <div id="preview" />
+          <input
+            type="file"
+            name="img_file"
+            id="new_item_img_file"
+            placeholder="Image File"
+            multiple
+            accept="image/* "
+            onChange={this.handleFiles}
+            required
+          />
           <input
             type="url"
             name="img_url"
@@ -189,8 +265,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    newItem: data => {
-      dispatch(newItem(data));
+    addNewItem: data => {
+      dispatch(addNewItem(data));
     }
   };
 };
