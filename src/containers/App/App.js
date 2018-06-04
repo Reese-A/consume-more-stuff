@@ -8,7 +8,7 @@ import './App.css';
 import { loadCategories } from '../../redux/actions/category-actions';
 import { loadConditions } from '../../redux/actions/condition-actions';
 import { loadStatuses } from '../../redux/actions/status-actions';
-import { loadUsers } from '../../redux/actions/user-actions';
+import { loadUsers, loadUser } from '../../redux/actions/user-actions';
 import { loadItems } from '../../redux/actions/item-actions';
 
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -16,6 +16,10 @@ import Header from '../../components/Header/Header';
 import Main from '../../components/Main/Main';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+
+import { loadState } from '../../localStorage';
+
+const persistedState = loadState();
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +66,8 @@ class App extends Component {
     this.props.loadCategories();
     this.props.loadConditions();
     this.props.loadStatuses();
-    this.props.loadUsers();
+    this.props.loadUser();
+    // this.props.loadUsers();
     // this.props.loadItems();
   }
 }
@@ -88,8 +93,11 @@ const mapDispatchToProps = dispatch => {
     loadStatuses: () => {
       dispatch(loadStatuses());
     },
-    loadUsers: () => {
-      dispatch(loadUsers());
+    // loadUsers: () => {
+    //   dispatch(loadUsers());
+    // },
+    loadUser: () => {
+      dispatch(loadUser());
     },
     loadItems: () => {
       dispatch(loadItems());
