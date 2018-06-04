@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const fileUpload = require('express-fileupload');
 const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local');
@@ -22,7 +21,6 @@ server.use(
 );
 server.use(bodyParser.json());
 server.use(cookieParser());
-server.use(fileUpload());
 
 server.use(
   session({
@@ -103,5 +101,5 @@ passport.use(
 server.use('/api', routes);
 
 server.listen(PORT, () => {
-  process.stdout.write(`Server listening on port: ${PORT}`);
+  console.log(`Server listening on port: ${PORT}`);
 });
