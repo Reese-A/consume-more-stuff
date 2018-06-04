@@ -15,6 +15,7 @@ class NewItem extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFiles = this.handleFiles.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -68,14 +69,15 @@ class NewItem extends React.Component {
   }
 
   handleChange(event) {
-    let { name, value } = event.target;
+    let { name, value, files } = event.target;
 
     name = name.trim().toLowerCase();
     value = value.trim().toLowerCase();
 
     if (name === 'category') value = Number(value);
     if (name === 'condition') value = Number(value);
-
+    if (name === 'img_file') value = files;
+    console.log(new FormData());
     // if (name === 'dimensions_value') {
     //   const split = value.toLowerCase().split('x');
     //   const cleaned = split.map(value => {
@@ -85,6 +87,39 @@ class NewItem extends React.Component {
     // }
     this.setState({ [name]: value }, () => {
       console.log(this.state);
+    });
+  }
+
+  handleFiles(event) {
+    const { files } = event.target;
+
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '';
+
+    const validFiles = [];
+
+    Object.values(files).forEach(file => {
+      // const file = files[i];
+      if (!file.type.startsWith('image/')) {
+        return;
+      }
+      validFiles.push(file);
+
+      const imgElem = document.createElement('img');
+      imgElem.file = file;
+      preview.appendChild(imgElem);
+
+      const reader = new FileReader();
+      reader.onload = (imgElem => {
+        return event => {
+          // console.log(event);
+          imgElem.src = event.target.result;
+          this.setState({ img_url: validFiles }, () => {
+            console.log(this.state);
+          });
+        };
+      })(imgElem);
+      reader.readAsDataURL(file);
     });
   }
 
@@ -171,7 +206,17 @@ class NewItem extends React.Component {
             placeholder="Product Notes"
             onChange={this.handleChange}
           />
-          {/* <input type="file" name="img" placeholder="Image" /> */}
+          <div id="preview" />
+          <input
+            type="file"
+            name="img_file"
+            id="new_item_img_file"
+            placeholder="Image File"
+            multiple
+            accept="image/* "
+            onChange={this.handleFiles}
+            required
+          />
           <input
             type="url"
             name="img_url"
