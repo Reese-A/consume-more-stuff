@@ -22,9 +22,16 @@ class ItemDetail extends Component {
     const condition = this.props.item.condition
       ? this.props.item.condition.name
       : null;
+    const owner = this.props.item.owner ? this.props.item.owner.id : null;
     console.log('ITEMDETAIL', this.props.item);
     return (
       <div id="item_detail">
+        {this.props.user.id === Number(owner) ? (
+          <Link id="edit_button" to={`item/${this.props.match.params.id}/edit`}>
+            {' '}
+            Edit Item{' '}
+          </Link>
+        ) : null}
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
           <span id="item_price">{this.props.item.price}</span>
@@ -46,7 +53,22 @@ class ItemDetail extends Component {
               </li>
             ) : null}
           </ul>
-          <div id="item_notes">{this.props.item.notes}</div>
+          <div id="item_notes">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis
+            nihil fuga error necessitatibus deserunt distinctio quod, explicabo
+            unde voluptatem nam incidunt qui consectetur ipsa veritatis eligendi
+            ipsum placeat id? Distinctio! Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Repellat enim eum asperiores praesentium velit
+            eaque architecto consequuntur tempora, voluptatem perspiciatis
+            fugiat quo soluta ex eos, impedit numquam inventore cumque quasi.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+            doloribus facere quas ipsam, rem fugit iusto, laborum totam debitis
+            quam temporibus non minima amet eos unde quia vitae! Ducimus,
+            voluptas! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Ratione ex repudiandae dicta quam quasi nesciunt accusamus neque
+            ducimus quaerat at voluptates veritatis assumenda, dignissimos
+            corporis, alias nemo, cumque quia placeat. {this.props.item.notes}
+          </div>
         </div>
         <div id="item_footer">
           <div id="item_created_at">
@@ -64,7 +86,8 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    item: state.items
+    item: state.items,
+    user: state.user
   };
 };
 
