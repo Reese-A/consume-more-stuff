@@ -23,4 +23,9 @@ header #auth_buttons {
 header #auth_buttons #login_button {
   margin-right: 15px;
 }
+
+header #auth_buttons #logout_button {
+  margin-left: 15px;
+  text-decoration: underline;
+}
 /*# sourceMappingURL=Header.css.map */
