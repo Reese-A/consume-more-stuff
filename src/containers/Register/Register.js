@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerUser, loginUser } from '../../redux/actions/user-actions';
+import { saveState } from '../../localStorage';
 
 class Register extends Component {
   constructor(props) {
@@ -39,6 +40,14 @@ class Register extends Component {
   confirmChangeHandler(event) {
     const { value } = event.target;
     this.setState({ confirm: value });
+  }
+
+  componentDidUpdate() {
+    const user = this.props.user ? this.props.user : {};
+    saveState({ user: user });
+    if (Object.keys(user).length > 0) {
+      this.props.history.push('/');
+    }
   }
 
   handleSubmit(event) {
@@ -109,6 +118,12 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     registerUser: data => {
@@ -120,4 +135,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

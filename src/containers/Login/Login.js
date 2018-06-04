@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class Login extends Component {
     console.log('componentdidupdate');
     const user = this.props.user ? this.props.user : {};
     saveState({ user: user });
+    if (Object.keys(user).length > 0) {
+      this.props.history.push('/');
+    }
   }
 
   render() {
@@ -83,4 +87,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
