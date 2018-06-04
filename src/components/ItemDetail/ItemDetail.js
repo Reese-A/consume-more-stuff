@@ -4,6 +4,7 @@ import { loadItem } from '../../redux/actions/item-actions';
 import { Link } from 'react-router-dom';
 
 import './ItemDetail.css';
+
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
