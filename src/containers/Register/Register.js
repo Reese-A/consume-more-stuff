@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { registerUser, loginUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
 
+import './Register.css';
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -67,52 +69,54 @@ class Register extends Component {
     return (
       <form id="register_form" onSubmit={this.handleSubmit}>
         <div id="register_title">Register new user</div>
-        <label htmlFor="email">Email: </label>
         <input
           type="email"
           required
           id="register_email"
           name="email"
+          placeholder="email"
           value={this.state.email}
           onChange={this.emailChangeHandler}
         />
         <br />
 
-        <label htmlFor="name">Username: </label>
         <input
           type="text"
           required
           id="register_name"
           name="name"
+          placeholder="username"
           value={this.state.name}
           onChange={this.nameChangeHandler}
         />
         <br />
 
-        <label htmlFor="password">Password: </label>
         <input
           type="password"
           required
           id="register_password"
           name="password"
+          placeholder="password"
           value={this.state.password}
           onChange={this.passwordChangeHandler}
         />
         <br />
 
-        <label htmlFor="confirm">Confirm Password: </label>
         <input
           type="password"
           required
           id="register_confirm"
           name="confirm"
+          placeholder="confirm password"
           value={this.state.confirm}
           onChange={this.confirmChangeHandler}
         />
         <br />
 
         <div hidden={this.state.hideErr}>Passwords must match</div>
-        <button type="submit">Submit</button>
+        <button id="submit_register" type="submit">
+          Submit
+        </button>
       </form>
     );
   }

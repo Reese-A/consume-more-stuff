@@ -4,6 +4,8 @@ import { loginUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
 import { withRouter } from 'react-router-dom';
 
+import './Login.css';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -48,21 +50,23 @@ class Login extends Component {
     return (
       <form id="login_form" onSubmit={this.handleSubmit}>
         <div id="login_title">Login as existing user</div>
-        <label htmlFor="login_email">Email: </label>
         <input
           id="login_email"
-          type="text"
+          type="email"
           name="email"
+          placeholder="email"
+          required
           value={this.state.email}
           onChange={this.emailChangeHandler}
         />
         <br />
 
-        <label htmlFor="login_password">Password: </label>
         <input
           id="login_password"
           type="password"
           name="password"
+          placeholder="password"
+          required
           value={this.state.password}
           onChange={this.passwordChangeHandler}
         />
