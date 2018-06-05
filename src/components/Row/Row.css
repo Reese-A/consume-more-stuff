@@ -12,6 +12,6 @@
 
 .row .row_container {
   display: flex;
-  overflow: scroll;
+  overflow: auto;
 }
 /*# sourceMappingURL=Row.css.map */
