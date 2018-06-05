@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
 import { loadAllCategoryItems } from '../../redux/actions/category-actions';
 
@@ -11,6 +11,7 @@ import './Home.css';
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   componentDidMount() {
     this.props.loadAllCategoryItems(5);
