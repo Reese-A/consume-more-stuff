@@ -72,6 +72,7 @@ class NewItem extends React.Component {
       }
     });
     this.props.addNewItem(data);
+    this.props.history.push('/');
   }
 
   handleChange(event) {
@@ -83,23 +84,12 @@ class NewItem extends React.Component {
     if (name === 'category') value = Number(value);
     if (name === 'condition') value = Number(value);
     if (name === 'img_file') value = files;
-    console.log(new FormData());
-    // if (name === 'dimensions_value') {
-    //   const split = value.toLowerCase().split('x');
-    //   const cleaned = split.map(value => {
-    //     return value.trim();
-    //   });
-    //   console.log(cleaned);
-    // }
-    this.setState({ [name]: value }, () => {
-      // console.log(this.state);
-    });
+
+    this.setState({ [name]: value });
   }
 
   handleFiles(event) {
     const { files } = event.target;
-    // const validFiles = [];
-    // const data = new FormData();
 
     const preview = document.getElementById('preview');
     preview.innerHTML = '';
@@ -111,61 +101,11 @@ class NewItem extends React.Component {
     const reader = new FileReader();
     reader.onload = (imgElem => {
       return event => {
-        // console.log(event);
         imgElem.src = event.target.result;
-
-        this.setState({ img_file: files[0] }, () => {
-          // console.log(this.state);
-        });
+        this.setState({ img_file: files[0] });
       };
     })(imgElem);
     reader.readAsDataURL(files[0]);
-
-    // this.setState({ img_file: files[0]}, () => {
-
-    // Object.values(files).forEach(file => {
-    //   // const file = files[i];
-    //   if (!file.type.startsWith('image/')) {
-    //     return;
-    //   }
-    //   validFiles.push(file);
-
-    //   data.append('file', file);
-
-    //   const imgElem = document.createElement('img');
-    //   imgElem.file = file;
-    //   preview.appendChild(imgElem);
-
-    //   const reader = new FileReader();
-    //   reader.onload = (imgElem => {
-    //     return event => {
-    //       // console.log(event);
-    //       imgElem.src = event.target.result;
-
-    //       this.setState({ img_url: files }, () => {
-    //         console.log(this.state);
-    //       });
-    //     };
-    //   })(imgElem);
-    //   reader.readAsDataURL(file);
-    // });
-    // Object.entries(this.state).forEach(entry => {
-    //   if (entry[0] === 'img_url') return;
-    //   data.append(entry[0], entry[1]);
-    // });
-    // fetch('/upload', {
-    //   method: 'POST',
-    //   body: data
-    // })
-    //   .then(res => res.json())
-    //   .then(files => {
-    //     console.log('Success:', files);
-    //     this.setState({ img_url: files[0]['location'] }, () => {
-    //       console.log(this.state);
-    //     });
-    //   })
-    //   .catch(error => console.error('Error:', error));
-    // // data.append('filename', file.name);
   }
 
   render() {
@@ -315,4 +255,7 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(NewItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewItem);

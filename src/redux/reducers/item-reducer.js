@@ -9,14 +9,7 @@ import store from '../../index';
 export const items = (state = {}, action) => {
   switch (action.type) {
     case LOAD_ITEMS: {
-      const items = action.items.reduce((items, item) => {
-        if (!items[item.category_id]) {
-          items[item.category_id] = [];
-        }
-        items[item.category_id].push(item);
-        return items;
-      }, {});
-      return items;
+      return action.items;
     }
     case LOAD_ITEM: {
       return action.item;

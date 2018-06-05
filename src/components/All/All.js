@@ -13,21 +13,11 @@ class All extends React.Component {
   }
 
   render() {
-    const items = Object.values(this.props.items).reduce((items, itemArr) => {
-      return [...items, ...itemArr];
-    }, []);
-
-    // items.sort((a, b) => {
-    //   return moment(b.created_at).diff(moment(a.created_at));
-    // });
-
-    console.log(items);
-
     return (
       <div id="all_items">
         <span className="all_title">All Items</span>
         <div className="all_items_container">
-          {items.map(item => {
+          {Object.values(this.props.items).map(item => {
             return (
               <Card
                 key={item.id}
