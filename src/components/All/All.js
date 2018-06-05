@@ -8,10 +8,6 @@ import Card from '../Card/Card';
 import './All.css';
 
 class All extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   componentDidMount() {
     this.props.loadItems(1, 25);
   }
