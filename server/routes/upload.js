@@ -26,39 +26,29 @@ AWS.config.update({
   region
 });
 
-// console.log(AWS.config);
-
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
   params: { Bucket }
 });
 
-s3.listBuckets(function(err, data) {
-  if (err) {
-    console.log('Error', err);
-  } else {
-    console.log('Bucket List', data.Buckets);
-  }
-});
+// const upload = multer({ dest: 'server/store/uploads/' });
 
 const upload = multer({
   storage: multerS3({
     s3: s3,
+    acl: 'public-read',
     bucket: process.env.AWS_S3_BUCKET_NAME,
     metadata: function(req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
     key: function(req, file, cb) {
-      console.log(Date.now().toString());
-      cb(null, Date.now().toString());
+      cb(null, `${Date.now().toString()}`);
     }
   })
 });
 
 router.route('/').post(upload.array('file', 1), (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
-  return res.json({ test: 'upload' });
+  return res.json(req.files);
 });
 
 module.exports = router;
