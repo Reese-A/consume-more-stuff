@@ -34,8 +34,6 @@ class NewItem extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    console.log(this.state);
     const {
       description,
       price_value,
@@ -94,7 +92,7 @@ class NewItem extends React.Component {
     //   console.log(cleaned);
     // }
     this.setState({ [name]: value }, () => {
-      console.log(this.state);
+      // console.log(this.state);
     });
   }
 
@@ -117,7 +115,7 @@ class NewItem extends React.Component {
         imgElem.src = event.target.result;
 
         this.setState({ img_file: files[0] }, () => {
-          console.log(this.state);
+          // console.log(this.state);
         });
       };
     })(imgElem);
