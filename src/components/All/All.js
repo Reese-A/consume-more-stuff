@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
+import { loadItems } from '../../redux/actions/item-actions';
 import moment from 'moment';
 import Card from '../Card/Card';
 
@@ -9,15 +10,21 @@ import './All.css';
 class All extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
+
+  componentDidMount() {
+    this.props.loadItems(1, 25);
+  }
+
   render() {
     const items = Object.values(this.props.items).reduce((items, itemArr) => {
       return [...items, ...itemArr];
     }, []);
 
-    items.sort((a, b) => {
-      return moment(b.created_at).diff(moment(a.created_at));
-    });
+    // items.sort((a, b) => {
+    //   return moment(b.created_at).diff(moment(a.created_at));
+    // });
 
     console.log(items);
 
@@ -49,4 +56,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(All);
+const mapDispatchToProps = dispatch => {
+  return {
+    loadItems: (page, limit) => {
+      dispatch(loadItems(page, limit));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(All);
