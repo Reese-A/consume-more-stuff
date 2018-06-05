@@ -39,6 +39,13 @@ class Sidebar extends React.Component {
           </li>
           {this.props.user.id ? (
             <li>
+              <NavLink exact to="/home">
+                My Listings
+              </NavLink>
+            </li>
+          ) : null}
+          {this.props.user.id ? (
+            <li>
               <NavLink exact to="/item/new-item">
                 New Item
               </NavLink>

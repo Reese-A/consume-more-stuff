@@ -8,6 +8,7 @@ import All from '../All/All';
 import Register from '../../containers/Register/Register';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import NewItem from '../NewItem/NewItem';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const Main = props => {
   return (
@@ -18,7 +19,8 @@ const Main = props => {
         {/* <Route exact path="/login" component={Login} /> */}
         <Route exact path="/all" component={All} />
         {/* <Route exact path="/register" component={Register} /> */}
-        <Route exact path="/item/new-item" component={NewItem} />
+        <PrivateRoute exact path="/item/new-item" component={NewItem} />
+        {/* <Route exact path="/item/new-item" component={NewItem} /> */}
         <Route exact path="/item/:id" component={ItemDetail} />
       </Switch>
     </main>

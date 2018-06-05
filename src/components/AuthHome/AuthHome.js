@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { loadAllCategoryItems } from '../../redux/actions/category-actions';
 
 import Row from '../Row/Row';
 
-import './Home.css';
+import './AuthHome.css';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   componentDidMount() {
     this.props.loadAllCategoryItems(5);

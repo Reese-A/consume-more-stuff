@@ -23,8 +23,8 @@ router.route('/items').get((req, res) => {
           withRelated: [
             {
               items: qb => {
-                qb.limit(limit);
                 qb.orderBy('created_at', 'desc');
+                qb.limit(limit);
               }
             }
           ]

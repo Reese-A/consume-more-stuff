@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+// import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import { addNewItem } from '../../redux/actions/item-actions';
 
@@ -100,8 +100,8 @@ class NewItem extends React.Component {
 
   handleFiles(event) {
     const { files } = event.target;
-    const validFiles = [];
-    const data = new FormData();
+    // const validFiles = [];
+    // const data = new FormData();
 
     const preview = document.getElementById('preview');
     preview.innerHTML = '';
