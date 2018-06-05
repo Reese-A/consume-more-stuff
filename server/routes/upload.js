@@ -44,6 +44,7 @@ s3.listBuckets(function(err, data) {
 const upload = multer({
   storage: multerS3({
     s3: s3,
+    acl: 'public-read',
     bucket: process.env.AWS_S3_BUCKET_NAME,
     metadata: function(req, file, cb) {
       cb(null, { fieldName: file.fieldname });
