@@ -4,7 +4,6 @@ export const loadState = () => {
     if (serializedState === null) {
       return undefined;
     }
-    console.log(serializedState.user);
     return JSON.parse(serializedState);
   } catch (err) {
     console.log(err);
