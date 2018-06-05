@@ -16,6 +16,32 @@ router.route('/').get((req, res) => {
     });
 });
 
+router.route('/:id/items').get((req, res) => {
+  const { id } = req.params;
+  const page = req.query.page > 0 ? req.query.page : 1;
+  const limit = req.query.limit;
+
+  return new User()
+    .where({ id })
+    .fetch({
+      withRelated: [
+        {
+          items: qb => {
+            qb.orderBy('created_at', 'desc');
+            qb.limit(limit);
+            qb.offset((page - 1) * limit);
+          }
+        }
+      ]
+    })
+    .then(user => {
+      return res.json(user);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 router.route('/register').post((req, res) => {
   let { email, password, name } = req.body;
 
