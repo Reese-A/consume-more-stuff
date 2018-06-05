@@ -7,16 +7,55 @@ class EditItem extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      condition: undefined,
-      category: undefined
-    };
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.loadItem(id);
-    console.log('MOUNT', this.props.item);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.condition && state.category) return state;
+    const stateChanges = { ...props.item };
+
+    console.log(props);
+    console.log(state);
+    // if (props.conditions.length > 0) {
+    //   stateChanges.condition = props.conditions[0].id;
+    // }
+    // if (props.categories.length > 0) {
+    //   stateChanges.category = props.categories[0].id;
+    // }
+    // return state;
+    stateChanges.condition = props.item.condition_id;
+    stateChanges.category = props.item.category_id;
+
+    const price = props.item.price ? props.item.price.split(' ') : undefined;
+    if (price) {
+      const price_value = price[0];
+      const price_currency = price[1];
+      stateChanges.price_value = price_value;
+      stateChanges.price_currency = price_currency;
+    }
+
+    return stateChanges;
+  }
+
+  handleChange(event) {
+    let { name, value, files } = event.target;
+
+    name = name.trim().toLowerCase();
+    value = value.trim().toLowerCase();
+
+    if (name === 'category') value = Number(value);
+    if (name === 'condition') value = Number(value);
+    if (name === 'img_file') value = files;
+
+    this.setState({ [name]: value }, () => {
+      console.log(this.state);
+    });
   }
 
   render() {
@@ -53,6 +92,7 @@ class EditItem extends Component {
             <input
               type="number"
               name="price_value"
+              value={this.state.price_value}
               placeholder="Price"
               onChange={this.handleChange}
             />
@@ -60,6 +100,7 @@ class EditItem extends Component {
               type="text"
               name="price_currency"
               placeholder="Currency"
+              value={this.state.price_currency}
               onChange={this.handleChange}
               pattern="([A-Za-z]+ ?)*"
             />
@@ -69,6 +110,7 @@ class EditItem extends Component {
             type="text"
             name="make"
             placeholder="Manufacturer"
+            value={this.state.make}
             pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
@@ -76,6 +118,7 @@ class EditItem extends Component {
             type="text"
             name="model"
             placeholder="Model"
+            value={this.state.model}
             pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
@@ -109,16 +152,10 @@ class EditItem extends Component {
             name="img_file"
             id="new_item_img_file"
             placeholder="Image File"
-            multiple
+            // multiple
             accept="image/* "
             onChange={this.handleFiles}
             required
-          />
-          <input
-            type="url"
-            name="img_url"
-            placeholder="Image URL"
-            onChange={this.handleChange}
           />
 
           <div id="new_item_category_container" className="select_container">
