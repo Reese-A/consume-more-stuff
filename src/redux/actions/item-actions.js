@@ -31,10 +31,11 @@ export const addNewItem = data => {
   return dispatch => {
     return fetch(`/item`, {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      body: data,
+      // body: JSON.stringify(data),
+      // headers: {
+      //   'Content-Type': 'application/json'
+      // },
       credentials: 'same-origin'
     })
       .then(res => res.json())
