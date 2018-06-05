@@ -47,6 +47,7 @@ router
   })
 
   .post((req, res) => {
+    console.log('requser ', req.user);
     const {
       description,
       condition_id,
@@ -59,24 +60,22 @@ router
       img_url
     } = req.body;
 
-    // const newItem = {
-    //   description,
-    //   condition_id,
-    //   category_id,
-    //   price,
-    //   make,
-    //   model,
-    //   dimensions,
-    //   notes,
-    //   img_url: 'http://via.placeholder.com/250x200',
-    //   owner: 1,
-    //   status_id: 1
-    // };
+    const newItem = {
+      description,
+      condition_id,
+      category_id,
+      price,
+      make,
+      model,
+      dimensions,
+      notes,
+      img_url: 'http://via.placeholder.com/250x200',
+      owner: Number(req.user.id),
+      status_id: 1
+    };
 
     console.log(req.body);
     console.log(img_url);
-
-    return res.json({ message: 'In Development' });
 
     return new Item(newItem)
       .save()
