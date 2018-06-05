@@ -25,7 +25,7 @@ server.use(cookieParser());
 server.use(
   session({
     store: new Redis(),
-    secret: 'keyboard cat',
+    secret: 'itsasecret',
     resave: false,
     saveUninitialized: true
   })
@@ -50,7 +50,8 @@ passport.deserializeUser((user, done) => {
       user = user.toJSON();
       return done(null, {
         id: user.id,
-        name: user.name
+        name: user.name,
+        email: user.email
       });
     })
     .catch(err => {
