@@ -40,10 +40,7 @@ class ItemDetail extends Component {
               Updated at {this.props.item.updated_at}
             </div>
             {this.props.user.id === Number(owner) ? (
-              <Link
-                id="edit_button"
-                to={`item/${this.props.match.params.id}/edit`}
-              >
+              <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
                 {' '}
                 Edit Item{' '}
               </Link>
