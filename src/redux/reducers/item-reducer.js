@@ -36,8 +36,8 @@ export const items = (state = {}, action) => {
     }
     case LOAD_USER_ITEMS: {
       const items = action.user.items.reduce((items, item) => {
-        if (!items[item.status.id]) items[item.stautus.id] = [];
-        items[item.status.id].push(item);
+        if (!items[item.status_id]) items[item.status_id] = [];
+        items[item.status_id].push(item);
         return items;
       }, {});
       return items;
