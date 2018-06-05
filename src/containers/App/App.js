@@ -17,10 +17,6 @@ import Main from '../../components/Main/Main';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
-import { loadState } from '../../localStorage';
-
-const persistedState = loadState();
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -67,8 +63,6 @@ class App extends Component {
     this.props.loadConditions();
     this.props.loadStatuses();
     this.props.loadUser();
-    // this.props.loadUsers();
-    // this.props.loadItems();
   }
 }
 
