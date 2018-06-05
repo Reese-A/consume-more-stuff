@@ -31,7 +31,7 @@ router.route('/items').get((req, res) => {
         });
       });
 
-      Promise.all(promises).then(data => {
+      return Promise.all(promises).then(data => {
         return res.json(data);
       });
     })
