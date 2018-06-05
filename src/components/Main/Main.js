@@ -8,6 +8,7 @@ import All from '../All/All';
 import Register from '../../containers/Register/Register';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import NewItem from '../NewItem/NewItem';
+import EditItem from '../EditItem/EditItem';
 
 const Main = props => {
   return (
@@ -20,6 +21,7 @@ const Main = props => {
         {/* <Route exact path="/register" component={Register} /> */}
         <Route exact path="/item/new-item" component={NewItem} />
         <Route exact path="/item/:id" component={ItemDetail} />
+        <Route exact path="/item/:id/edit" component={EditItem} />
       </Switch>
     </main>
   );
