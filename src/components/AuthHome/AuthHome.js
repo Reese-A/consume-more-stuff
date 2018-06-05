@@ -2,28 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { loadAllCategoryItems } from '../../redux/actions/category-actions';
+import { loadUserItems } from '../../redux/actions/user-actions';
 
 import Row from '../Row/Row';
 
 import './AuthHome.css';
 
-class Home extends React.Component {
+class AuthHome extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.props.loadAllCategoryItems(5);
+    this.props.loadUserItems(this.props.user.id);
   }
   render() {
     return (
       <div id="home">
-        {this.props.categories.map(category => {
+        {this.props.statuses.map(status => {
           return (
             <Row
-              key={category.id}
-              categoryId={category.id}
-              categoryName={category.name}
+              key={status.id}
+              statusId={status.id}
+              statusName={status.name}
             />
           );
         })}
@@ -34,16 +34,18 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.category
+    user: state.user,
+    items: state.items,
+    statuses: state.status
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadAllCategoryItems: limit => {
-      dispatch(loadAllCategoryItems(limit));
+    loadUserItems: id => {
+      dispatch(loadUserItems(id));
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthHome);
