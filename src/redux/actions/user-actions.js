@@ -72,9 +72,9 @@ export const logoutUser = () => {
   };
 };
 
-export const loadUserItems = () => {
+export const loadUserItems = id => {
   return dispatch => {
-    return fetch('/user/items', { credentials: 'same-origin' })
+    return fetch(`/user/${id}/items`, { credentials: 'same-origin' })
       .then(res => res.json())
       .then(user => {
         return dispatch({ type: LOAD_USER_ITEMS, user });

@@ -10,6 +10,7 @@ import ItemDetail from '../ItemDetail/ItemDetail';
 import NewItem from '../NewItem/NewItem';
 import EditItem from '../EditItem/EditItem';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import AuthHome from '../AuthHome/AuthHome';
 
 const Main = props => {
   return (
@@ -21,6 +22,8 @@ const Main = props => {
         <Route exact path="/all" component={All} />
         {/* <Route exact path="/register" component={Register} /> */}
         <PrivateRoute exact path="/item/new-item" component={NewItem} />
+        <PrivateRoute exact path="/home" component={AuthHome} />
+
         {/* <Route exact path="/item/new-item" component={NewItem} /> */}
         <Route exact path="/item/:id" component={ItemDetail} />
         <Route exact path="/item/:id/edit" component={EditItem} />
