@@ -6,16 +6,6 @@ const User = require('../db/models/User');
 const router = express.Router();
 const saltedRounds = 12;
 
-router.route('/').get((req, res) => {
-  return User.fetchAll({})
-    .then(users => {
-      return res.json(users);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
 router.route('/:id/items').get((req, res) => {
   const { id } = req.params;
   const page = req.query.page > 0 ? req.query.page : 1;
@@ -63,14 +53,10 @@ router.route('/register').post((req, res) => {
       })
         .save()
         .then(user => {
-          req.login(user, err => {
-            if (err) throw new Error(err);
-          });
-          name = name ? name : null;
-          // console.log('REGISTER', req.user);
-          return res.json({
-            id: user.id,
-            name: name
+          return req.login(user, err => {
+            if (err) throw err;
+            name = name ? name : null;
+            return res.json({ id: user.id, name: name });
           });
         })
         .catch(err => {
@@ -81,7 +67,6 @@ router.route('/register').post((req, res) => {
 });
 
 router.route('/login').post(passport.authenticate('local'), (req, res) => {
-  // console.log('LOGIN ', req.user);
   return res.json({
     id: req.user.id,
     name: req.user.name
@@ -89,10 +74,7 @@ router.route('/login').post(passport.authenticate('local'), (req, res) => {
 });
 
 router.route('/logout').get((req, res) => {
-  // console.log('LOGOUT BEGIN', req.user);
   req.logout();
-  // console.log('LOGOUT DONE', req.user);
-
   if (!req.user) {
     return res.json({
       success: true

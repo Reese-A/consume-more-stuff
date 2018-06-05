@@ -8,11 +8,6 @@ import Card from '../Card/Card';
 import './All.css';
 
 class All extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     this.props.loadItems(1, 25);
   }
@@ -64,4 +59,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(All);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(All);
