@@ -27,16 +27,28 @@ class ItemDetail extends Component {
     console.log('ITEMDETAIL', this.props.item);
     return (
       <div id="item_detail">
-        {this.props.user.id === Number(owner) ? (
-          <Link id="edit_button" to={`item/${this.props.match.params.id}/edit`}>
-            {' '}
-            Edit Item{' '}
-          </Link>
-        ) : null}
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
           <span id="item_price">{this.props.item.price}</span>
           <img id="item_img" src={this.props.item.img_url} alt="" />
+          <div id="item_footer">
+            <div id="item_created_at">
+              Posted on {this.props.item.created_at} in{' '}
+              <Link to={`/category/${category}`}>{category}</Link>
+            </div>
+            <div id="item_updated_at">
+              Updated at {this.props.item.updated_at}
+            </div>
+            {this.props.user.id === Number(owner) ? (
+              <Link
+                id="edit_button"
+                to={`item/${this.props.match.params.id}/edit`}
+              >
+                {' '}
+                Edit Item{' '}
+              </Link>
+            ) : null}
+          </div>
         </div>
         <div id="details_wrap">
           <ul id="details_box">
@@ -68,16 +80,11 @@ class ItemDetail extends Component {
             voluptas! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             Ratione ex repudiandae dicta quam quasi nesciunt accusamus neque
             ducimus quaerat at voluptates veritatis assumenda, dignissimos
-            corporis, alias nemo, cumque quia placeat. {this.props.item.notes}
-          </div>
-        </div>
-        <div id="item_footer">
-          <div id="item_created_at">
-            Posted on {this.props.item.created_at} in{' '}
-            <Link to={`/category/${category}`}>{category}</Link>
-          </div>
-          <div id="item_updated_at">
-            Updated at {this.props.item.updated_at}
+            corporis, alias nemo, cumque quia placeat. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Nemo, repellat. Ab quis dolores
+            dolore veniam ea repudiandae hic atque cum dolor corporis eaque
+            mollitia neque nisi vitae, necessitatibus labore illum.{' '}
+            {this.props.item.notes}
           </div>
         </div>
       </div>

@@ -26,6 +26,11 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
+#item_detail #item_main #item_footer {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
 #item_detail #details_wrap {
   display: flex;
   flex-direction: column;
@@ -52,10 +57,5 @@
   font-size: 20px;
   overflow: scroll;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-#item_detail #item_footer {
-  margin-top: 20px;
-  font-size: 18px;
 }
 /*# sourceMappingURL=ItemDetail.css.map */

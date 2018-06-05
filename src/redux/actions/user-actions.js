@@ -8,13 +8,10 @@ export const LOAD_USER = 'LOAD_USER';
 
 export const loadUsers = () => {
   return dispatch => {
-    return fetch('/user')
+    return fetch('/user', { credentials: 'same-origin' })
       .then(res => res.json())
       .then(users => {
-        return dispatch({
-          type: LOAD_USERS,
-          users
-        });
+        return dispatch({ type: LOAD_USERS, users });
       });
   };
 };
@@ -36,14 +33,12 @@ export const registerUser = data => {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'same-origin'
     })
       .then(res => res.json())
       .then(user => {
-        return dispatch({
-          type: REGISTER_USER,
-          user
-        });
+        return dispatch({ type: REGISTER_USER, user });
       });
   };
 };
@@ -56,27 +51,22 @@ export const loginUser = data => {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'same-origin'
     })
       .then(res => res.json())
       .then(user => {
-        return dispatch({
-          type: LOGIN_USER,
-          user
-        });
+        return dispatch({ type: LOGIN_USER, user });
       });
   };
 };
 
 export const logoutUser = () => {
   return dispatch => {
-    return fetch('/user/logout')
+    return fetch('/user/logout', { credentials: 'same-origin' })
       .then(res => res.json())
       .then(res => {
-        return dispatch({
-          type: LOGOUT_USER,
-          user: {}
-        });
+        return dispatch({ type: LOGOUT_USER, user: {} });
       });
   };
 };

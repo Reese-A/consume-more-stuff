@@ -47,6 +47,7 @@ router
   })
 
   .post((req, res) => {
+    console.log('requser ', req.user);
     const {
       description,
       condition_id,

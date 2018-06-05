@@ -38,7 +38,6 @@ class Login extends Component {
   }
 
   componentDidUpdate() {
-    console.log('componentdidupdate');
     const user = this.props.user ? this.props.user : {};
     saveState({ user: user });
     if (Object.keys(user).length > 0) {

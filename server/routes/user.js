@@ -41,7 +41,7 @@ router.route('/register').post((req, res) => {
             if (err) throw new Error(err);
           });
           name = name ? name : null;
-          console.log(name);
+          // console.log('REGISTER', req.user);
           return res.json({
             id: user.id,
             name: name
@@ -55,6 +55,7 @@ router.route('/register').post((req, res) => {
 });
 
 router.route('/login').post(passport.authenticate('local'), (req, res) => {
+  // console.log('LOGIN ', req.user);
   return res.json({
     id: req.user.id,
     name: req.user.name
@@ -62,7 +63,10 @@ router.route('/login').post(passport.authenticate('local'), (req, res) => {
 });
 
 router.route('/logout').get((req, res) => {
+  // console.log('LOGOUT BEGIN', req.user);
   req.logout();
+  // console.log('LOGOUT DONE', req.user);
+
   if (!req.user) {
     return res.json({
       success: true
