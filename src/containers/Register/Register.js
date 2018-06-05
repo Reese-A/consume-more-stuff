@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerUser, loginUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
+import { withRouter } from 'react-router-dom';
 
 import './Register.css';
 
@@ -53,11 +54,9 @@ class Register extends Component {
   }
 
   handleSubmit(event) {
-    console.log('submit fired');
     event.preventDefault();
     if (this.state.password === this.state.confirm) {
       this.props.registerUser(this.state);
-      console.log('REGISTER FINISHED');
     } else {
       return this.setState({
         hideErr: false
@@ -139,4 +138,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Register)
+);
