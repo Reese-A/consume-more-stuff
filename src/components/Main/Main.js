@@ -8,6 +8,7 @@ import All from '../All/All';
 import Register from '../../containers/Register/Register';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import NewItem from '../NewItem/NewItem';
+import EditItem from '../EditItem/EditItem';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import AuthHome from '../AuthHome/AuthHome';
 
@@ -25,6 +26,7 @@ const Main = props => {
 
         {/* <Route exact path="/item/new-item" component={NewItem} /> */}
         <Route exact path="/item/:id" component={ItemDetail} />
+        <Route exact path="/item/:id/edit" component={EditItem} />
       </Switch>
     </main>
   );
