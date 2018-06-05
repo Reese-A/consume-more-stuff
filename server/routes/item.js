@@ -44,7 +44,11 @@ const upload = multer({ dest: 'server/store/uploads' });
 router
   .route('/')
   .get((req, res) => {
-    return Item.fetchAll({})
+    const page = req.query.page > 0 ? req.query.page : 1;
+    const limit = req.query.limit || 50;
+    return new Item()
+      .orderBy('created_at', 'desc')
+      .fetchPage({ pageSize: limit, page })
       .then(items => {
         return res.json(items);
       })
