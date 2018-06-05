@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
 import Card from '../Card/Card';
 
@@ -9,6 +9,7 @@ import './Row.css';
 class Row extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {

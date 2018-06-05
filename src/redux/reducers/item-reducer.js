@@ -3,7 +3,7 @@ import {
   LOAD_CATEGORY_ITEMS,
   LOAD_ALL_CATEGORY_ITEMS
 } from '../actions/category-actions';
-
+import { LOAD_USER_ITEMS } from '../actions/user-actions';
 import store from '../../index';
 
 export const items = (state = {}, action) => {
@@ -32,6 +32,14 @@ export const items = (state = {}, action) => {
       if (!action.category) return state;
 
       const items = { [action.category.id]: action.category.items };
+      return items;
+    }
+    case LOAD_USER_ITEMS: {
+      const items = action.user.items.reduce((items, item) => {
+        if (!items[item.status.id]) items[item.stautus.id] = [];
+        items[item.status.id].push(item);
+        return items;
+      }, {});
       return items;
     }
     case ADD_NEW_ITEM: {

@@ -5,6 +5,7 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOAD_USER = 'LOAD_USER';
+export const LOAD_USER_ITEMS = 'LOAD_USER_ITEMS';
 
 export const loadUsers = () => {
   return dispatch => {
@@ -67,6 +68,16 @@ export const logoutUser = () => {
       .then(res => res.json())
       .then(res => {
         return dispatch({ type: LOGOUT_USER, user: {} });
+      });
+  };
+};
+
+export const loadUserItems = () => {
+  return dispatch => {
+    return fetch('/user/items', { credentials: 'same-origin' })
+      .then(res => res.json())
+      .then(user => {
+        return dispatch({ type: LOAD_USER_ITEMS, user });
       });
   };
 };

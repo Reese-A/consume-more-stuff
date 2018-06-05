@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+// import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import { addNewItem } from '../../redux/actions/item-actions';
 
@@ -45,16 +45,19 @@ class NewItem extends React.Component {
       dimensions_value,
       dimensions_units,
       notes,
-      img_url,
+      // img_url,
+      img_file,
       category,
       condition
     } = this.state;
+
     const item = {
       description,
       make,
       model,
       notes,
-      img_url,
+      // img_url,
+      img_file,
       category_id: category,
       condition_id: condition
     };
@@ -64,8 +67,13 @@ class NewItem extends React.Component {
     if (price_value && price_currency) {
       item.price = `${price_value} ${price_currency}`.trim() || undefined;
     }
-
-    this.props.addNewItem(item);
+    const data = new FormData();
+    Object.entries(item).forEach(item => {
+      if (item[1]) {
+        data.append(item[0], item[1]);
+      }
+    });
+    this.props.addNewItem(data);
   }
 
   handleChange(event) {
@@ -92,46 +100,74 @@ class NewItem extends React.Component {
 
   handleFiles(event) {
     const { files } = event.target;
-    const validFiles = [];
+    // const validFiles = [];
+    // const data = new FormData();
 
     const preview = document.getElementById('preview');
     preview.innerHTML = '';
 
-    Object.values(files).forEach(file => {
-      // const file = files[i];
-      if (!file.type.startsWith('image/')) {
-        return;
-      }
-      const data = new FormData();
-      data.append('file', file);
-      // data.append('filename', file.name);
-      console.log(file);
-      fetch('/upload', {
-        method: 'POST',
-        body: data
-      })
-        .then(res => res.json())
-        .then(data => console.log('Success:', data))
-        .catch(error => console.error('Error:', error));
-      validFiles.push(data);
+    const imgElem = document.createElement('img');
+    imgElem.file = files[0];
+    preview.appendChild(imgElem);
 
-      const imgElem = document.createElement('img');
-      imgElem.file = file;
-      preview.appendChild(imgElem);
+    const reader = new FileReader();
+    reader.onload = (imgElem => {
+      return event => {
+        // console.log(event);
+        imgElem.src = event.target.result;
 
-      const reader = new FileReader();
-      reader.onload = (imgElem => {
-        return event => {
-          // console.log(event);
-          imgElem.src = event.target.result;
+        this.setState({ img_file: files[0] }, () => {
+          console.log(this.state);
+        });
+      };
+    })(imgElem);
+    reader.readAsDataURL(files[0]);
 
-          this.setState({ img_url: validFiles }, () => {
-            console.log(this.state);
-          });
-        };
-      })(imgElem);
-      reader.readAsDataURL(file);
-    });
+    // this.setState({ img_file: files[0]}, () => {
+
+    // Object.values(files).forEach(file => {
+    //   // const file = files[i];
+    //   if (!file.type.startsWith('image/')) {
+    //     return;
+    //   }
+    //   validFiles.push(file);
+
+    //   data.append('file', file);
+
+    //   const imgElem = document.createElement('img');
+    //   imgElem.file = file;
+    //   preview.appendChild(imgElem);
+
+    //   const reader = new FileReader();
+    //   reader.onload = (imgElem => {
+    //     return event => {
+    //       // console.log(event);
+    //       imgElem.src = event.target.result;
+
+    //       this.setState({ img_url: files }, () => {
+    //         console.log(this.state);
+    //       });
+    //     };
+    //   })(imgElem);
+    //   reader.readAsDataURL(file);
+    // });
+    // Object.entries(this.state).forEach(entry => {
+    //   if (entry[0] === 'img_url') return;
+    //   data.append(entry[0], entry[1]);
+    // });
+    // fetch('/upload', {
+    //   method: 'POST',
+    //   body: data
+    // })
+    //   .then(res => res.json())
+    //   .then(files => {
+    //     console.log('Success:', files);
+    //     this.setState({ img_url: files[0]['location'] }, () => {
+    //       console.log(this.state);
+    //     });
+    //   })
+    //   .catch(error => console.error('Error:', error));
+    // // data.append('filename', file.name);
   }
 
   render() {
@@ -223,17 +259,17 @@ class NewItem extends React.Component {
             name="img_file"
             id="new_item_img_file"
             placeholder="Image File"
-            multiple
+            // multiple
             accept="image/* "
             onChange={this.handleFiles}
             required
           />
-          <input
+          {/* <input
             type="url"
             name="img_url"
             placeholder="Image URL"
             onChange={this.handleChange}
-          />
+          /> */}
 
           <div id="new_item_category_container" className="select_container">
             <label htmlFor="new_item_category">Category</label>
