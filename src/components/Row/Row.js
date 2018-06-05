@@ -13,10 +13,13 @@ class Row extends Component {
   }
 
   render() {
-    const items = this.props.items[this.props.categoryId] || [];
+    const items =
+      this.props.items[this.props.categoryId || this.props.statusId] || [];
     return (
       <div className="row">
-        <div className="row_title">{this.props.categoryName}</div>
+        <div className="row_title">
+          {this.props.categoryName || this.props.statusName}
+        </div>
         <div className="row_container">
           {items.map(item => {
             return (
