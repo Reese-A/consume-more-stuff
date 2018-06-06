@@ -1,4 +1,9 @@
-import { LOAD_ITEMS, LOAD_ITEM, ADD_NEW_ITEM } from '../actions/item-actions';
+import {
+  LOAD_ITEMS,
+  LOAD_ITEM,
+  ADD_NEW_ITEM,
+  EDIT_ITEM
+} from '../actions/item-actions';
 import {
   LOAD_CATEGORY_ITEMS,
   LOAD_ALL_CATEGORY_ITEMS
@@ -6,7 +11,7 @@ import {
 import { LOAD_USER_ITEMS } from '../actions/user-actions';
 import store from '../../index';
 
-export const items = (state = {}, action) => {
+export const items = (state = [], action) => {
   switch (action.type) {
     case LOAD_ITEMS: {
       return action.items;
@@ -36,10 +41,9 @@ export const items = (state = {}, action) => {
       return items;
     }
     case ADD_NEW_ITEM: {
-      // const item = action.item;
-      // const items = { ...state };
-      // items[item.category_id].push(item);
-      // return items;
+      return action.item;
+    }
+    case EDIT_ITEM: {
       return action.item;
     }
     default:

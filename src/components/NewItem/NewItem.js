@@ -61,7 +61,8 @@ class NewItem extends React.Component {
       item.dimensions = `${dimensions_value} ${dimensions_units}`;
     }
     if (price_value && price_currency) {
-      item.price = `${price_value} ${price_currency}`.trim() || undefined;
+      item.price =
+        `${Number(price_value)} ${price_currency}`.trim() || undefined;
     }
     const data = new FormData();
     Object.entries(item).forEach(item => {

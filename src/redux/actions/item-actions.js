@@ -1,6 +1,7 @@
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const LOAD_ITEM = 'LOAD_ITEM';
 export const ADD_NEW_ITEM = 'ADD_NEW_ITEM';
+export const EDIT_ITEM = 'EDIT_ITEM';
 
 export const loadItems = (page, limit) => {
   return dispatch => {
@@ -44,6 +45,20 @@ export const addNewItem = data => {
       .then(item => {
         console.log(item);
         return dispatch({ type: ADD_NEW_ITEM, item });
+      });
+  };
+};
+
+export const editItem = data => {
+  return dispatch => {
+    return fetch(`/item`, {
+      method: 'PUT',
+      body: data,
+      credentials: 'same-origin'
+    })
+      .then(res => res.json())
+      .then(item => {
+        return dispatch({ type: EDIT_ITEM, item });
       });
   };
 };

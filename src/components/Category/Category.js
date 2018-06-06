@@ -38,9 +38,10 @@ class Category extends React.Component {
 
     if (!category) return <Redirect to="/" />;
 
+    let items = [];
     const id = category ? category.id : undefined;
 
-    let items = this.props.items[id] || [];
+    if (!Array.isArray(this.props.items)) items = this.props.items[id] || [];
 
     return (
       <div id="category">
@@ -82,4 +83,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Category);
