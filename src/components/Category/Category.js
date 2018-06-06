@@ -54,7 +54,7 @@ class Category extends React.Component {
                 id={item.id}
                 description={item.description}
                 price={item.price}
-                img_url={'http://via.placeholder.com/250x200'}
+                img_url={item.img_url}
                 created_at={item.created_at}
               />
             );
