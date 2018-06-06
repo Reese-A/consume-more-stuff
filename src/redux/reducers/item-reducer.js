@@ -41,10 +41,10 @@ export const items = (state = [], action) => {
       return items;
     }
     case ADD_NEW_ITEM: {
-      return action.item;
+      return state;
     }
     case EDIT_ITEM: {
-      return action.item;
+      return state;
     }
     default:
       return state;
