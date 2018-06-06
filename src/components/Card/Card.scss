@@ -14,10 +14,19 @@
       width: 250px;
     }
   }
+  .card_description {
+    margin-left: 10px;
+    margin-top: 15px;
+    font-size: 18px;
+  }
+  .card_created_at {
+    margin-left: 10px;
+    font-size: 14px;
+  }
 
   .card_price {
     grid-area: 1/1/1/1;
     /* position: relative; */
-    margin: 16px;
+    margin: 8px;
   }
 }
