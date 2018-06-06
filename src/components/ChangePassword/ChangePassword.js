@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updatePassword } from '../../redux/actions/user-actions';
+// import { updatePassword } from '../../redux/actions/user-actions';
 
 import './ChangePassword.css';
 
@@ -47,8 +47,21 @@ class ChangePassword extends Component {
     event.preventDefault();
     console.log(this.state);
     if (this.state.newPassword === this.state.confirm) {
-      this.props.updatePassword(this.state);
-      this.props.history.push(`/user/${this.state.id}/home`); //add error handling
+      return fetch(`/user/${this.state.id}/password`, {
+        method: 'PUT',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success === true) {
+            return this.props.history.push(`/user/${this.state.id}/home`);
+          }
+        })
+        .catch(err => console.log(err));
     } else {
       return this.setState({
         hideErr: false
@@ -119,15 +132,15 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updatePassword: data => {
-      dispatch(updatePassword(data));
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     updatePassword: data => {
+//       dispatch(updatePassword(data));
+//     }
+//   };
+// };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(ChangePassword);

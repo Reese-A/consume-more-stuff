@@ -3,8 +3,7 @@ import {
   LOAD_USER,
   REGISTER_USER,
   LOGIN_USER,
-  LOGOUT_USER,
-  UPDATE_PASSWORD
+  LOGOUT_USER
 } from '../actions/user-actions';
 
 const initialState = {};
@@ -21,8 +20,6 @@ const user = (state = initialState, action) => {
       return action.user;
     case LOGOUT_USER:
       return action.user;
-    case UPDATE_PASSWORD:
-      return state;
     default:
       return state;
   }
