@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/user-actions';
+import { saveState } from '../../localStorage';
 import './Header.css';
 
 class Header extends Component {
@@ -13,7 +14,7 @@ class Header extends Component {
 
   logout() {
     this.props.logoutUser();
-    localStorage.removeItem('state');
+    saveState({ user: {} });
     this.props.history.push('/');
   }
 
@@ -67,4 +68,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);

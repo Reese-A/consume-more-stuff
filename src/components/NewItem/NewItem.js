@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import { addNewItem } from '../../redux/actions/item-actions';
 
@@ -28,7 +27,6 @@ class NewItem extends React.Component {
     if (props.categories.length > 0) {
       stateChanges.category = props.categories[0].id;
     }
-    // return state;
     return stateChanges;
   }
 
