@@ -23,6 +23,7 @@ router.route('/items').get((req, res) => {
           withRelated: [
             {
               items: qb => {
+                qb.whereNot({ status_id: 3 });
                 qb.orderBy('created_at', 'desc');
                 qb.limit(limit);
               }
@@ -51,6 +52,8 @@ router.route('/:name').get((req, res) => {
       withRelated: [
         {
           items: qb => {
+            qb.whereNot({ status_id: 3 });
+            qb.orderBy('created_at', 'desc');
             qb.limit(limit);
             qb.offset((page - 1) * limit);
           }

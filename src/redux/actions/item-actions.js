@@ -49,9 +49,9 @@ export const addNewItem = data => {
   };
 };
 
-export const editItem = data => {
+export const editItem = (id, data) => {
   return dispatch => {
-    return fetch(`/item`, {
+    return fetch(`/item/${id}`, {
       method: 'PUT',
       body: data,
       credentials: 'same-origin'
