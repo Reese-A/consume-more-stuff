@@ -34,7 +34,7 @@ class ItemDetail extends Component {
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
           {this.props.item.price ? (
-            <span className="item_price">${this.props.item.price}</span>
+            <span className="item_price">{this.props.item.price}</span>
           ) : (
             <span className="item_price">free</span>
           )}
