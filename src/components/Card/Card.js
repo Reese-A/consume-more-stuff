@@ -16,7 +16,7 @@ class Card extends Component {
           <img className="card_image" src={this.props.img_url} />
         </Link>
         <div className="card_price">
-          {this.props.price ? `$${this.props.price}` : `free`}
+          {this.props.price ? this.props.price : 'free'}
         </div>
         <div className="card_description">
           <Link to={`/item/${this.props.id}`}>{this.props.description}</Link>
