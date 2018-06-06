@@ -22,11 +22,24 @@
 }
 
 #edit_item form #preview {
+  display: grid;
+  grid-template-rows: 15% 85%;
+}
+
+#edit_item form #preview #edit_item_img_preview_clear {
+  justify-self: end;
+  width: unset;
+  padding: 8px;
+  margin: 0 8px 0 0;
+  background: salmon;
+}
+
+#edit_item form #preview #preview_img_container {
   display: flex;
   justify-content: space-evenly;
 }
 
-#edit_item form #preview img {
+#edit_item form #preview #preview_img_container img {
   height: 100px;
   margin: 4px;
 }

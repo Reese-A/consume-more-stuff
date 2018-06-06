@@ -16,11 +16,23 @@
     }
 
     #preview {
-      display: flex;
-      justify-content: space-evenly;
-      img {
-        height: 100px;
-        margin: 4px;
+      display: grid;
+      grid-template-rows: 15% 85%;
+      #edit_item_img_preview_clear {
+        justify-self: end;
+        width: unset;
+        padding: 8px;
+        margin: 0 8px 0 0;
+        background: salmon;
+      }
+      #preview_img_container {
+        display: flex;
+        justify-content: space-evenly;
+
+        img {
+          height: 100px;
+          margin: 4px;
+        }
       }
     }
 
