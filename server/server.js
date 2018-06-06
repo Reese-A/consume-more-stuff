@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local');
@@ -20,7 +19,6 @@ server.use(
   })
 );
 server.use(bodyParser.json());
-// server.use(cookieParser());
 
 server.use(
   session({
