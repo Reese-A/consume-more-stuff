@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { loadState } from '../../localStorage';
 const PrivateRoute = props => {
-  // console.log();
   const { component: Component, user, ...rest } = props;
-
+  const persistedState = loadState();
   return (
     <Route
       {...rest}
       render={props =>
-        user.id ? (
+        persistedState.user.id ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -30,4 +30,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(PrivateRoute);
+export default connect(
+  mapStateToProps,
+  null
+)(PrivateRoute);

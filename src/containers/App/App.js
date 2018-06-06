@@ -10,6 +10,7 @@ import { loadConditions } from '../../redux/actions/condition-actions';
 import { loadStatuses } from '../../redux/actions/status-actions';
 import { loadUsers, loadUser } from '../../redux/actions/user-actions';
 import { loadItems } from '../../redux/actions/item-actions';
+import { saveState } from '../../localStorage';
 
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
@@ -63,6 +64,9 @@ class App extends Component {
     this.props.loadConditions();
     this.props.loadStatuses();
     this.props.loadUser();
+    if (!localStorage.getItem('state')) {
+      saveState({ user: {} });
+    }
   }
 }
 

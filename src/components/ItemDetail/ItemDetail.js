@@ -11,13 +11,6 @@ class ItemDetail extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    const persistedState = loadState();
-    this.setState({
-      user: persistedState.user
-    });
-  }
-
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.loadItem(id);
@@ -25,6 +18,7 @@ class ItemDetail extends Component {
   }
 
   render() {
+    const persistedState = loadState();
     const category = this.props.item.category
       ? this.props.item.category.name
       : null;
@@ -47,7 +41,7 @@ class ItemDetail extends Component {
             <div id="item_updated_at">
               Updated at {this.props.item.updated_at}
             </div>
-            {this.state.user.id === Number(owner) ? (
+            {persistedState && persistedState.user.id === Number(owner) ? (
               <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
                 {' '}
                 Edit Item{' '}

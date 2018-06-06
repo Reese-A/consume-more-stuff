@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
           </li>
           {this.props.user.id ? (
             <li>
-              <NavLink exact to="/home">
+              <NavLink exact to={`/user/${this.props.user.name}/home`}>
                 My Listings
               </NavLink>
             </li>
@@ -71,4 +71,9 @@ const mapStateToProps = state => {
 //     }
 //   };
 // };
-export default withRouter(connect(mapStateToProps, null)(Sidebar));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(Sidebar)
+);
