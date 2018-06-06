@@ -50,11 +50,3 @@ export const items = (state = [], action) => {
       return state;
   }
 };
-// export const item = (state = {}, action) => {
-//   switch (action.type) {
-//     case LOAD_ITEM:
-//       return action.item;
-//     default:
-//       return state;
-//   }
-// };

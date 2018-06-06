@@ -12,7 +12,7 @@ const router = express.Router();
 router.use('/condition', condition);
 router.use('/category', category);
 router.use('/status', status);
-router.use('/upload', upload);
+// router.use('/upload', upload);
 router.use('/item', item);
 router.use('/user', user);
 

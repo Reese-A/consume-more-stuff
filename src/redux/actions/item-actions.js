@@ -35,15 +35,10 @@ export const addNewItem = data => {
     return fetch(`/item`, {
       method: 'POST',
       body: data,
-      // body: JSON.stringify(data),
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // },
       credentials: 'same-origin'
     })
       .then(res => res.json())
       .then(item => {
-        console.log(item);
         return dispatch({ type: ADD_NEW_ITEM, item });
       });
   };

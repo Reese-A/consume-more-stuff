@@ -15,7 +15,6 @@ const user = (state = initialState, action) => {
     case LOAD_USER:
       return action.user;
     case REGISTER_USER:
-      console.log(action);
       return action.user;
     case LOGIN_USER:
       return action.user;
