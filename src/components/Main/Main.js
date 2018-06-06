@@ -26,7 +26,7 @@ const Main = props => {
 
         {/* <Route exact path="/item/new-item" component={NewItem} /> */}
         <Route exact path="/item/:id" component={ItemDetail} />
-        <Route exact path="/item/:id/edit" component={EditItem} />
+        <PrivateRoute exact path="/item/:id/edit" component={EditItem} />
       </Switch>
     </main>
   );
