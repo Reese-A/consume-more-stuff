@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadItem } from '../../redux/actions/item-actions';
 import { Link } from 'react-router-dom';
+import { loadState } from '../../localStorage';
 
 import './ItemDetail.css';
 
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    const persistedState = loadState();
+    this.setState({
+      user: persistedState.user
+    });
   }
 
   componentDidMount() {
@@ -39,7 +47,7 @@ class ItemDetail extends Component {
             <div id="item_updated_at">
               Updated at {this.props.item.updated_at}
             </div>
-            {this.props.user.id === Number(owner) ? (
+            {this.state.user.id === Number(owner) ? (
               <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
                 {' '}
                 Edit Item{' '}
@@ -91,8 +99,7 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    item: state.items,
-    user: state.user
+    item: state.items
   };
 };
 
