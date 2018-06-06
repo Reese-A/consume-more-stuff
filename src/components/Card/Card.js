@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
 
+const moment = require('moment');
 class Card extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,9 @@ class Card extends Component {
         <div className="card_description">
           <Link to={`/item/${this.props.id}`}>{this.props.description}</Link>
         </div>
-        <div className="card_created_at">{this.props.created_at}</div>
+        <div className="card_created_at">
+          {moment(this.props.created_at).format('MMM Do')}
+        </div>
       </div>
     );
   }
