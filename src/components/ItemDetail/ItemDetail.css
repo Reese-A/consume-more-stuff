@@ -15,8 +15,8 @@
   margin-right: 10px;
 }
 
-#item_detail #item_main #item_price {
-  margin-left: 10px;
+#item_detail #item_main .item_price {
+  margin-left: 20px;
 }
 
 #item_detail #item_main img {

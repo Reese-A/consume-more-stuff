@@ -6,6 +6,8 @@ import { loadState } from '../../localStorage';
 
 import './ItemDetail.css';
 
+const moment = require('moment');
+
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
@@ -31,15 +33,25 @@ class ItemDetail extends Component {
       <div id="item_detail">
         <div id="item_main">
           <span id="item_description">{this.props.item.description}</span>
-          <span id="item_price">{this.props.item.price}</span>
+          {this.props.item.price ? (
+            <span className="item_price">${this.props.item.price}</span>
+          ) : (
+            <span className="item_price">free</span>
+          )}
           <img id="item_img" src={this.props.item.img_url} alt="" />
           <div id="item_footer">
             <div id="item_created_at">
-              Posted on {this.props.item.created_at} in{' '}
-              <Link to={`/category/${category}`}>{category}</Link>
+              Posted{' '}
+              {moment(this.props.item.created_at)
+                .startOf('hour')
+                .fromNow()}{' '}
+              in <Link to={`/category/${category}`}>{category}</Link>
             </div>
             <div id="item_updated_at">
-              Updated at {this.props.item.updated_at}
+              Updated{' '}
+              {moment(this.props.item.updated_at)
+                .startOf('hour')
+                .fromNow()}
             </div>
             {persistedState && persistedState.user.id === Number(owner) ? (
               <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
