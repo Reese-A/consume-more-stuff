@@ -17,7 +17,7 @@ class AuthHome extends React.Component {
   }
   render() {
     return (
-      <div id="home">
+      <div id="auth_home">
         {this.props.statuses.map(status => {
           return (
             <Row
@@ -48,4 +48,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthHome);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthHome);

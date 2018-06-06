@@ -1,25 +1,29 @@
 #login_form {
-  grid-area: 2/1/2/3;
+  justify-self: center;
+  width: 80vw;
+  max-width: 300px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
 }
 
 #login_form #login_title {
-  font-size: 1.5rem;
+  width: 100%;
   margin: 16px;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 #login_form input {
-  text-transform: unset;
-  margin-top: 10px;
-  width: 25%;
+  width: 100%;
   height: 35px;
+  margin-top: 10px;
   padding-left: 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  text-transform: unset;
 }
 
 #login_form input::placeholder {
@@ -27,9 +31,9 @@
 }
 
 #login_form button {
-  text-transform: uppercase;
   width: 100px;
   height: 32px;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
 }
 /*# sourceMappingURL=Login.css.map */

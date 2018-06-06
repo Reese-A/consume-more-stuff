@@ -1,11 +1,11 @@
 .card {
   width: 250px;
-  margin: 16px;
-  width: 250px;
   height: 300px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin: 16px;
   display: grid;
   grid-template-rows: 200px 1fr 1fr;
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card .image_link {
@@ -30,7 +30,6 @@
 
 .card .card_price {
   grid-area: 1/1/1/1;
-  /* position: relative; */
   margin: 8px;
 }
 /*# sourceMappingURL=Card.css.map */

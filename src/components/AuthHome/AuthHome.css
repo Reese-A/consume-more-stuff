@@ -1,4 +1,10 @@
-#home {
+#auth_home {
   margin: 32px;
+}
+
+@media only screen and (max-width: 600px) {
+  #auth_home {
+    margin: 16px;
+  }
 }
 /*# sourceMappingURL=AuthHome.css.map */

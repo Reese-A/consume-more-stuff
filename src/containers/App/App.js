@@ -30,7 +30,7 @@ class App extends Component {
             exact
             path="/login"
             render={() => (
-              <div id="app_login">
+              <div id="app_login" className="app_container">
                 <Header />
                 <Login />
               </div>
@@ -40,7 +40,7 @@ class App extends Component {
             exact
             path="/register"
             render={() => (
-              <div id="app_register">
+              <div id="app_register" className="app_container">
                 <Header />
                 <Register />
               </div>
@@ -48,7 +48,7 @@ class App extends Component {
           />
           <Route
             render={() => (
-              <div id="app_main">
+              <div id="app_main" className="app_container">
                 <Header />
                 <Sidebar />
                 <Main />
