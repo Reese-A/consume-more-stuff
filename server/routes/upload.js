@@ -15,13 +15,6 @@ const credentials = new AWS.CognitoIdentityCredentials({
   IdentityPoolId
 });
 
-// console.log(credentials);
-
-// AWS.config.update({
-//   region,
-//   credentials
-// });
-
 AWS.config.update({
   region
 });
@@ -30,8 +23,6 @@ const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
   params: { Bucket }
 });
-
-// const upload = multer({ dest: 'server/store/uploads/' });
 
 const upload = multer({
   storage: multerS3({
