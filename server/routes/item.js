@@ -6,6 +6,7 @@ const multerS3 = require('multer-s3');
 require('dotenv').config();
 
 const Item = require('../db/models/Item');
+const isAuthenticated = require('../utilities/isAuthenticated');
 const router = express.Router();
 
 const Bucket = process.env.AWS_S3_BUCKET_NAME;
@@ -57,6 +58,7 @@ router
       });
   })
   .post(
+    isAuthenticated,
     upload.array('img_file', 1),
     (req, res, next) => {
       console.log(req.body);
@@ -145,10 +147,10 @@ router
       });
   })
   .put(
+    isAuthenticated,
     upload.array('img_file', 1),
     (req, res, next) => {
       const { id } = req.params;
-
       console.log(req.body);
       console.log(req.files);
       const {
@@ -181,6 +183,9 @@ router
       return new Item({ id })
         .save(newItem, { method: 'update' })
         .then(item => {
+          if (Number(req.user.id) !== Number(item.owner)) {
+            return res.status(401).json({ message: 'wrong user' });
+          }
           req.temp = {};
           req.temp.item = item;
           next();

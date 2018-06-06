@@ -3,10 +3,11 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 const User = require('../db/models/User');
+const isAuthenticated = require('../utilities/isAuthenticated');
 const router = express.Router();
 const saltedRounds = 12;
 
-router.route('/:id/items').get((req, res) => {
+router.route('/:id/items').get(isAuthenticated, (req, res) => {
   const { id } = req.params;
   const page = req.query.page > 0 ? req.query.page : 1;
   const limit = req.query.limit;
@@ -34,8 +35,12 @@ router.route('/:id/items').get((req, res) => {
 
 router
   .route('/:id/password')
-  .put(passport.authenticate('local'), (req, res) => {
-    const id = req.params.id;
+  .put(passport.authenticate('local'), isAuthenticated, (req, res) => {
+    const id = Number(req.params.id);
+    const userId = Number(req.user.id);
+    if (id !== userId) {
+      return res.status(401).json({ message: 'wrong user' });
+    }
     let { password, newPassword } = req.body;
     bcrypt.genSalt(saltedRounds, function(err, salt) {
       if (err) {
@@ -50,7 +55,9 @@ router
           .save({ password }, { method: 'update' })
           .then(user => {
             console.log(user);
-            return res.json(user);
+            return res.json({
+              success: true
+            });
           })
           .catch(err => {
             console.log(err);
