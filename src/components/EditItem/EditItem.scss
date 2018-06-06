@@ -1,0 +1,118 @@
+#edit_item {
+  margin: 32px;
+  display: grid;
+  #edit_item_title {
+    font-size: 1.5rem;
+    margin: 16px;
+  }
+  form {
+    display: grid;
+    max-width: 500px;
+    * {
+      text-transform: capitalize;
+    }
+    #edit_item_img_file {
+      padding-top: 16px;
+    }
+
+    #preview {
+      display: flex;
+      justify-content: space-evenly;
+      img {
+        height: 100px;
+        margin: 4px;
+      }
+    }
+
+    input::placeholder,
+    textarea::placeholder,
+    select::placeholder {
+      text-transform: uppercase;
+    }
+    input,
+    textarea,
+    select {
+      text-transform: unset;
+      margin: 8px;
+      height: 42px;
+      padding-left: 16px;
+      border: 1px solid rgba($color: #000000, $alpha: 0.1);
+      border-radius: 4px;
+      // text-align: justify;
+      box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    textarea {
+      padding-top: 16px;
+    }
+    :focus {
+      outline: none;
+      transition: all 0.5s ease-in-out;
+      box-shadow: inset 0 0 12px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    input:not(:placeholder-shown):invalid {
+      transition: all 0.5s ease-in-out;
+      border: 1px solid salmon;
+    }
+
+    .select_container {
+      display: flex;
+      margin: 8px;
+      padding-left: 16px;
+      height: 42px;
+      label {
+        width: 80px;
+        /* justify-self: center; */
+        align-self: center;
+        text-transform: uppercase;
+        font-weight: 200;
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.75);
+      }
+      select {
+        width: 159px;
+        align-self: center;
+      }
+    }
+    button {
+      justify-self: center;
+      text-transform: uppercase;
+      width: 100px;
+      height: 32px;
+      margin: 16px;
+      // background: rgb(131, 255, 122);
+      // color: white;
+      border: none;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+  form:valid {
+    button {
+      border-radius: 8px;
+      background: green;
+      color: white;
+      font-weight: 800;
+      transition: all 0.5s ease-in-out;
+    }
+    button:hover {
+      // box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+      font-weight: 600;
+      border: 2px solid greenyellow;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  form:invalid {
+    button {
+      border-radius: 8px;
+      border: none;
+      opacity: 0.5;
+    }
+    button:hover {
+      background: salmon;
+      color: white;
+      font-weight: 800;
+      opacity: 1;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+}
