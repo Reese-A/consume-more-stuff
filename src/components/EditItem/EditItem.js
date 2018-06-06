@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
-import { loadItem } from '../../redux/actions/item-actions';
+import { loadItem, editItem } from '../../redux/actions/item-actions';
 
 import './EditItem.css';
 
@@ -9,9 +9,14 @@ class EditItem extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      // img_input: null
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    // this.clearPreview = this.clearPreview.bind(this);
   }
 
   componentDidMount() {
@@ -32,8 +37,8 @@ class EditItem extends Component {
     //   stateChanges.category = props.categories[0].id;
     // }
     // return state;
-    stateChanges.condition = props.item.condition_id;
-    stateChanges.category = props.item.category_id;
+    stateChanges.condition_id = props.item.condition_id;
+    stateChanges.category_id = props.item.category_id;
 
     const price = props.item.price ? props.item.price.split(' ') : undefined;
     if (price) {
@@ -57,14 +62,66 @@ class EditItem extends Component {
     return stateChanges;
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const id = this.props.match.params.id;
+
+    const {
+      description,
+      price_value,
+      price_currency,
+      make,
+      model,
+      dimensions_value,
+      dimensions_units,
+      notes,
+      img_file,
+      img_url,
+      category_id,
+      condition_id,
+      status_id
+    } = this.state;
+
+    const item = {
+      description,
+      make,
+      model,
+      notes,
+      img_file,
+      img_url,
+      category_id,
+      condition_id,
+      status_id
+    };
+    if (dimensions_value && dimensions_units) {
+      item.dimensions = `${dimensions_value} ${dimensions_units}`;
+    }
+    if (price_value && price_currency) {
+      item.price =
+        `${Number(price_value)} ${price_currency}`.trim() || undefined;
+    }
+    const data = new FormData();
+    Object.entries(item).forEach(item => {
+      if (item[1]) {
+        data.append(item[0], item[1]);
+      }
+    });
+    this.props.editItem(id, data);
+    this.props.history.push('/');
+  }
+
   handleChange(event) {
     let { name, value, files } = event.target;
 
-    name = name.trim().toLowerCase();
-    value = value.trim().toLowerCase();
-
-    if (name === 'category') value = Number(value);
-    if (name === 'condition') value = Number(value);
+    if (name === 'category_id') {
+      value = Number(value);
+    }
+    if (name === 'condition_id') {
+      value = Number(value);
+    }
+    if (name === 'status_id') {
+      value = Number(value);
+    }
     if (name === 'img_file') value = files;
 
     this.setState({ [name]: value }, () => {
@@ -72,14 +129,24 @@ class EditItem extends Component {
     });
   }
 
-  handleFiles(event) {
-    const { files } = event.target;
+  // clearPreview(event) {
+  //   event.preventDefault();
+  //   const preview = document.getElementById('preview_img_container');
+  //   preview.innerHTML = '';
+  //   this.img_input.value = '';
+  // }
 
-    const preview = document.getElementById('preview');
+  handleFiles(event) {
+    let { files } = event.target;
+
+    const preview = document.getElementById('preview_img_container');
     preview.innerHTML = '';
+
+    if (!files.length) return;
 
     const imgElem = document.createElement('img');
     imgElem.file = files[0];
+
     preview.appendChild(imgElem);
 
     const reader = new FileReader();
@@ -191,13 +258,22 @@ class EditItem extends Component {
             onChange={this.handleChange}
           />
           <div id="preview">
-            <img src={this.state.img_url} alt="" />
+            {/* <button
+              id="edit_item_img_preview_clear"
+              onClick={this.clearPreview}
+            >
+              Clear
+            </button> */}
+            <div id="preview_img_container">
+              <img src={this.state.img_url} alt="" />
+            </div>
           </div>
           <input
             type="file"
             name="img_file"
             id="edit_item_img_file"
             placeholder="Image File"
+            ref={input => (this.img_input = input)}
             // multiple
             accept="image/* "
             onChange={this.handleFiles}
@@ -206,9 +282,9 @@ class EditItem extends Component {
           <div id="edit_item_category_container" className="select_container">
             <label htmlFor="edit_item_category">Category</label>
             <select
-              name="category"
+              name="category_id"
               id="edit_item_category"
-              value={this.state.category}
+              value={this.state.category_id}
               onChange={this.handleChange}
             >
               {categoryOptions}
@@ -217,9 +293,9 @@ class EditItem extends Component {
           <div id="edit_item_condition_container" className="select_container">
             <label htmlFor="edit_item_condition">Condition</label>
             <select
-              name="condition"
+              name="condition_id"
               id="edit_item_condition"
-              value={this.state.condition}
+              value={this.state.condition_id}
               onChange={this.handleChange}
             >
               {conditionOptions}
@@ -228,9 +304,9 @@ class EditItem extends Component {
           <div id="edit_item_status_container" className="select_container">
             <label htmlFor="edit_item_status">Status</label>
             <select
-              name="status"
+              name="status_id"
               id="edit_item_status"
-              value={this.state.status}
+              value={this.state.status_id}
               onChange={this.handleChange}
             >
               {statusOptions}
@@ -258,6 +334,9 @@ const mapDispatchToProps = dispatch => {
   return {
     loadItem: id => {
       dispatch(loadItem(id));
+    },
+    editItem: (id, data) => {
+      dispatch(editItem(id, data));
     }
   };
 };
