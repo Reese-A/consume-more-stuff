@@ -29,6 +29,7 @@ router.route('/:id/items').get((req, res) => {
     })
     .catch(err => {
       console.log(err);
+      return res.json(err);
     });
 });
 
@@ -40,20 +41,22 @@ router
     bcrypt.genSalt(saltedRounds, function(err, salt) {
       if (err) {
         console.log(err);
+        return res.json(err);
       }
       bcrypt.hash(newPassword, salt, function(err, hash) {
         if (err) {
           console.log(err);
+          return res.json(err);
         }
         password = hash;
         return new User({ id })
           .save({ password }, { method: 'update' })
           .then(user => {
-            console.log(user);
             return res.json(user);
           })
           .catch(err => {
             console.log(err);
+            return res.json(err);
           });
       });
     });
@@ -68,10 +71,12 @@ router.route('/register').post((req, res) => {
   bcrypt.genSalt(saltedRounds, function(err, salt) {
     if (err) {
       console.log(err);
+      return res.json(err);
     }
     bcrypt.hash(req.body.password, salt, function(err, hash) {
       if (err) {
         console.log(err);
+        return res.json(err);
       }
       return new User({
         email,
@@ -88,6 +93,7 @@ router.route('/register').post((req, res) => {
         })
         .catch(err => {
           console.log(err);
+          return res.json(err);
         });
     });
   });

@@ -74,7 +74,7 @@ passport.use(
 
           if (user === null) {
             return done(null, false, {
-              message: 'bad email or password'
+              message: 'Bad Email or Password'
             });
           } else {
             bcrypt.compare(password, user.password).then(res => {
@@ -83,14 +83,14 @@ passport.use(
                 return done(null, user);
               } else {
                 return done(null, false, {
-                  message: 'Bad email or password'
+                  message: 'Bad Email or Password'
                 });
               }
             });
           }
         })
         .catch(err => {
-          console.log('error', err);
+          console.log(err);
           return done(err);
         });
     }

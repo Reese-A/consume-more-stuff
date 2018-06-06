@@ -47,7 +47,6 @@ export const registerUser = data => {
 
 export const loginUser = data => {
   return dispatch => {
-    console.log('LOGIN ACTION BEFORE FETCH');
     return fetch('/user/login', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -85,7 +84,6 @@ export const loadUserItems = id => {
 
 export const updatePassword = data => {
   return dispatch => {
-    console.log('UPDATE ACTION BEFORE FETCH');
     return fetch(`/user/${data.id}/password`, {
       method: 'PUT',
       body: JSON.stringify(data),

@@ -54,13 +54,12 @@ router
       })
       .catch(err => {
         console.log(err);
+        return res.json(err);
       });
   })
   .post(
     upload.array('img_file', 1),
     (req, res, next) => {
-      console.log(req.body);
-      console.log(req.files);
       const {
         description,
         condition_id,
@@ -86,9 +85,6 @@ router
         owner: req.user.id,
         status_id: 1
       };
-      console.log(newItem);
-
-      // return res.json({ message: 'In Development' });
 
       return new Item(newItem)
         .save()
@@ -96,14 +92,13 @@ router
           req.temp = {};
           req.temp.item = item;
           next();
-          // return res.json(item);
         })
         .catch(err => {
           console.log(err);
+          return res.json(err);
         });
     },
     (req, res) => {
-      console.log(req.temp.item);
       return fs.readFile(req.files[0].path, (err, data) => {
         const base64data = new Buffer(data, 'binary');
         s3.upload(
@@ -116,7 +111,8 @@ router
           },
           (err, data) => {
             if (err) {
-              return console.log(err);
+              console.log(err);
+              return res.json(err);
             }
             return new Item({ id: req.temp.item.id })
               .save({ img_url: data.Location }, { method: 'update' })
@@ -142,6 +138,7 @@ router
       })
       .catch(err => {
         console.log(err);
+        return res.json(err);
       });
   })
   .put(
@@ -149,8 +146,6 @@ router
     (req, res, next) => {
       const { id } = req.params;
 
-      console.log(req.body);
-      console.log(req.files);
       const {
         description,
         condition_id,
@@ -184,14 +179,13 @@ router
           req.temp = {};
           req.temp.item = item;
           next();
-          // return res.json(item);
         })
         .catch(err => {
           console.log(err);
+          return res.json(err);
         });
     },
     (req, res) => {
-      console.log(req.temp.item);
       if (!req.files.length) return req.temp.item;
 
       return fs.readFile(req.files[0].path, (err, data) => {
@@ -206,7 +200,8 @@ router
           },
           (err, data) => {
             if (err) {
-              return console.log(err);
+              console.log(err);
+              return res.json(err);
             }
             return new Item({ id: req.temp.item.id })
               .save({ img_url: data.Location }, { method: 'update' })
