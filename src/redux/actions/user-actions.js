@@ -6,6 +6,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOAD_USER = 'LOAD_USER';
 export const LOAD_USER_ITEMS = 'LOAD_USER_ITEMS';
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 
 export const loadUsers = () => {
   return dispatch => {
@@ -78,6 +79,24 @@ export const loadUserItems = id => {
       .then(res => res.json())
       .then(user => {
         return dispatch({ type: LOAD_USER_ITEMS, user });
+      });
+  };
+};
+
+export const updatePassword = data => {
+  return dispatch => {
+    console.log('UPDATE ACTION BEFORE FETCH');
+    return fetch(`/user/${data.id}/password`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    })
+      .then(res => res.json())
+      .then(user => {
+        return dispatch({ type: UPDATE_PASSWORD, user });
       });
   };
 };
