@@ -13,11 +13,14 @@ class All extends React.Component {
   }
 
   render() {
+    let items = [];
+    if (Array.isArray(this.props.items)) items = this.props.items;
+
     return (
       <div id="all_items">
         <span className="all_title">All Items</span>
         <div className="all_items_container">
-          {Object.values(this.props.items).map(item => {
+          {items.map(item => {
             return (
               <Card
                 key={item.id}

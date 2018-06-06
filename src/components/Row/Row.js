@@ -13,8 +13,11 @@ class Row extends Component {
   }
 
   render() {
-    const items =
-      this.props.items[this.props.categoryId || this.props.statusId] || [];
+    let items = [];
+    if (!Array.isArray(this.props.items)) {
+      items =
+        this.props.items[this.props.categoryId || this.props.statusId] || [];
+    }
     return (
       <div className="row">
         <div className="row_title">
@@ -46,4 +49,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Row);
+export default connect(
+  mapStateToProps,
+  null
+)(Row);
