@@ -32,6 +32,33 @@ router.route('/:id/items').get((req, res) => {
     });
 });
 
+router
+  .route('/:id/password')
+  .put(passport.authenticate('local'), (req, res) => {
+    const id = req.params.id;
+    let { password, newPassword } = req.body;
+    bcrypt.genSalt(saltedRounds, function(err, salt) {
+      if (err) {
+        console.log(err);
+      }
+      bcrypt.hash(newPassword, salt, function(err, hash) {
+        if (err) {
+          console.log(err);
+        }
+        password = hash;
+        return new User({ id })
+          .save({ password }, { method: 'update' })
+          .then(user => {
+            console.log(user);
+            return res.json(user);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
+    });
+  });
+
 router.route('/register').post((req, res) => {
   let { email, password, name } = req.body;
 

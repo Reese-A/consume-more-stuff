@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
           </li>
           {this.props.user.id ? (
             <li>
-              <NavLink exact to={`/user/${this.props.user.name}/home`}>
+              <NavLink exact to={`/user/${this.props.user.id}/home`}>
                 My Listings
               </NavLink>
             </li>
@@ -48,6 +48,13 @@ class Sidebar extends React.Component {
             <li>
               <NavLink exact to="/item/new-item">
                 New Item
+              </NavLink>
+            </li>
+          ) : null}
+          {this.props.user.id ? (
+            <li>
+              <NavLink exact to={`/user/${this.props.user.id}/password`}>
+                Change Password
               </NavLink>
             </li>
           ) : null}
