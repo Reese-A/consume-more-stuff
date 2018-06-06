@@ -6,7 +6,7 @@ import {
 import { LOAD_USER_ITEMS } from '../actions/user-actions';
 import store from '../../index';
 
-export const items = (state = {}, action) => {
+export const items = (state = [], action) => {
   switch (action.type) {
     case LOAD_ITEMS: {
       return action.items;
