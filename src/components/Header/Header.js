@@ -18,10 +18,6 @@ class Header extends Component {
     this.props.history.push('/');
   }
 
-  // componentDidMount() {
-  //   this.props.loadUser();
-  // }
-
   render() {
     return (
       <header id="header">
@@ -59,9 +55,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // loadUser: () => {
-    //   dispatch(loadUser());
-    // },
     logoutUser: () => {
       dispatch(logoutUser());
     }

@@ -16,7 +16,6 @@ class ItemDetail extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.loadItem(id);
-    console.log('MOUNT', this.props.item);
   }
 
   render() {
@@ -28,7 +27,6 @@ class ItemDetail extends Component {
       ? this.props.item.condition.name
       : null;
     const owner = this.props.item.owner ? this.props.item.owner.id : null;
-    console.log('ITEMDETAIL', this.props.item);
     return (
       <div id="item_detail">
         <div id="item_main">

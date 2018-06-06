@@ -28,15 +28,6 @@ class EditItem extends Component {
     if (state.condition && state.category) return state;
     const stateChanges = { ...props.item };
 
-    console.log(props);
-    console.log(state);
-    // if (props.conditions.length > 0) {
-    //   stateChanges.condition = props.conditions[0].id;
-    // }
-    // if (props.categories.length > 0) {
-    //   stateChanges.category = props.categories[0].id;
-    // }
-    // return state;
     stateChanges.condition_id = props.item.condition_id;
     stateChanges.category_id = props.item.category_id;
 
@@ -50,7 +41,6 @@ class EditItem extends Component {
     const dimensions = props.item.dimensions
       ? props.item.dimensions.split(' ')
       : undefined;
-    console.log(dimensions);
 
     if (dimensions) {
       const dimensions_value = dimensions[0];
@@ -124,9 +114,7 @@ class EditItem extends Component {
     }
     if (name === 'img_file') value = files;
 
-    this.setState({ [name]: value }, () => {
-      console.log(this.state);
-    });
+    this.setState({ [name]: value });
   }
 
   // clearPreview(event) {
