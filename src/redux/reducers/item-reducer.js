@@ -33,6 +33,7 @@ export const items = (state = [], action) => {
       return items;
     }
     case LOAD_USER_ITEMS: {
+      if (!action.user) return [];
       const items = action.user.items.reduce((items, item) => {
         if (!items[item.status_id]) items[item.status_id] = [];
         items[item.status_id].push(item);
@@ -41,7 +42,7 @@ export const items = (state = [], action) => {
       return items;
     }
     case ADD_NEW_ITEM: {
-      return state;
+      return action.item;
     }
     case EDIT_ITEM: {
       return state;

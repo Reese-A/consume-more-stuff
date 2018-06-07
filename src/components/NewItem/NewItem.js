@@ -71,7 +71,13 @@ class NewItem extends React.Component {
       }
     });
     this.props.addNewItem(data);
-    this.props.history.push('/');
+  }
+
+  componentDidUpdate() {
+    const item = this.props.item ? this.props.item : {};
+    if (item.id) {
+      this.props.history.push('/');
+    }
   }
 
   handleChange(event) {
@@ -243,7 +249,8 @@ class NewItem extends React.Component {
 const mapStateToProps = state => {
   return {
     categories: state.category,
-    conditions: state.condition
+    conditions: state.condition,
+    item: state.items
   };
 };
 
