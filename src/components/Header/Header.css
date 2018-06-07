@@ -34,4 +34,16 @@ header .auth_elements #logout_button {
 header .auth_elements #user_greeting {
   font-size: 22px;
 }
+
+@media only screen and (max-width: 600px) {
+  #header {
+    grid-template-columns: 1fr 3fr 2fr;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #header {
+    grid-template-columns: 1fr 2fr 3fr;
+  }
+}
 /*# sourceMappingURL=Header.css.map */

@@ -31,3 +31,14 @@ header {
     }
   }
 }
+@media only screen and (max-width: 600px) {
+  #header {
+    grid-template-columns: 1fr 3fr 2fr;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #header {
+    grid-template-columns: 1fr 2fr 3fr;
+  }
+}
