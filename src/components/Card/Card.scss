@@ -31,7 +31,11 @@
 
   .card_price {
     grid-area: 1/1/1/1;
-
     margin: 8px;
+    width: fit-content;
+    height: fit-content;
+    background: white;
+    padding: 2px;
+    border-radius: 4px;
   }
 }

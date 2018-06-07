@@ -15,7 +15,7 @@ import ChangePassword from '../ChangePassword/ChangePassword';
 
 const Main = props => {
   return (
-    <main className="page_content">
+    <main id="main" className="page_content">
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/category/:name" component={Category} />
