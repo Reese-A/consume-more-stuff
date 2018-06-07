@@ -15,12 +15,25 @@ header #header_logo {
   font-size: 1.5rem;
 }
 
+@media screen and (max-width: 992px) {
+  header #header_logo {
+    font-size: 2rem;
+  }
+}
+
 header .auth_elements {
   grid-area: 1/3/1/3;
   justify-self: end;
   align-self: center;
   margin-right: 32px;
   font-size: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  header .auth_elements {
+    font-size: 17px;
+    margin-right: 10px;
+  }
 }
 
 header .auth_elements #login_button {
@@ -33,5 +46,11 @@ header .auth_elements #logout_button {
 
 header .auth_elements #user_greeting {
   font-size: 22px;
+}
+
+@media screen and (max-width: 992px) {
+  header .auth_elements #user_greeting {
+    font-size: 15px;
+  }
 }
 /*# sourceMappingURL=Header.css.map */
