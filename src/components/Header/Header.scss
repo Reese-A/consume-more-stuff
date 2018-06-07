@@ -1,9 +1,12 @@
-header {
+#header {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   background: #252833;
   * {
     color: white;
+  }
+  #header_menu_button {
+    display: none;
   }
   #header_logo {
     justify-self: start;
@@ -43,6 +46,14 @@ header {
 @media only screen and (max-width: 600px) {
   #header {
     grid-template-columns: 1fr 3fr 2fr;
+    #header_menu_button {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+    #header_logo {
+      display: none;
+    }
   }
 }
 

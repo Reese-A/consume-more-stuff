@@ -3,13 +3,32 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
+
+import MenuButton from '../MenuButton/MenuButton';
+
 import './Header.css';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      // width: window.innerWidth,
+      // height: window.innerHeight
+    };
     this.logout = this.logout.bind(this);
+    // this.updateDimensions = this.updateDimensions.bind(this);
+  }
+  // updateDimensions(event) {
+  //   this.setState(
+  //     { width: window.innerWidth, height: window.innerHeight },
+  //     () => {
+  //       console.log(this.state);
+  //     }
+  //   );
+  // }
+  componentDidMount() {
+    // window.addEventListener('resize', this.updateDimensions);
   }
 
   logout() {
@@ -21,8 +40,19 @@ class Header extends Component {
   render() {
     return (
       <header id="header">
-        <div id="sidebar_button" />
+        {/* {this.state.width > 600 ? (
+          <div id="header_logo">
+            <Link to="/">CMS</Link>
+          </div>
+        ) : (
+          <div id="menu_button_container">
+            <MenuButton />
+          </div>
+        )} */}
 
+        <div id="header_menu_button">
+          <MenuButton />
+        </div>
         <div id="header_logo">
           <Link to="/">CMS</Link>
         </div>

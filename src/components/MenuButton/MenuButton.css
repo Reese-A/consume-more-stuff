@@ -1,0 +1,25 @@
+.menu_button .line {
+  width: 32px;
+  height: 3px;
+  background-color: #ecf0f1;
+  display: block;
+  margin: 8px auto;
+  border-radius: 4px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ONE */
+#menu_button.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+#menu_button.active .line:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+#menu_button.active .line:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+/*# sourceMappingURL=MenuButton.css.map */
