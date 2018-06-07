@@ -31,7 +31,7 @@ class App extends Component {
             path="/login"
             render={() => (
               <div id="app_login" className="app_container">
-                <Header />
+                <Header enableMenuButton={false} />
                 <Login />
               </div>
             )}
@@ -41,7 +41,7 @@ class App extends Component {
             path="/register"
             render={() => (
               <div id="app_register" className="app_container">
-                <Header />
+                <Header enableMenuButton={false} />
                 <Register />
               </div>
             )}
@@ -49,7 +49,7 @@ class App extends Component {
           <Route
             render={() => (
               <div id="app_main" className="app_container">
-                <Header />
+                <Header enableMenuButton={true} />
                 <Sidebar />
                 <Main />
               </div>

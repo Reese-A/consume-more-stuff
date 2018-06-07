@@ -11,6 +11,8 @@ import NewItem from '../NewItem/NewItem';
 import EditItem from '../EditItem/EditItem';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import AuthHome from '../AuthHome/AuthHome';
+import Verify from '../Verify/Verify';
+
 import ChangePassword from '../ChangePassword/ChangePassword';
 
 const Main = props => {
@@ -18,11 +20,14 @@ const Main = props => {
     <main id="main" className="page_content">
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/category/:name" component={Category} />
-        {/* <Route exact path="/login" component={Login} /> */}
+
         <Route exact path="/all" component={All} />
-        {/* <Route exact path="/register" component={Register} /> */}
+
+        <Route exact path="/category/:name" component={Category} />
+
         <PrivateRoute exact path="/item/new-item" component={NewItem} />
+
+        <Route exact path="/user/verify" component={Verify} />
         <PrivateRoute exact path="/user/:id/home" component={AuthHome} />
         <PrivateRoute
           exact
