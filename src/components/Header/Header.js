@@ -21,6 +21,8 @@ class Header extends Component {
   render() {
     return (
       <header id="header">
+        <div id="sidebar_button" />
+
         <div id="header_logo">
           <Link to="/">CMS</Link>
         </div>
