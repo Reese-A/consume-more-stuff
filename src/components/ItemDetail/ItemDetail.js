@@ -30,11 +30,11 @@ class ItemDetail extends Component {
     return (
       <div id="item_detail">
         <div id="item_main">
-          <span id="item_description">{this.props.item.description}</span>
+          <div id="item_description">{this.props.item.description}</div>
           {this.props.item.price ? (
-            <span className="item_price">{this.props.item.price}</span>
+            <div className="item_price">{this.props.item.price}</div>
           ) : (
-            <span className="item_price">free</span>
+            <div className="item_price">free</div>
           )}
           <img id="item_img" src={this.props.item.img_url} alt="" />
           <div id="item_footer">

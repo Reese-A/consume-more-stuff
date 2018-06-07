@@ -6,17 +6,28 @@
   justify-content: space-evenly;
 }
 
+@media screen and (max-width: 600px) {
+  #item_detail {
+    margin-top: 5px;
+  }
+}
+
 #item_detail #item_main {
   width: 50%;
   font-size: 30px;
 }
 
-#item_detail #item_main #item_description {
-  margin-right: 10px;
+@media screen and (max-width: 992px) {
+  #item_detail #item_main {
+    width: 80%;
+    font-size: 23px;
+  }
 }
 
-#item_detail #item_main .item_price {
-  margin-left: 20px;
+@media screen and (max-width: 992px) {
+  #item_detail #item_main .item_price {
+    margin-top: 5px;
+  }
 }
 
 #item_detail #item_main img {
@@ -26,9 +37,24 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
+@media screen and (max-width: 992px) {
+  #item_detail #item_main img {
+    max-height: 40vh;
+    margin-top: 10px;
+  }
+}
+
 #item_detail #item_main #item_footer {
   margin-top: 20px;
   font-size: 18px;
+}
+
+@media screen and (max-width: 992px) {
+  #item_detail #item_main #item_footer {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 #item_detail #details_wrap {
@@ -38,17 +64,37 @@
   align-items: center;
 }
 
+@media screen and (max-width: 992px) {
+  #item_detail #details_wrap {
+    width: 90%;
+  }
+}
+
 #item_detail #details_wrap #details_header {
   text-decoration: underline;
   font-weight: bold;
 }
 
+@media screen and (max-width: 992px) {
+  #item_detail #details_wrap #details_header {
+    font-size: 20px;
+  }
+}
+
 #item_detail #details_wrap #details_box {
-  padding: 10px 50px;
+  width: 80%;
+  padding: 10px 40px;
   list-style-type: none;
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 992px) {
+  #item_detail #details_wrap #details_box {
+    font-size: 20px;
+    padding: 20px;
+  }
 }
 
 #item_detail #details_wrap #item_notes {
@@ -57,5 +103,16 @@
   font-size: 20px;
   overflow: auto;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 992px) {
+  #item_detail #details_wrap #item_notes {
+    width: 90%;
+    max-height: none;
+    margin-bottom: 0px;
+    box-shadow: none;
+    word-break: normal;
+    hyphens: auto;
+  }
 }
 /*# sourceMappingURL=ItemDetail.css.map */
