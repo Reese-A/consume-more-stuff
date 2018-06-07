@@ -48,7 +48,7 @@ class Register extends Component {
   componentDidUpdate() {
     const user = this.props.user ? this.props.user : {};
     saveState({ user: user });
-    if (Object.keys(user).length > 0) {
+    if (Object.keys(user).length > 0 && user.name !== 'error') {
       this.props.history.push('/');
     }
   }
