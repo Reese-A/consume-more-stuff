@@ -43,6 +43,7 @@ form:valid button {
   color: white;
   font-weight: 800;
   transition: all 0.5s ease-in-out;
+  border: none;
 }
 
 form:valid button:hover {
