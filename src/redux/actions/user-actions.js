@@ -77,6 +77,10 @@ export const loadUserItems = id => {
       .then(res => res.json())
       .then(user => {
         return dispatch({ type: LOAD_USER_ITEMS, user });
+      })
+      .catch(err => {
+        console.log(err);
+        return;
       });
   };
 };
