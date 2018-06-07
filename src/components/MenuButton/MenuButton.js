@@ -7,6 +7,7 @@ export const MenuButton = props => {
     const sidebar = document.getElementById('sidebar');
     const header = document.getElementById('header');
     const main = document.getElementById('main');
+    const menuButton = document.getElementById('menu_button');
 
     sidebar.classList.contains('active')
       ? sidebar.classList.remove('active')
@@ -15,9 +16,14 @@ export const MenuButton = props => {
     header.classList.contains('menu_shift')
       ? header.classList.remove('menu_shift')
       : header.classList.add('menu_shift');
+
     main.classList.contains('menu_shift')
       ? main.classList.remove('menu_shift')
       : main.classList.add('menu_shift');
+
+    menuButton.classList.contains('active')
+      ? menuButton.classList.remove('active')
+      : menuButton.classList.add('active');
   };
   return (
     <div className="menu_button" id="menu_button" onClick={toggleSidebar}>
