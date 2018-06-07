@@ -75,26 +75,7 @@ class ItemDetail extends Component {
               </li>
             ) : null}
           </ul>
-          <div id="item_notes">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis
-            nihil fuga error necessitatibus deserunt distinctio quod, explicabo
-            unde voluptatem nam incidunt qui consectetur ipsa veritatis eligendi
-            ipsum placeat id? Distinctio! Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Repellat enim eum asperiores praesentium velit
-            eaque architecto consequuntur tempora, voluptatem perspiciatis
-            fugiat quo soluta ex eos, impedit numquam inventore cumque quasi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-            doloribus facere quas ipsam, rem fugit iusto, laborum totam debitis
-            quam temporibus non minima amet eos unde quia vitae! Ducimus,
-            voluptas! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Ratione ex repudiandae dicta quam quasi nesciunt accusamus neque
-            ducimus quaerat at voluptates veritatis assumenda, dignissimos
-            corporis, alias nemo, cumque quia placeat. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Nemo, repellat. Ab quis dolores
-            dolore veniam ea repudiandae hic atque cum dolor corporis eaque
-            mollitia neque nisi vitae, necessitatibus labore illum.{' '}
-            {this.props.item.notes}
-          </div>
+          <div id="item_notes">{this.props.item.notes}</div>
         </div>
       </div>
     );
