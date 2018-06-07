@@ -1,11 +1,86 @@
 const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const faker = require('faker');
+const moment = require('moment');
 
 const User = require('../db/models/User');
+const Verify = require('../db/models/Verify');
+
 const isAuthenticated = require('../utilities/isAuthenticated');
 const router = express.Router();
 const saltedRounds = 12;
+
+router.route('/verify').get((req, res) => {
+  const { hash } = req.query;
+
+  return new Verify({ hash })
+    .fetch()
+    .then(verify => {
+      if (!verify) return res.json({ verified: false });
+
+      verify = verify.toJSON();
+      return res.json({ verified: true });
+    })
+    .catch(err => {
+      return res.json({ verified: false });
+    });
+  return res.json(hash);
+});
+
+router.route('/email-test').get((req, res) => {
+  return bcrypt
+    .hash(faker.random.words(5), 5)
+    .then(data => {
+      const verify = {
+        hash: data.toString('hex'),
+        user_id: 1,
+        expires_at: moment()
+          .add(30, 'minutes')
+          .format()
+      };
+      // console.log(verify);
+      return verify;
+    })
+    .then(verify => {
+      return new Verify(verify).save().then(verify => {
+        return verify;
+      });
+    })
+    .then(verify => {
+      const { hash } = verify.toJSON();
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: 'cyruswu.email@gmail.com',
+        from: 'support@cms.com',
+        subject: 'Welcome to CMS! Confirm Your Email',
+        // text: 'and easy to do anywhere, even with Node.js',
+        html: `<a href="http://localhost:3000/user/verify?hash=${hash}">Confirm Email Address</a>`
+      };
+      sgMail.send(msg);
+      return res.json(msg);
+    });
+
+  // const hash = crypto.createHash('sha256');
+
+  // hash.on('readable', () => {
+  //   const data = hash.read();
+  //   if (data) {
+  //     const message = {
+  //       hash: data.toString('hex'),
+  //       expires_at: moment()
+  //         .add('minutes', 30)
+  //         .format()
+  //     };
+  //     return res.json(message);
+  //   }
+  // });
+
+  // hash.write(faker.random.words(5));
+  // hash.end();
+});
 
 router.route('/:id/items').get(isAuthenticated, (req, res) => {
   const { id } = req.params;

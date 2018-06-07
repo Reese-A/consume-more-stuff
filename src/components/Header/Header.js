@@ -29,6 +29,7 @@ class Header extends Component {
   // }
   componentDidMount() {
     // window.addEventListener('resize', this.updateDimensions);
+    console.log();
   }
 
   logout() {
@@ -50,9 +51,12 @@ class Header extends Component {
           </div>
         )} */}
 
-        <div id="header_menu_button">
-          <MenuButton />
-        </div>
+        {this.props.enableMenuButton ? (
+          <div id="header_menu_button">
+            <MenuButton />
+          </div>
+        ) : null}
+
         <div id="header_logo">
           <Link to="/">CMS</Link>
         </div>
