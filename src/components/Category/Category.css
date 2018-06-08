@@ -15,7 +15,7 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 600px) {
   #category .category_container {
     flex-direction: column;
     align-items: center;

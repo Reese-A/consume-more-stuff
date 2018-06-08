@@ -19,7 +19,7 @@
   font-size: 1.5rem;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 600px) {
   #header #header_logo {
     font-size: 2rem;
   }
@@ -33,7 +33,7 @@
   font-size: 20px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 600px) {
   #header .auth_elements {
     font-size: 17px;
     margin-right: 10px;
@@ -52,7 +52,7 @@
   font-size: 22px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 600px) {
   #header .auth_elements #user_greeting {
     font-size: 15px;
   }
