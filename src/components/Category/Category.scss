@@ -16,4 +16,16 @@
     }
     // overflow: scroll;
   }
+  #cat_page_buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      justify-content: space-evenly;
+    }
+    #cat_prev_page {
+      margin-right: 15px;
+    }
+  }
 }
