@@ -13,7 +13,7 @@
     align-self: center;
     margin-left: 32px;
     font-size: 1.5rem;
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 600px) {
       font-size: 2rem;
     }
   }
@@ -25,7 +25,7 @@
     margin-right: 32px;
 
     font-size: 20px;
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 600px) {
       font-size: 17px;
       margin-right: 10px;
     }
@@ -37,7 +37,7 @@
     }
     #user_greeting {
       font-size: 22px;
-      @media screen and (max-width: 992px) {
+      @media screen and (max-width: 600px) {
         font-size: 15px;
       }
     }

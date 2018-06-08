@@ -178,9 +178,6 @@ router
       return new Item({ id })
         .save(newItem, { method: 'update' })
         .then(item => {
-          if (Number(req.user.id) !== Number(item.owner)) {
-            return res.status(401).json({ message: 'wrong user' });
-          }
           req.temp = {};
           req.temp.item = item;
           next();
@@ -192,7 +189,6 @@ router
     },
     (req, res) => {
       if (!req.files.length) return req.temp.item;
-
       return fs.readFile(req.files[0].path, (err, data) => {
         const base64data = new Buffer(data, 'binary');
         s3.upload(
