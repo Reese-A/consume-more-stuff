@@ -33,7 +33,7 @@ class Sidebar extends React.Component {
             </ul>
           </li>
           <li>
-            <NavLink exact to="/all">
+            <NavLink exact to="/all?page=1">
               All
             </NavLink>
           </li>
