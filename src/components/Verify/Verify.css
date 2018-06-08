@@ -1,1 +1,90 @@
-/* No CSS *//*# sourceMappingURL=Verify.css.map */
+@keyframes blink {
+  /**
+   * At the start of the animation the dot
+   * has an opacity of .2
+   */
+  0% {
+    opacity: 0.2;
+  }
+  /**
+   * At 20% the dot is fully visible and
+   * then fades out slowly
+   */
+  20% {
+    opacity: 1;
+  }
+  /**
+   * Until it reaches an opacity of .2 and
+   * the animation can start again
+   */
+  100% {
+    opacity: 0.2;
+  }
+}
+
+#verify {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#verify #verify_text {
+  position: relative;
+  bottom: 15vh;
+  padding: 32px 64px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+#verify #verify_text span {
+  font-size: 3rem;
+  animation-name: blink;
+  animation-duration: 1.9s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+#verify #verify_text span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+#verify #verify_text span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+#verify #verify_text span:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
+#verify #verify_text span:nth-child(5) {
+  animation-delay: 0.6s;
+}
+
+#verify #verify_text span:nth-child(6) {
+  animation-delay: 0.75s;
+}
+
+#verify #verify_text span:nth-child(7) {
+  animation-delay: 0.9s;
+}
+
+#verify #verify_text span:nth-child(8) {
+  animation-delay: 1.05s;
+}
+
+#verify #verify_text span:nth-child(9) {
+  animation-delay: 1.2s;
+}
+
+#verify #verify_text span:nth-child(10) {
+  animation-delay: 1.35s;
+}
+
+#verify #verify_text span:nth-child(11) {
+  animation-delay: 1.5s;
+}
+
+#verify #verify_text span:nth-child(12) {
+  animation-delay: 1.65s;
+}
+/*# sourceMappingURL=Verify.css.map */

@@ -18,19 +18,50 @@ class AuthHome extends React.Component {
     const { hash, id } = parse;
     fetch(`/user/${id}/verify?hash=${hash}`, {
       method: 'PUT',
-      body: { hash, id },
+      body: JSON.stringify({ hash, id }),
+      headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin'
     })
       .then(res => res.json())
       .then(verified => {
-        console.log(verified);
-        // this.setState({ verified }, () => {
-        //   console.log(this.state);
-        // });
+        this.setState(verified, () => {
+          console.log(this.state);
+        });
       });
   }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(prevProps);
+    console.log(prevState);
+    if (this.state.verified) {
+      setTimeout(() => {
+        this.props.history.push('/');
+      }, 3000);
+    }
+    // if (prevProps.items === this.props.items) {
+    // }
+  }
+
   render() {
-    return <div id="verify">VERIFY</div>;
+    return (
+      <div id="verify">
+        <div id="verify_text">
+          {/* Verifying */}
+          <span>V</span>
+          <span>e</span>
+          <span>r</span>
+          <span>i</span>
+          <span>f</span>
+          <span>y</span>
+          <span>i</span>
+          <span>n</span>
+          <span>g</span>
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
+        </div>
+      </div>
+    );
   }
 }
 
