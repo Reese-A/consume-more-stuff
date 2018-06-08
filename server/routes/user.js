@@ -102,14 +102,14 @@ router.route('/register').post((req, res) => {
         email,
         name,
         password,
-        hash
+        hash,
+        verified: false
       })
         .save()
         .then(user => {
           return req.login(user, err => {
             if (err) throw err;
-            const { id, name, hash } = user.toJSON();
-
+            const { id, name, verified, hash } = user.toJSON();
             const sgMail = require('@sendgrid/mail');
             sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -121,7 +121,8 @@ router.route('/register').post((req, res) => {
               html: `<a href="http://localhost:3000/user/verify?hash=${hash}&id=${id}">Confirm Email Address</a>`
             };
             sgMail.send(msg);
-            return res.json({ id, name });
+
+            return res.json({ id, name, verified });
           });
         })
         .then(user => {})
@@ -186,9 +187,11 @@ router.route('/verify').get((req, res) => {
 });
 
 router.route('/login').post(passport.authenticate('local'), (req, res) => {
+  console.log(req.user);
   return res.json({
     id: req.user.id,
-    name: req.user.name
+    name: req.user.name,
+    verified: req.user.verified
   });
 });
 
