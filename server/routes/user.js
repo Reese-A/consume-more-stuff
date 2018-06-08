@@ -110,7 +110,7 @@ router.route('/register').post((req, res) => {
             sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
             const msg = {
-              to: 'cyruswu.email@gmail.com',
+              to: process.env.EMAIL,
               from: 'support@cms.com',
               subject: 'Welcome to CMS! Confirm Your Email',
               // text: 'and easy to do anywhere, even with Node.js',

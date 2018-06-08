@@ -11,7 +11,10 @@ const routes = require('./routes/_routes');
 const User = require('./db/models/User');
 
 const server = express();
+
 const PORT = process.env.PORT || 9001;
+
+require('dotenv').config();
 
 server.use(
   bodyParser.urlencoded({
