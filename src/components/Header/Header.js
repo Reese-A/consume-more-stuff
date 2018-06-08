@@ -55,7 +55,11 @@ class Header extends Component {
           <div id="header_menu_button">
             <MenuButton />
           </div>
-        ) : null}
+        ) : (
+          <div id="header_menu_button">
+            <Link to="/">CMS</Link>
+          </div>
+        )}
 
         <div id="header_logo">
           <Link to="/">CMS</Link>
