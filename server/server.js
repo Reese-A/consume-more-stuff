@@ -101,6 +101,7 @@ passport.use(
 );
 
 server.use(express.static('build'));
+
 server.use('/api', routes);
 
 server.listen(PORT, () => {

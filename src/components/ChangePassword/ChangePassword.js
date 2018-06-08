@@ -47,7 +47,7 @@ class ChangePassword extends Component {
     event.preventDefault();
     console.log(this.state);
     if (this.state.newPassword === this.state.confirm) {
-      return fetch(`/user/${this.state.id}/password`, {
+      return fetch(`/api/user/${this.state.id}/password`, {
         method: 'PUT',
         body: JSON.stringify(this.state),
         headers: {
