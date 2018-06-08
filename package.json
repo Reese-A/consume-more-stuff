@@ -2,6 +2,7 @@
   "name": "react-consume-more-stuff",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9001",
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "aws-sdk": "^2.250.1",
@@ -20,7 +21,6 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.3",
-    "query-string": "^6.1.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
@@ -34,6 +34,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "proxy": "http://localhost:9001/api"
+  }
 }
