@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { loadItems } from '../../redux/actions/item-actions';
 import moment from 'moment';
 import Card from '../Card/Card';
-import qs from 'query-string';
+// import qs from 'query-string';
 
 import './All.css';
 
