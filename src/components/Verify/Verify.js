@@ -35,6 +35,7 @@ class AuthHome extends React.Component {
     console.log(prevState);
     if (this.state.verified) {
       setTimeout(() => {
+        console.log(this.state);
         this.props.history.push('/');
       }, 3000);
     }

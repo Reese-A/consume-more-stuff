@@ -136,9 +136,13 @@ router.route('/register').post((req, res) => {
 router.route('/:id/verify').put((req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
+
+  if (!id) return res.json({ id: null, name: null, verified: false });
+
   console.log(req.params);
   console.log(req.body);
   console.log(id, hash);
+
   return new User()
     .where({ id, hash })
     .save({ verified: true, hash: null }, { method: 'update' })
@@ -150,11 +154,16 @@ router.route('/:id/verify').put((req, res) => {
     .catch(err => {
       if (err) {
         console.log('Not Found');
-        return new User({ id }).fetch().then(user => {
-          user = user.toJSON();
-          const { id, name, verified } = user;
-          return res.json({ id, name, verified });
-        });
+        return new User({ id })
+          .fetch()
+          .then(user => {
+            user = user.toJSON();
+            const { id, name, verified } = user;
+            return res.json({ id, name, verified });
+          })
+          .catch(err => {
+            if (err) return res.json({ id: null, name: null, verified: false });
+          });
       }
     });
 });
