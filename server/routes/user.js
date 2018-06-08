@@ -74,6 +74,10 @@ router
     });
   });
 
+router.route('/test').get((req, res) => {
+  return res.json({ message: process.env.EMAIL });
+});
+
 router.route('/register').post((req, res) => {
   let { email, password, name } = req.body;
 
