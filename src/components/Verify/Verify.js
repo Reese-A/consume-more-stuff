@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { saveState } from '../../localStorage';
+import { saveState, loadState } from '../../localStorage';
 
 import qs from 'query-string';
 
@@ -36,10 +36,9 @@ class AuthHome extends React.Component {
     console.log(prevProps);
     console.log(prevState);
     if (this.state.verified) {
-      const user = localStorage.getItem('state');
-      user.verified = this.state.verified;
-      saveState(user);
-
+      const persistedState = loadState();
+      persistedState.user.verified = this.state.verified;
+      saveState({ user: persistedState.user });
       setTimeout(() => {
         console.log(this.state);
 
