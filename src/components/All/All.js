@@ -35,16 +35,16 @@ class All extends React.Component {
     window.scroll(0, 0);
   }
   componentDidUpdate(prevProps, prevState) {
-    const parse = qs.parse(this.props.location.search);
-    const { page } = parse;
+    const params = new URL(document.location).searchParams;
+    let { page } = params.get('page');
     if (prevProps.items === this.props.items) {
       this.props.loadItems(page, 10);
     }
   }
 
   componentDidMount() {
-    const parse = qs.parse(this.props.location.search);
-    const { page } = parse;
+    const params = new URL(document.location).searchParams;
+    let { page } = params.get('page');
     this.props.loadItems(page, 10);
   }
 
