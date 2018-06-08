@@ -31,7 +31,6 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    console.log('submit fired');
     event.preventDefault();
     this.props.loginUser(this.state);
     console.log('LOGIN FINISHED');

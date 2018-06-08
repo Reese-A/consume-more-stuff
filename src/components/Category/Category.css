@@ -21,4 +21,21 @@
     align-items: center;
   }
 }
+
+#category #cat_page_buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  #category #cat_page_buttons {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+}
+
+#category #cat_page_buttons #cat_prev_page {
+  margin-right: 15px;
+}
 /*# sourceMappingURL=Category.css.map */

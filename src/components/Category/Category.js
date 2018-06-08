@@ -8,25 +8,52 @@ import {
 } from '../../redux/actions/category-actions';
 
 import Card from '../Card/Card';
+import qs from 'query-string';
 
 import './Category.css';
 
-const LIMIT = 25;
+const LIMIT = 10;
 
 class Category extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
+  }
+  handleNext() {
+    const { name } = this.props.match.params;
+    const parse = qs.parse(this.props.location.search);
+    let { page } = parse;
+    if (!page) {
+      page = 1;
+    }
+    page = Number(page) + 1;
+    this.props.history.push(`/category/${name}?page=${page}`);
+    window.scroll(0, 0);
+  }
+  handlePrev() {
+    const { name } = this.props.match.params;
+    const parse = qs.parse(this.props.location.search);
+    let { page } = parse;
+    page = Number(page) - 1;
+    this.props.history.push(`/category/${name}?page=${page}`);
+    window.scroll(0, 0);
   }
   componentDidMount() {
+    const parse = qs.parse(this.props.location.search);
+    const { page } = parse;
     const { name } = this.props.match.params;
-    this.props.loadCategoryItems(name, 1, LIMIT);
+    this.props.loadCategoryItems(name, page, LIMIT);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { name } = this.props.match.params;
+    const parse = qs.parse(this.props.location.search);
+    const { page } = parse;
 
     if (prevProps.items === this.props.items) {
-      this.props.loadCategoryItems(name, 1, LIMIT);
+      this.props.loadCategoryItems(name, page, LIMIT);
     }
   }
 
@@ -59,6 +86,14 @@ class Category extends React.Component {
               />
             );
           })}
+        </div>
+        <div id="cat_page_buttons">
+          <div id="cat_prev_page" onClick={this.handlePrev}>
+            Previous Page
+          </div>
+          <div id="cat_next_page" onClick={this.handleNext}>
+            Next Page
+          </div>
         </div>
       </div>
     );
