@@ -22,9 +22,9 @@ class Category extends React.Component {
     this.handlePrev = this.handlePrev.bind(this);
   }
   handleNext() {
-    const { name } = this.props.match.params;
-    const parse = qs.parse(this.props.location.search);
-    let { page } = parse;
+    const params = new URL(document.location).searchParams;
+    const name = params.get('name');
+    let page = params.get('page');
     if (!page) {
       page = 1;
     }
@@ -33,25 +33,24 @@ class Category extends React.Component {
     window.scroll(0, 0);
   }
   handlePrev() {
-    const { name } = this.props.match.params;
-    const parse = qs.parse(this.props.location.search);
-    let { page } = parse;
+    const params = new URL(document.location).searchParams;
+    const name = params.get('name');
+    let page = params.get('page');
     page = Number(page) - 1;
     this.props.history.push(`/category/${name}?page=${page}`);
     window.scroll(0, 0);
   }
   componentDidMount() {
-    const parse = qs.parse(this.props.location.search);
-    const { page } = parse;
-    const { name } = this.props.match.params;
+    const params = new URL(document.location).searchParams;
+    const name = params.get('name');
+    const page = params.get('page');
     this.props.loadCategoryItems(name, page, LIMIT);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { name } = this.props.match.params;
-    const parse = qs.parse(this.props.location.search);
-    const { page } = parse;
-
+    const params = new URL(document.location).searchParams;
+    const name = params.get('name');
+    const page = params.get('page');
     if (prevProps.items === this.props.items) {
       this.props.loadCategoryItems(name, page, LIMIT);
     }
