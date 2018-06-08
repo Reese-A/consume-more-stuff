@@ -35,18 +35,22 @@ class Category extends React.Component {
   }
   handlePrev() {
     const { name } = this.props.match.params;
-
     const params = new URL(document.location).searchParams;
+
     let page = params.get('page');
     page = Number(page) - 1;
+
     this.props.history.push(`/category/${name}?page=${page}`);
     window.scroll(0, 0);
   }
   componentDidMount() {
     const { name } = this.props.match.params;
-
     const params = new URL(document.location).searchParams;
-    const page = params.get('page');
+
+    let page = params.get('page');
+    if (!page) {
+      page = 1;
+    }
     this.props.loadCategoryItems(name, page, LIMIT);
   }
 
