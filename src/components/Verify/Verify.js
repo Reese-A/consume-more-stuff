@@ -15,16 +15,18 @@ class AuthHome extends React.Component {
   }
   componentDidMount() {
     const parse = qs.parse(this.props.location.search);
-    const { hash } = parse;
-    fetch(`/user/verify?hash=${hash}`, {
+    const { hash, id } = parse;
+    fetch(`/user/${id}/verify?hash=${hash}`, {
+      method: 'PUT',
+      body: { hash, id },
       credentials: 'same-origin'
     })
       .then(res => res.json())
-      .then(verify => {
-        const { verified } = verify;
-        this.setState({ verified }, () => {
-          console.log(this.state);
-        });
+      .then(verified => {
+        console.log(verified);
+        // this.setState({ verified }, () => {
+        //   console.log(this.state);
+        // });
       });
   }
   render() {
