@@ -22,8 +22,9 @@ class Category extends React.Component {
     this.handlePrev = this.handlePrev.bind(this);
   }
   handleNext() {
+    const { name } = this.props.match.params;
+
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
     let page = params.get('page');
     if (!page) {
       page = 1;
@@ -33,24 +34,28 @@ class Category extends React.Component {
     window.scroll(0, 0);
   }
   handlePrev() {
+    const { name } = this.props.match.params;
+
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
     let page = params.get('page');
     page = Number(page) - 1;
     this.props.history.push(`/category/${name}?page=${page}`);
     window.scroll(0, 0);
   }
   componentDidMount() {
+    const { name } = this.props.match.params;
+
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
     const page = params.get('page');
     this.props.loadCategoryItems(name, page, LIMIT);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    const { name } = this.props.match.params;
+
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
     const page = params.get('page');
+
     if (prevProps.items === this.props.items) {
       this.props.loadCategoryItems(name, page, LIMIT);
     }
@@ -61,8 +66,6 @@ class Category extends React.Component {
     const category = this.props.categories.find(category => {
       return category.name === name;
     });
-
-    if (!category) return <Redirect to="/" />;
 
     let items = [];
     const id = category ? category.id : undefined;
