@@ -4,7 +4,7 @@ export const LOAD_CATEGORY_ITEMS = 'LOAD_CATEGORY_ITEMS';
 
 export const loadCategories = () => {
   return dispatch => {
-    return fetch(`/api/category`, { credentials: 'same-origin' })
+    return fetch('/api/category', { credentials: 'same-origin' })
       .then(res => {
         return res.json();
       })
