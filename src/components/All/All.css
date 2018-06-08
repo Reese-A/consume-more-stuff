@@ -19,4 +19,14 @@
     align-items: center;
   }
 }
+
+#all_items #all_page_buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+#all_items #all_page_buttons #all_prev_page {
+  margin-right: 15px;
+}
 /*# sourceMappingURL=All.css.map */

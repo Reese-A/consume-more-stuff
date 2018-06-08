@@ -4,12 +4,48 @@ import { connect } from 'react-redux';
 import { loadItems } from '../../redux/actions/item-actions';
 import moment from 'moment';
 import Card from '../Card/Card';
+import qs from 'query-string';
 
 import './All.css';
 
 class All extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
+  }
+
+  handleNext() {
+    const parse = qs.parse(this.props.location.search);
+    let { page } = parse;
+    if (!page) {
+      page = 1;
+    }
+    page = Number(page) + 1;
+    this.props.history.push(`/all?page=${page}`);
+    window.scroll(0, 0);
+  }
+
+  handlePrev() {
+    const parse = qs.parse(this.props.location.search);
+    let { page } = parse;
+    page = Number(page) - 1;
+    this.props.history.push(`/all?page=${page}`);
+    window.scroll(0, 0);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const parse = qs.parse(this.props.location.search);
+    const { page } = parse;
+    if (prevProps.items === this.props.items) {
+      this.props.loadItems(page, 10);
+    }
+  }
+
   componentDidMount() {
-    this.props.loadItems(1, 25);
+    const parse = qs.parse(this.props.location.search);
+    const { page } = parse;
+    this.props.loadItems(page, 10);
   }
 
   render() {
@@ -32,6 +68,14 @@ class All extends React.Component {
               />
             );
           })}
+        </div>
+        <div id="all_page_buttons">
+          <div id="all_prev_page" onClick={this.handlePrev}>
+            Previous Page
+          </div>
+          <div id="all_next_page" onClick={this.handleNext}>
+            Next Page
+          </div>
         </div>
       </div>
     );
