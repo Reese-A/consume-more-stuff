@@ -97,7 +97,7 @@ class EditItem extends Component {
       }
     });
     this.props.editItem(id, data);
-    this.props.history.push('/');
+    this.props.history.push(`/item/${id}`);
   }
 
   handleChange(event) {
