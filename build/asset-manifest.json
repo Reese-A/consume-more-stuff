@@ -1,12 +1,7 @@
 {
   "main.css": "static/css/main.607c185a.css",
   "main.css.map": "static/css/main.607c185a.css.map",
-<<<<<<< HEAD
-  "main.js": "static/js/main.2e8fe157.js",
-  "main.js.map": "static/js/main.2e8fe157.js.map",
-=======
-  "main.js": "static/js/main.d6f1c9c5.js",
-  "main.js.map": "static/js/main.d6f1c9c5.js.map",
->>>>>>> dc627eb1202f044edb392c64def2cfb8dc184e3a
+  "main.js": "static/js/main.ce1e3b34.js",
+  "main.js.map": "static/js/main.ce1e3b34.js.map",
   "static/media/logo.svg": "static/media/logo.5d5d9eef.svg"
 }
