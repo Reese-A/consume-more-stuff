@@ -138,7 +138,7 @@ router.route('/:id/verify').put((req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
 
-  if (!id) return res.json({ user: null, verified: false });
+  if (!id) return res.json({ user: null, verified: false, checked: true });
 
   console.log(req.params);
   console.log(req.body);
@@ -160,31 +160,32 @@ router.route('/:id/verify').put((req, res) => {
           .then(user => {
             user = user.toJSON();
             const { id, name, verified } = user;
-            return res.json({ id, name, verified });
+            return res.json({ user: { id, name }, verified, checked: true });
           })
           .catch(err => {
-            if (err) return res.json({ user: null, verified: false });
+            if (err)
+              return res.json({ user: null, verified: false, checked: true });
           });
       }
     });
 });
 
-router.route('/verify').get((req, res) => {
-  const { id } = req.query;
-  const { hash } = req.query;
+// router.route('/verify').get((req, res) => {
+//   const { id } = req.query;
+//   const { hash } = req.query;
 
-  return new User({ id, hash })
-    .fetch()
-    .then(user => {
-      if (!user) return res.json({ verified: false });
+//   return new User({ id, hash })
+//     .fetch()
+//     .then(user => {
+//       if (!user) return res.json({ verified: false });
 
-      user = user.toJSON();
-      return res.json({ verified: true });
-    })
-    .catch(err => {
-      return res.json({ verified: false });
-    });
-});
+//       user = user.toJSON();
+//       return res.json({ verified: true });
+//     })
+//     .catch(err => {
+//       return res.json({ verified: false });
+//     });
+// });
 
 router.route('/login').post(passport.authenticate('local'), (req, res) => {
   console.log(req.user);

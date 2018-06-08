@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { saveState, loadState } from '../../localStorage';
 
-import qs from 'query-string';
+// import qs from 'query-string';
 
 import './Verify.css';
 
@@ -12,12 +12,18 @@ class AuthHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      verified: false
+      verified: false,
+      user: null,
+      checked: false
     };
   }
   componentDidMount() {
-    const parse = qs.parse(this.props.location.search);
-    const { hash, id } = parse;
+    // const parse = qs.parse(this.props.location.search);
+    const params = new URL(document.location).searchParams;
+    const hash = params.get('hash');
+    const id = parseInt(params.get('id'));
+
+    // const { hash, id } = parse;
     fetch(`/user/${id}/verify?hash=${hash}`, {
       method: 'PUT',
       body: JSON.stringify({ hash, id }),
@@ -36,9 +42,10 @@ class AuthHome extends React.Component {
     console.log(prevProps);
     console.log(prevState);
     if (this.state.verified) {
-      const persistedState = loadState();
-      persistedState.user.verified = this.state.verified;
-      saveState({ user: persistedState.user });
+      const user = loadState().user;
+      user.verified = this.state.verified;
+      saveState({ user });
+
       setTimeout(() => {
         console.log(this.state);
 
@@ -52,21 +59,25 @@ class AuthHome extends React.Component {
   render() {
     return (
       <div id="verify">
-        <div id="verify_text">
-          {/* Verifying */}
-          <span>V</span>
-          <span>e</span>
-          <span>r</span>
-          <span>i</span>
-          <span>f</span>
-          <span>y</span>
-          <span>i</span>
-          <span>n</span>
-          <span>g</span>
-          <span>.</span>
-          <span>.</span>
-          <span>.</span>
-        </div>
+        {!this.state.verified && !this.state.checked ? (
+          <div id="verify_text">
+            {/* Verifying */}
+            <span>V</span>
+            <span>e</span>
+            <span>r</span>
+            <span>i</span>
+            <span>f</span>
+            <span>y</span>
+            <span>i</span>
+            <span>n</span>
+            <span>g</span>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </div>
+        ) : (
+          <div>You Failure!</div>
+        )}
       </div>
     );
   }
