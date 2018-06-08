@@ -23,7 +23,7 @@ class Category extends React.Component {
   }
   handleNext() {
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
+    const { name } = this.props.match.params;
     let page = params.get('page');
     if (!page) {
       page = 1;
@@ -34,7 +34,7 @@ class Category extends React.Component {
   }
   handlePrev() {
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
+    const { name } = this.props.match.params;
     let page = params.get('page');
     page = Number(page) - 1;
     this.props.history.push(`/category/${name}?page=${page}`);
@@ -42,15 +42,19 @@ class Category extends React.Component {
   }
   componentDidMount() {
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
-    const page = params.get('page');
+    console.log(params);
+    const { name } = this.props.match.params;
+    let page = params.get('page');
+    if (!page) {
+      page = 1;
+    }
     this.props.loadCategoryItems(name, page, LIMIT);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const params = new URL(document.location).searchParams;
-    const name = params.get('name');
-    const page = params.get('page');
+    const { name } = this.props.match.params;
+    let page = params.get('page');
     if (prevProps.items === this.props.items) {
       this.props.loadCategoryItems(name, page, LIMIT);
     }
@@ -61,8 +65,6 @@ class Category extends React.Component {
     const category = this.props.categories.find(category => {
       return category.name === name;
     });
-
-    if (!category) return <Redirect to="/" />;
 
     let items = [];
     const id = category ? category.id : undefined;
