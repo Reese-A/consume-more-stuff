@@ -9,7 +9,7 @@ const PrivateRoute = props => {
     <Route
       {...rest}
       render={props =>
-        persistedState.user.id ? (
+        persistedState.user.verified ? (
           <Component {...props} />
         ) : (
           <Redirect

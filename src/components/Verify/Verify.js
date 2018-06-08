@@ -20,7 +20,7 @@ class AuthHome extends React.Component {
   componentDidMount() {
     // const parse = qs.parse(this.props.location.search);
     const params = new URL(document.location).searchParams;
-    const name = params.get('hash');
+    const hash = params.get('hash');
     const id = parseInt(params.get('id'));
 
     // const { hash, id } = parse;
