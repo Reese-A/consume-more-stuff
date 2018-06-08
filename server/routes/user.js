@@ -74,14 +74,6 @@ router
     });
   });
 
-router.route('/test').get((req, res) => {
-  const hash = crypto.createHash('md5');
-  const email = 'cyruswu@wu';
-  hash.update(`${email}${moment().format()}`);
-  const data = hash.digest('hex');
-  return res.json(data);
-});
-
 router.route('/register').post((req, res) => {
   let { email, password, name } = req.body;
 
@@ -140,12 +132,26 @@ router.route('/register').post((req, res) => {
 router.route('/:id/verify').put((req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
-
-  return new User({ id, hash })
+  console.log(req.params);
+  console.log(req.body);
+  console.log(id, hash);
+  return new User()
+    .where({ id, hash })
     .save({ verified: true, hash: null }, { method: 'update' })
     .then(user => {
       user = user.toJSON();
-      return res.json({ verified: user.verified });
+      console.log('Found');
+      return res.json(user);
+    })
+    .catch(err => {
+      if (err) {
+        console.log('Not Found');
+        return new User({ id }).fetch().then(user => {
+          user = user.toJSON();
+          const { id, name, verified } = user;
+          return res.json({ id, name, verified });
+        });
+      }
     });
 });
 
@@ -165,59 +171,6 @@ router.route('/verify').get((req, res) => {
       return res.json({ verified: false });
     });
 });
-
-// router.route('/email-test').get((req, res) => {
-//   return bcrypt
-//     .hash(faker.random.words(5), 5)
-//     .then(data => {
-//       const verify = {
-//         hash: data.toString('hex'),
-//         user_id: 1,
-//         expires_at: moment()
-//           .add(30, 'minutes')
-//           .format()
-//       };
-//       // console.log(verify);
-//       return verify;
-//     })
-//     .then(verify => {
-//       return new Verify(verify).save().then(verify => {
-//         return verify;
-//       });
-//     })
-//     .then(verify => {
-//       const { hash } = verify.toJSON();
-//       const sgMail = require('@sendgrid/mail');
-//       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-//       const msg = {
-//         to: 'cyruswu.email@gmail.com',
-//         from: 'support@cms.com',
-//         subject: 'Welcome to CMS! Confirm Your Email',
-//         // text: 'and easy to do anywhere, even with Node.js',
-//         html: `<a href="http://localhost:3000/user/verify?hash=${hash}">Confirm Email Address</a>`
-//       };
-//       sgMail.send(msg);
-//       return res.json(msg);
-//     });
-
-//   // const hash = crypto.createHash('sha256');
-
-//   // hash.on('readable', () => {
-//   //   const data = hash.read();
-//   //   if (data) {
-//   //     const message = {
-//   //       hash: data.toString('hex'),
-//   //       expires_at: moment()
-//   //         .add('minutes', 30)
-//   //         .format()
-//   //     };
-//   //     return res.json(message);
-//   //   }
-//   // });
-
-//   // hash.write(faker.random.words(5));
-//   // hash.end();
-// });
 
 router.route('/login').post(passport.authenticate('local'), (req, res) => {
   return res.json({
