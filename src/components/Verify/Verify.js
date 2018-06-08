@@ -24,7 +24,7 @@ class AuthHome extends React.Component {
     const id = parseInt(params.get('id'));
 
     // const { hash, id } = parse;
-    fetch(`/user/${id}/verify?hash=${hash}`, {
+    fetch(`/api/user/${id}/verify?hash=${hash}`, {
       method: 'PUT',
       body: JSON.stringify({ hash, id }),
       headers: { 'Content-Type': 'application/json' },

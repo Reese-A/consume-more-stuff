@@ -9,7 +9,7 @@ export const LOAD_USER_ITEMS = 'LOAD_USER_ITEMS';
 
 export const loadUsers = () => {
   return dispatch => {
-    return fetch('/user', { credentials: 'same-origin' })
+    return fetch('/api/user', { credentials: 'same-origin' })
       .then(res => res.json())
       .then(users => {
         return dispatch({ type: LOAD_USERS, users });
@@ -29,7 +29,7 @@ export const loadUser = () => {
 
 export const registerUser = data => {
   return dispatch => {
-    return fetch('/user/register', {
+    return fetch('/api/user/register', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -46,7 +46,7 @@ export const registerUser = data => {
 
 export const loginUser = data => {
   return dispatch => {
-    return fetch('/user/login', {
+    return fetch('/api/user/login', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -63,7 +63,7 @@ export const loginUser = data => {
 
 export const logoutUser = () => {
   return dispatch => {
-    return fetch('/user/logout', { credentials: 'same-origin' })
+    return fetch('/api/user/logout', { credentials: 'same-origin' })
       .then(res => res.json())
       .then(res => {
         return dispatch({ type: LOGOUT_USER, user: {} });
@@ -73,7 +73,7 @@ export const logoutUser = () => {
 
 export const loadUserItems = id => {
   return dispatch => {
-    return fetch(`/user/${id}/items`, { credentials: 'same-origin' })
+    return fetch(`/api/user/${id}/items`, { credentials: 'same-origin' })
       .then(res => res.json())
       .then(user => {
         return dispatch({ type: LOAD_USER_ITEMS, user });

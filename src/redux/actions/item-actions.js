@@ -5,7 +5,7 @@ export const EDIT_ITEM = 'EDIT_ITEM';
 
 export const loadItems = (page, limit) => {
   return dispatch => {
-    return fetch(`/item?page=${page}&limit=${limit}`, {
+    return fetch(`/api/item?page=${page}&limit=${limit}`, {
       credentials: 'same-origin'
     })
       .then(res => res.json())
@@ -17,7 +17,7 @@ export const loadItems = (page, limit) => {
 
 export const loadItem = id => {
   return dispatch => {
-    return fetch(`/item/${id}`, {
+    return fetch(`/api/item/${id}`, {
       credentials: 'same-origin'
     })
       .then(res => res.json())
@@ -32,7 +32,7 @@ export const loadItem = id => {
 
 export const addNewItem = data => {
   return dispatch => {
-    return fetch(`/item`, {
+    return fetch(`/api/item`, {
       method: 'POST',
       body: data,
       credentials: 'same-origin'
@@ -46,7 +46,7 @@ export const addNewItem = data => {
 
 export const editItem = (id, data) => {
   return dispatch => {
-    return fetch(`/item/${id}`, {
+    return fetch(`/api/item/${id}`, {
       method: 'PUT',
       body: data,
       credentials: 'same-origin'
