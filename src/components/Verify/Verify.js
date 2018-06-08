@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { saveState } from '../../localStorage';
+
 import qs from 'query-string';
 
 import './Verify.css';
@@ -34,8 +36,13 @@ class AuthHome extends React.Component {
     console.log(prevProps);
     console.log(prevState);
     if (this.state.verified) {
+      const user = localStorage.getItem('state');
+      user.verified = this.state.verified;
+      saveState(user);
+
       setTimeout(() => {
         console.log(this.state);
+
         this.props.history.push('/');
       }, 3000);
     }
