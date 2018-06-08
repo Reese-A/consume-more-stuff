@@ -39,17 +39,11 @@ class ItemDetail extends Component {
           <img id="item_img" src={this.props.item.img_url} alt="" />
           <div id="item_footer">
             <div id="item_created_at">
-              Posted{' '}
-              {moment(this.props.item.created_at)
-                .startOf('hour')
-                .fromNow()}{' '}
-              in <Link to={`/category/${category}`}>{category}</Link>
+              Posted {moment(this.props.item.created_at).fromNow()} in{' '}
+              <Link to={`/category/${category}`}>{category}</Link>
             </div>
             <div id="item_updated_at">
-              Updated{' '}
-              {moment(this.props.item.updated_at)
-                .startOf('hour')
-                .fromNow()}
+              Updated {moment(this.props.item.updated_at).fromNow()}
             </div>
             {persistedState && persistedState.user.id === Number(owner) ? (
               <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
@@ -75,7 +69,9 @@ class ItemDetail extends Component {
               </li>
             ) : null}
           </ul>
-          <div id="item_notes">{this.props.item.notes}</div>
+          {this.props.item.notes ? (
+            <div id="item_notes">{this.props.item.notes}</div>
+          ) : null}
         </div>
       </div>
     );
