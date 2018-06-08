@@ -137,7 +137,7 @@ router.route('/:id/verify').put((req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
 
-  if (!id) return res.json({ id: null, name: null, verified: false });
+  if (!id) return res.json({ user: null, verified: false });
 
   console.log(req.params);
   console.log(req.body);
@@ -162,7 +162,7 @@ router.route('/:id/verify').put((req, res) => {
             return res.json({ id, name, verified });
           })
           .catch(err => {
-            if (err) return res.json({ id: null, name: null, verified: false });
+            if (err) return res.json({ user: null, verified: false });
           });
       }
     });
