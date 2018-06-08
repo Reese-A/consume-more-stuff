@@ -4,7 +4,7 @@ export const LOAD_CATEGORY_ITEMS = 'LOAD_CATEGORY_ITEMS';
 
 export const loadCategories = () => {
   return dispatch => {
-    return fetch('/category', { credentials: 'same-origin' })
+    return fetch('/api/category', { credentials: 'same-origin' })
       .then(res => {
         return res.json();
       })
@@ -16,7 +16,7 @@ export const loadCategories = () => {
 
 export const loadAllCategoryItems = limit => {
   return dispatch => {
-    return fetch(`/category/items?limit=${limit}`, {
+    return fetch(`/api/category/items?limit=${limit}`, {
       credentials: 'same-origin'
     })
       .then(res => {
@@ -30,7 +30,7 @@ export const loadAllCategoryItems = limit => {
 
 export const loadCategoryItems = (name, page, limit) => {
   return dispatch => {
-    return fetch(`/category/${name}?page=${page}&limit=${limit}`, {
+    return fetch(`/api/category/${name}?page=${page}&limit=${limit}`, {
       credentials: 'same-origin'
     })
       .then(res => res.json())
