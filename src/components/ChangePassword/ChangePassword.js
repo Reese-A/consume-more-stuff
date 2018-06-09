@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { updatePassword } from '../../redux/actions/user-actions';
 
 import './ChangePassword.css';
 
@@ -45,7 +44,7 @@ class ChangePassword extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
+
     if (this.state.newPassword === this.state.confirm) {
       return fetch(`/api/user/${this.state.id}/password`, {
         method: 'PUT',
@@ -129,14 +128,6 @@ class ChangePassword extends Component {
 const mapStateToProps = state => {
   return {};
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     updatePassword: data => {
-//       dispatch(updatePassword(data));
-//     }
-//   };
-// };
 
 export default connect(
   mapStateToProps,

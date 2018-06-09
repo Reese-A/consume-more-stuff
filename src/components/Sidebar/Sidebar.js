@@ -7,9 +7,6 @@ import { loadState } from '../../localStorage';
 import './Sidebar.css';
 
 class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const user = loadState().user;
     return (
@@ -72,13 +69,6 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     loadCategories: () => {
-//       dispatch(loadCategories());
-//     }
-//   };
-// };
 export default withRouter(
   connect(
     mapStateToProps,

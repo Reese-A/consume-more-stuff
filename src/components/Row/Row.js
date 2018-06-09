@@ -7,11 +7,6 @@ import Card from '../Card/Card';
 import './Row.css';
 
 class Row extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     let items = [];
     if (!Array.isArray(this.props.items)) {

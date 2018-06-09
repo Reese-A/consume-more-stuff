@@ -11,28 +11,10 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      // width: window.innerWidth,
-      // height: window.innerHeight
-    };
     this.logout = this.logout.bind(this);
-    // this.updateDimensions = this.updateDimensions.bind(this);
-  }
-  // updateDimensions(event) {
-  //   this.setState(
-  //     { width: window.innerWidth, height: window.innerHeight },
-  //     () => {
-  //       console.log(this.state);
-  //     }
-  //   );
-  // }
-  componentDidMount() {
-    // window.addEventListener('resize', this.updateDimensions);
-    console.log();
   }
 
   logout() {
-    // this.props.logoutUser();
     return fetch('/api/user/logout', { credentials: 'same-origin' })
       .then(res => res.json())
       .then(res => {
@@ -48,16 +30,6 @@ class Header extends Component {
     const user = loadState().user;
     return (
       <header id="header">
-        {/* {this.state.width > 600 ? (
-          <div id="header_logo">
-            <Link to="/">CMS</Link>
-          </div>
-        ) : (
-          <div id="menu_button_container">
-            <MenuButton />
-          </div>
-        )} */}
-
         {this.props.enableMenuButton ? (
           <div id="header_menu_button">
             <MenuButton />
@@ -95,9 +67,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    // user: state.user
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {

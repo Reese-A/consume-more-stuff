@@ -25,9 +25,7 @@ const PrivateRoute = props => {
 };
 
 const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
+  return {};
 };
 
 export default connect(

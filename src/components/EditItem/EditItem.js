@@ -9,9 +9,7 @@ class EditItem extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      // img_input: null
-    };
+    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -311,6 +309,7 @@ class EditItem extends Component {
 const mapStateToProps = state => {
   return {
     item: state.items,
+    // user: state.user,
     categories: state.category,
     conditions: state.condition,
     statuses: state.status
