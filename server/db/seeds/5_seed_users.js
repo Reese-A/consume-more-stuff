@@ -6,12 +6,12 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {
-          id: 1,
           email: 'admin@admin',
           password:
             '$2b$12$SkdwoWgVCK7xVTb6auCBM.gjhrscEuqrlY2JDwqbnbNOFpfsJmSRS',
           name: 'admin',
-          role_id: 1
+          role_id: 1,
+          verified: true
         }
       ]);
     });
