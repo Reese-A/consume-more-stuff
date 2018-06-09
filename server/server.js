@@ -39,7 +39,10 @@ server.use(passport.session());
 passport.serializeUser((user, done) => {
   return done(null, {
     id: user.id,
-    email: user.email
+    email: user.email,
+    name: user.name,
+    role_id: user.role_id,
+    verified: user.verified
   });
 });
 
@@ -53,7 +56,9 @@ passport.deserializeUser((user, done) => {
       return done(null, {
         id: user.id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role_id: user.role_id,
+        verified: user.verified
       });
     })
     .catch(err => {
@@ -75,7 +80,6 @@ passport.use(
         .then(user => {
           console.log(user);
           user = user.toJSON();
-
           if (user === null) {
             return done(null, false, {
               message: 'Bad Email or Password'

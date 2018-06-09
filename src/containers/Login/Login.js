@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../../redux/actions/user-actions';
-import { saveState } from '../../localStorage';
+import { saveState, loadState } from '../../localStorage';
 import { withRouter } from 'react-router-dom';
 
 import './Login.css';
@@ -32,16 +31,23 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.loginUser(this.state);
+    return fetch('/api/user/login', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    })
+      .then(res => res.json())
+      .then(user => {
+        saveState({ user });
+        return this.props.history.push(`/`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     console.log('LOGIN FINISHED');
-  }
-
-  componentDidUpdate() {
-    const user = this.props.user ? this.props.user : {};
-    saveState({ user: user });
-    if (Object.keys(user).length > 0) {
-      this.props.history.push(`/user/${user.id}/home`);
-    }
   }
 
   render() {
@@ -76,17 +82,11 @@ class Login extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    loginUser: data => {
-      dispatch(loginUser(data));
-    }
-  };
+  return {};
 };
 
 export default withRouter(

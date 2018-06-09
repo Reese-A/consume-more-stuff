@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser, loginUser } from '../../redux/actions/user-actions';
 import { saveState } from '../../localStorage';
 import { withRouter } from 'react-router-dom';
 
@@ -45,18 +44,25 @@ class Register extends Component {
     this.setState({ confirm: value });
   }
 
-  componentDidUpdate() {
-    const user = this.props.user ? this.props.user : {};
-    saveState({ user: user });
-    if (Object.keys(user).length > 0 && user.name !== 'error') {
-      this.props.history.push('/');
-    }
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.password === this.state.confirm) {
-      this.props.registerUser(this.state);
+      return fetch('/api/user/register', {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+      })
+        .then(res => res.json())
+        .then(user => {
+          saveState({ user });
+          this.props.history.push('/');
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
       return this.setState({
         hideErr: false
@@ -122,20 +128,11 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    registerUser: data => {
-      dispatch(registerUser(data));
-    },
-    loginUser: data => {
-      dispatch(loginUser(data));
-    }
-  };
+  return {};
 };
 
 export default withRouter(

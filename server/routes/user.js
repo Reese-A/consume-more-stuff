@@ -146,6 +146,10 @@ router.route('/:id/verify').put(isAuthenticated, (req, res) => {
     .then(user => {
       user = user.toJSON();
       console.log('Found');
+<<<<<<< HEAD
+=======
+      console.log(req.user);
+>>>>>>> 9379494871995ec0c388807027397dd807fed84c
       return res.json({ user, verified: user.verified, checked: true });
     })
     .catch(err => {
