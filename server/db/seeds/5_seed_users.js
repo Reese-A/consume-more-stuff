@@ -9,7 +9,7 @@ exports.seed = function(knex, Promise) {
           id: 1,
           email: 'admin@admin',
           password:
-            '2b$12$SkdwoWgVCK7xVTb6auCBM.gjhrscEuqrlY2JDwqbnbNOFpfsJmSRS',
+            '$2b$12$SkdwoWgVCK7xVTb6auCBM.gjhrscEuqrlY2JDwqbnbNOFpfsJmSRS',
           name: 'admin',
           role_id: 1
         }
