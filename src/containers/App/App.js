@@ -8,7 +8,7 @@ import './App.css';
 import { loadCategories } from '../../redux/actions/category-actions';
 import { loadConditions } from '../../redux/actions/condition-actions';
 import { loadStatuses } from '../../redux/actions/status-actions';
-import { loadUsers, loadUser } from '../../redux/actions/user-actions';
+import { loadUser } from '../../redux/actions/user-actions';
 import { loadItems } from '../../redux/actions/item-actions';
 import { saveState } from '../../localStorage';
 
@@ -59,11 +59,13 @@ class App extends Component {
       </div>
     );
   }
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
+    console.log('mount');
     this.props.loadCategories();
     this.props.loadConditions();
     this.props.loadStatuses();
-    this.props.loadUser();
+    // this.props.loadUser();
+    // console.log(localStorage.getItem('state'));
     if (!localStorage.getItem('state')) {
       saveState({ user: {} });
     }
@@ -74,9 +76,9 @@ const mapStateToProps = state => {
   return {
     categories: state.category,
     conditions: state.condition,
-    statuses: state.status,
-    users: state.user,
-    items: state.items
+    statuses: state.status
+    // users: state.user
+    // items: state.items
   };
 };
 
@@ -91,9 +93,6 @@ const mapDispatchToProps = dispatch => {
     loadStatuses: () => {
       dispatch(loadStatuses());
     },
-    // loadUsers: () => {
-    //   dispatch(loadUsers());
-    // },
     loadUser: () => {
       dispatch(loadUser());
     },

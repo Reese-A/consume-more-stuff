@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import { loadState } from '../../localStorage';
 
 import './Sidebar.css';
 
@@ -10,6 +11,7 @@ class Sidebar extends React.Component {
     super(props);
   }
   render() {
+    const user = loadState().user;
     return (
       <div id="sidebar" className="sidebar">
         <ul>
@@ -37,23 +39,23 @@ class Sidebar extends React.Component {
               All
             </NavLink>
           </li>
-          {this.props.user.id ? (
+          {user.id ? (
             <li>
-              <NavLink exact to={`/user/${this.props.user.id}/home`}>
+              <NavLink exact to={`/user/${user.id}/home`}>
                 My Listings
               </NavLink>
             </li>
           ) : null}
-          {this.props.user.id ? (
+          {user.id ? (
             <li>
               <NavLink exact to="/item/new-item">
                 New Item
               </NavLink>
             </li>
           ) : null}
-          {this.props.user.id ? (
+          {user.id ? (
             <li>
-              <NavLink exact to={`/user/${this.props.user.id}/password`}>
+              <NavLink exact to={`/user/${user.id}/password`}>
                 Change Password
               </NavLink>
             </li>
@@ -66,8 +68,7 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.category,
-    user: state.user
+    categories: state.category
   };
 };
 
