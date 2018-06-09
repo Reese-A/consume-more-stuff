@@ -1,5 +1,5 @@
 const isAuthenticated = (req, res, next) => {
-  console.log('Authenticator');
+  console.log('is authenticated');
 
   if (req.isAuthenticated()) {
     next();
@@ -11,7 +11,10 @@ const isAuthenticated = (req, res, next) => {
 };
 
 const isAuthorizedUser = (req, res, next) => {
-  if (!req.isAuthenticated()) return res.status(401).json({ success: false });
+  console.log('is authorized user');
+
+  if (!req.isAuthenticated())
+    return res.status(401).json({ authorized: false });
 
   const sessionUser = req.user;
 
@@ -24,34 +27,39 @@ const isAuthorizedUser = (req, res, next) => {
     .where({ id })
     .fetch()
     .then(user => {
-      const { id, verified } = user;
+      const { id } = user;
 
       if (id !== sessionUser.id)
         return res.status(401).json({ authorized: false });
       next();
-    })
-    .catch(err => {
-      console.log(err);
-      return res.json(err);
     });
 };
 
 const isAuthorizedItem = (req, res, next) => {
-  if (!req.isAuthenticated()) return res.status(401).json({ success: false });
+  console.log('is authorized item');
+
+  if (!req.isAuthenticated())
+    return res.status(401).json({ authorized: false });
 
   const sessionUser = req.user;
 
   if (sessionUser.role_id === 1) return next();
 
-  const { id } = req.params; // item id
+  const { id } = req.params; //item id
 
   return new Item()
     .where({ id })
     .fetch()
-    .then(item => {});
+    .then(item => {
+      const { owner } = item;
+      if (owner !== sessionUser.id)
+        return res.status(401).json({ authorized: false });
+      next();
+    });
 };
 
 module.exports = {
   isAuthenticated: isAuthenticated,
-  isAuthorizedUser: isAuthorizedUser
+  isAuthorizedUser: isAuthorizedUser,
+  isAuthorizedItem: isAuthorizedItem
 };
