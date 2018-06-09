@@ -112,11 +112,13 @@ router.route('/register').post((req, res) => {
             sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
             const msg = {
-              to: process.env.EMAIL,
+              to: email,
               from: 'support@cms.com',
               subject: 'Welcome to CMS! Confirm Your Email',
               // text: 'and easy to do anywhere, even with Node.js',
-              html: `<a href="http://localhost:3000/user/verify?hash=${hash}&id=${id}">Confirm Email Address</a>`
+              html: `<a href="${
+                process.env.DOMAIN_NAME
+              }user/verify?hash=${hash}&id=${id}">Confirm Email Address</a>`
             };
             sgMail.send(msg);
 
