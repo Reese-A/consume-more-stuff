@@ -6,7 +6,9 @@ const multerS3 = require('multer-s3');
 require('dotenv').config();
 
 const Item = require('../db/models/Item');
-const isAuthenticated = require('../utilities/isAuthenticated');
+// const isAuthenticated = require('../utilities/isAuthenticated');
+const { isAuthenticated, isAuthorizedItem } = require('../utilities/auth');
+
 const router = express.Router();
 
 const Bucket = process.env.AWS_S3_BUCKET_NAME;
@@ -144,7 +146,7 @@ router
       });
   })
   .put(
-    isAuthenticated,
+    isAuthorizedItem,
     upload.array('img_file', 1),
     (req, res, next) => {
       const { id } = req.params;

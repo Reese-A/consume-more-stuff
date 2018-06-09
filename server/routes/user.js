@@ -7,11 +7,12 @@ const moment = require('moment');
 
 const User = require('../db/models/User');
 
-const isAuthenticated = require('../utilities/isAuthenticated');
+// const isAuthenticated = require('../utilities/isAuthenticated');
+const { isAuthenticated, isAuthorizedUser } = require('../utilities/auth');
 const router = express.Router();
 const saltedRounds = 12;
 
-router.route('/:id/items').get(isAuthenticated, (req, res) => {
+router.route('/:id/items').get(isAuthorizedUser, (req, res) => {
   const { id } = req.params;
   const page = req.query.page > 0 ? req.query.page : 1;
   const limit = req.query.limit;
@@ -40,7 +41,7 @@ router.route('/:id/items').get(isAuthenticated, (req, res) => {
 
 router
   .route('/:id/password')
-  .put(passport.authenticate('local'), isAuthenticated, (req, res) => {
+  .put(passport.authenticate('local'), isAuthorizedUser, (req, res) => {
     const id = Number(req.params.id);
     const userId = Number(req.user.id);
     if (id !== userId) {
@@ -74,10 +75,6 @@ router
     });
   });
 
-router.route('/test').get((req, res) => {
-  return res.json({ message: process.env.EMAIL });
-});
-
 router.route('/register').post((req, res) => {
   let { email, password, name } = req.body;
 
@@ -103,13 +100,14 @@ router.route('/register').post((req, res) => {
         name,
         password,
         hash,
-        verified: false
+        verified: false,
+        role_id: 2
       })
         .save()
         .then(user => {
           return req.login(user, err => {
             if (err) throw err;
-            const { id, name, verified, hash } = user.toJSON();
+            const { id, name, verified, role_id, hash } = user.toJSON();
             const sgMail = require('@sendgrid/mail');
             sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -122,13 +120,12 @@ router.route('/register').post((req, res) => {
             };
             sgMail.send(msg);
 
-            return res.json({ id, name, verified });
+            return res.json({ id, name, verified, role_id });
           });
         })
-        .then(user => {})
         .catch(err => {
           console.log(err);
-          return res.json(err);
+          return res.status(500).json(err);
         });
     });
   });
@@ -137,20 +134,16 @@ router.route('/register').post((req, res) => {
 router.route('/:id/verify').put((req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
+  const sessionUser = req.user;
 
   if (!id) return res.json({ user: null, verified: false, checked: true });
-
-  console.log(req.params);
-  console.log(req.body);
-  console.log(id, hash);
 
   return new User()
     .where({ id, hash })
     .save({ verified: true, hash: null }, { method: 'update' })
     .then(user => {
       user = user.toJSON();
-      console.log('Found');
-      console.log(req.user);
+      req.user.verified = true;
       return res.json({ user, verified: user.verified, checked: true });
     })
     .catch(err => {
@@ -193,7 +186,8 @@ router.route('/login').post(passport.authenticate('local'), (req, res) => {
   return res.json({
     id: req.user.id,
     name: req.user.name,
-    verified: req.user.verified
+    verified: req.user.verified,
+    role_id: req.user.role_id
   });
 });
 

@@ -27,6 +27,8 @@ class ItemDetail extends Component {
       ? this.props.item.condition.name
       : null;
     const owner = this.props.item.owner ? this.props.item.owner.id : null;
+    const { role_id } = user;
+
     return (
       <div id="item_detail">
         <div id="item_main">
@@ -45,7 +47,7 @@ class ItemDetail extends Component {
             <div id="item_updated_at">
               Updated {moment(this.props.item.updated_at).fromNow()}
             </div>
-            {user.id === Number(owner) ? (
+            {user.id === Number(owner) || role_id === 1 ? (
               <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
                 {' '}
                 Edit Item{' '}

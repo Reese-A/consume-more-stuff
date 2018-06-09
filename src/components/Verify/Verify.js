@@ -33,8 +33,6 @@ class AuthHome extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(prevProps);
-    console.log(prevState);
     if (this.state.verified) {
       const user = loadState().user;
       user.verified = this.state.verified;
@@ -51,6 +49,7 @@ class AuthHome extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div id="verify">
         {!this.state.verified && !this.state.checked ? (
