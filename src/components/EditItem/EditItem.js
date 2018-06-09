@@ -9,9 +9,12 @@ class EditItem extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    // this.clearPreview = this.clearPreview.bind(this);
   }
 
   componentDidMount() {
@@ -111,6 +114,13 @@ class EditItem extends Component {
 
     this.setState({ [name]: value });
   }
+
+  // clearPreview(event) {
+  //   event.preventDefault();
+  //   const preview = document.getElementById('preview_img_container');
+  //   preview.innerHTML = '';
+  //   this.img_input.value = '';
+  // }
 
   handleFiles(event) {
     let { files } = event.target;
@@ -299,6 +309,7 @@ class EditItem extends Component {
 const mapStateToProps = state => {
   return {
     item: state.items,
+    // user: state.user,
     categories: state.category,
     conditions: state.condition,
     statuses: state.status
