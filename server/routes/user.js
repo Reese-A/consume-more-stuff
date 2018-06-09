@@ -150,7 +150,8 @@ router.route('/:id/verify').put((req, res) => {
     .then(user => {
       user = user.toJSON();
       console.log('Found');
-      return res.json(user);
+      console.log(req.user);
+      return res.json({ user, verified: user.verified, checked: true });
     })
     .catch(err => {
       if (err) {
