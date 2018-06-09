@@ -9,6 +9,11 @@ import './ItemDetail.css';
 const moment = require('moment');
 
 class ItemDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.loadItem(id);
