@@ -105,13 +105,13 @@ server.use(express.static('build'));
 
 server.use('/api', routes);
 
-server.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../build/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
+// server.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, '../build/index.html'), function(err) {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });
 
 server.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);

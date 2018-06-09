@@ -40,7 +40,7 @@ class Login extends Component {
     const user = this.props.user ? this.props.user : {};
     saveState({ user: user });
     if (Object.keys(user).length > 0) {
-      this.props.history.push(`/user/${user.id}/home`);
+      this.props.history.push(`/`);
     }
   }
 
