@@ -5,15 +5,11 @@ import './Card.css';
 
 const moment = require('moment');
 class Card extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="card">
         <Link className="image_link" to={`/item/${this.props.id}`}>
-          <img className="card_image" src={this.props.img_url} />
+          <img className="card_image" src={this.props.img_url} alt="" />
         </Link>
         <div className="card_price">
           {this.props.price ? this.props.price : 'free'}

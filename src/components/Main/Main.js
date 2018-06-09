@@ -3,9 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from '../Home/Home';
 import Category from '../Category/Category';
-import Login from '../../containers/Login/Login';
 import All from '../All/All';
-import Register from '../../containers/Register/Register';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import NewItem from '../NewItem/NewItem';
 import EditItem from '../EditItem/EditItem';

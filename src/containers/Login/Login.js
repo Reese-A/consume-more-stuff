@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveState, loadState } from '../../localStorage';
+import { saveState } from '../../localStorage';
 import { withRouter } from 'react-router-dom';
 
 import './Login.css';

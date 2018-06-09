@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
 
 import {
   loadAllCategoryItems,
@@ -27,7 +26,7 @@ class Category extends React.Component {
     let page = params.get('page');
     if (!page) page = 1;
 
-    Number(page) + 1;
+    page = Number(page) + 1;
     this.props.history.push(`/category/${name}?page=${page}`);
     window.scroll(0, 0);
   }

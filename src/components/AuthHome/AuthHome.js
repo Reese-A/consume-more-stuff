@@ -10,9 +10,6 @@ import Row from '../Row/Row';
 import './AuthHome.css';
 
 class AuthHome extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.items === this.props.items) {
       this.props.loadUserItems(this.props.match.params.id);

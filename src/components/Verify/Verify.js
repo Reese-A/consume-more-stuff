@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { saveState, loadState } from '../../localStorage';
 
@@ -18,7 +17,7 @@ class AuthHome extends React.Component {
   componentDidMount() {
     const params = new URL(document.location).searchParams;
     const hash = params.get('hash');
-    const id = parseInt(params.get('id'));
+    const id = Number(params.get('id'));
 
     fetch(`/api/user/${id}/verify?hash=${hash}`, {
       method: 'PUT',

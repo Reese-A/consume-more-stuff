@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
-import logo from './logo.svg';
 import './App.css';
 
 import { loadCategories } from '../../redux/actions/category-actions';

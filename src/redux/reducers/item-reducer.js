@@ -9,7 +9,6 @@ import {
   LOAD_ALL_CATEGORY_ITEMS
 } from '../actions/category-actions';
 import { LOAD_USER_ITEMS } from '../actions/user-actions';
-import store from '../../index';
 
 export const items = (state = [], action) => {
   switch (action.type) {
