@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../redux/actions/user-actions';
-import { saveState } from '../../localStorage';
+import { saveState, loadState } from '../../localStorage';
 
 import MenuButton from '../MenuButton/MenuButton';
 
@@ -33,12 +32,20 @@ class Header extends Component {
   }
 
   logout() {
-    this.props.logoutUser();
-    saveState({ user: {} });
-    this.props.history.push('/');
+    // this.props.logoutUser();
+    return fetch('/api/user/logout', { credentials: 'same-origin' })
+      .then(res => res.json())
+      .then(res => {
+        saveState({ user: {} });
+        this.props.history.push('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
+    const user = loadState().user;
     return (
       <header id="header">
         {/* {this.state.width > 600 ? (
@@ -65,9 +72,9 @@ class Header extends Component {
           <Link to="/">CMS</Link>
         </div>
 
-        {this.props.user.id ? (
+        {user.id ? (
           <div className="auth_elements">
-            <div id="user_greeting"> Hello, {this.props.user.name} </div>
+            <div id="user_greeting"> Hello, {user.name} </div>
             <a id="logout_button" onClick={this.logout}>
               Logout
             </a>
@@ -89,16 +96,12 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    // user: state.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    logoutUser: () => {
-      dispatch(logoutUser());
-    }
-  };
+  return {};
 };
 
 export default withRouter(

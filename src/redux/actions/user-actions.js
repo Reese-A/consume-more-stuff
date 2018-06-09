@@ -61,15 +61,16 @@ export const loadUser = () => {
 //   };
 // };
 
-export const logoutUser = () => {
-  return dispatch => {
-    return fetch('/api/user/logout', { credentials: 'same-origin' })
-      .then(res => res.json())
-      .then(res => {
-        return dispatch({ type: LOGOUT_USER, user: {} });
-      });
-  };
-};
+// export const logoutUser = () => {
+//   return dispatch => {
+//     return fetch('/api/user/logout', { credentials: 'same-origin' })
+//       .then(res => res.json())
+//       .then(res => {
+//         saveState({ user: {} });
+//         return dispatch({ type: LOGOUT_USER, user: {} });
+//       });
+//   };
+// };
 
 export const loadUserItems = id => {
   return dispatch => {

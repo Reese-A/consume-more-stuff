@@ -22,9 +22,9 @@ class AuthHome extends React.Component {
     this.props.loadUserItems(this.props.match.params.id);
   }
   render() {
-    const persistedState = loadState();
-    if (persistedState.user.id !== Number(this.props.match.params.id)) {
-      return <Redirect to={`/user/${persistedState.user.id}/home`} />;
+    const user = loadState().user;
+    if (user.id !== Number(this.props.match.params.id)) {
+      return <Redirect to={`/user/${user.id}/home`} />;
     }
     return (
       <div id="auth_home">
@@ -44,7 +44,6 @@ class AuthHome extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
     items: state.items,
     statuses: state.status
   };

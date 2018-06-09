@@ -311,7 +311,6 @@ class EditItem extends Component {
 const mapStateToProps = state => {
   return {
     item: state.items,
-    user: state.user,
     categories: state.category,
     conditions: state.condition,
     statuses: state.status
