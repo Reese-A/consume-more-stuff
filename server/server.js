@@ -106,7 +106,7 @@ server.use(express.static('build'));
 server.use('/api', routes);
 
 server.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../build'), function(err) {
+  res.sendFile(path.join(__dirname, '../build/index.html'), function(err) {
     if (err) {
       res.status(500).send(err);
     }
