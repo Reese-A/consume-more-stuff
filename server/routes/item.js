@@ -190,7 +190,8 @@ router
         });
     },
     (req, res) => {
-      if (!req.files.length) return req.temp.item;
+      if (!req.files.length) return res.json(req.temp.item);
+
       return fs.readFile(req.files[0].path, (err, data) => {
         const base64data = new Buffer(data, 'binary');
         s3.upload(
