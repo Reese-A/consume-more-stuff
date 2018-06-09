@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom';
 
 import { saveState, loadState } from '../../localStorage';
 
-// import qs from 'query-string';
-
 import './Verify.css';
 
 class AuthHome extends React.Component {
@@ -18,12 +16,10 @@ class AuthHome extends React.Component {
     };
   }
   componentDidMount() {
-    // const parse = qs.parse(this.props.location.search);
     const params = new URL(document.location).searchParams;
     const hash = params.get('hash');
     const id = parseInt(params.get('id'));
 
-    // const { hash, id } = parse;
     fetch(`/api/user/${id}/verify?hash=${hash}`, {
       method: 'PUT',
       body: JSON.stringify({ hash, id }),
@@ -32,9 +28,7 @@ class AuthHome extends React.Component {
     })
       .then(res => res.json())
       .then(verified => {
-        this.setState(verified, () => {
-          console.log(this.state);
-        });
+        this.setState(verified, () => {});
       });
   }
 

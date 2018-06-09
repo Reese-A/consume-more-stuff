@@ -8,7 +8,6 @@ import {
 } from '../../redux/actions/category-actions';
 
 import Card from '../Card/Card';
-// import qs from 'query-string';
 
 import './Category.css';
 

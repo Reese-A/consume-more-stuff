@@ -41,7 +41,6 @@ class NewItem extends React.Component {
       dimensions_value,
       dimensions_units,
       notes,
-      // img_url,
       img_file,
       category,
       condition
@@ -52,7 +51,6 @@ class NewItem extends React.Component {
       make,
       model,
       notes,
-      // img_url,
       img_file,
       category_id: category,
       condition_id: condition
