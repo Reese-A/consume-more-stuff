@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from '../Home/Home';
 import Category from '../Category/Category';
@@ -38,11 +38,7 @@ const Main = props => {
         {/* <Route exact path="/item/new-item" component={NewItem} /> */}
         <Route exact path="/item/:id" component={ItemDetail} />
         <PrivateRoute exact path="/item/:id/edit" component={EditItem} />
-        <Route
-          render={() => {
-            return <Redirect to="/" />;
-          }}
-        />
+        <Route render={() => <Redirect to="/" />} />
       </Switch>
     </main>
   );

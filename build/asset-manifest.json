@@ -1,7 +1,12 @@
 {
   "main.css": "static/css/main.607c185a.css",
   "main.css.map": "static/css/main.607c185a.css.map",
+<<<<<<< HEAD
   "main.js": "static/js/main.44c644f6.js",
   "main.js.map": "static/js/main.44c644f6.js.map",
+=======
+  "main.js": "static/js/main.fb4879ae.js",
+  "main.js.map": "static/js/main.fb4879ae.js.map",
+>>>>>>> 34faad8d257d6e7dc1b7ffb054b7d7fc90c666f8
   "static/media/logo.svg": "static/media/logo.5d5d9eef.svg"
 }
