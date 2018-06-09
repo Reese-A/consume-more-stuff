@@ -37,7 +37,6 @@
 }
 
 #verify #verify_text span {
-  font-size: 3rem;
   animation-name: blink;
   animation-duration: 1.9s;
   animation-iteration-count: infinite;
