@@ -134,15 +134,11 @@ router.route('/register').post((req, res) => {
   });
 });
 
-router.route('/:id/verify').put((req, res) => {
+router.route('/:id/verify').put(isAuthenticated, (req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
 
   if (!id) return res.json({ user: null, verified: false, checked: true });
-
-  console.log(req.params);
-  console.log(req.body);
-  console.log(id, hash);
 
   return new User()
     .where({ id, hash })
@@ -150,7 +146,7 @@ router.route('/:id/verify').put((req, res) => {
     .then(user => {
       user = user.toJSON();
       console.log('Found');
-      return res.json(user);
+      return res.json({ user, verified: user.verified, checked: true });
     })
     .catch(err => {
       if (err) {
