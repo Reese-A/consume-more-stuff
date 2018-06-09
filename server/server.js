@@ -5,6 +5,7 @@ const session = require('express-session');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const Redis = require('connect-redis')(session);
+const path = require('path');
 
 const routes = require('./routes/_routes');
 
@@ -103,6 +104,14 @@ passport.use(
 server.use(express.static('build'));
 
 server.use('/api', routes);
+
+server.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build'), function(err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 server.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
