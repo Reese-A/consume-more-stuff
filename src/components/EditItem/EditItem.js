@@ -180,7 +180,7 @@ class EditItem extends Component {
             name="description"
             placeholder="Description"
             onChange={this.handleChange}
-            value={this.state.description}
+            value={this.state.description || ''}
             pattern="([A-Za-z0-9]+ ?)*"
             autoFocus
           />
@@ -188,7 +188,7 @@ class EditItem extends Component {
             <input
               type="number"
               name="price_value"
-              value={this.state.price_value}
+              value={this.state.price_value || 0}
               placeholder="Price"
               onChange={this.handleChange}
             />
@@ -196,7 +196,7 @@ class EditItem extends Component {
               type="text"
               name="price_currency"
               placeholder="Currency"
-              value={this.state.price_currency}
+              value={this.state.price_currency || ''}
               onChange={this.handleChange}
               pattern="([A-Za-z]+ ?)*"
             />
@@ -206,7 +206,7 @@ class EditItem extends Component {
             type="text"
             name="make"
             placeholder="Manufacturer"
-            value={this.state.make}
+            value={this.state.make || ''}
             pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
@@ -214,7 +214,7 @@ class EditItem extends Component {
             type="text"
             name="model"
             placeholder="Model"
-            value={this.state.model}
+            value={this.state.model || ''}
             pattern="([A-Za-z0-9]+ ?)*"
             onChange={this.handleChange}
           />
@@ -224,7 +224,7 @@ class EditItem extends Component {
               type="text"
               name="dimensions_value"
               placeholder="Dimensions"
-              value={this.state.dimensions_value}
+              value={this.state.dimensions_value || ''}
               pattern=" *([0-9]+.?[0-9]*){1,1} *[xX] *([0-9]+.?[0-9]*){1,1} *[xX] *([0-9]+.?[0-9]*){1,1} *"
               onChange={this.handleChange}
             />
@@ -232,7 +232,7 @@ class EditItem extends Component {
               type="text"
               name="dimensions_units"
               placeholder="Units"
-              value={this.state.dimensions_units}
+              value={this.state.dimensions_units || ''}
               onChange={this.handleChange}
               pattern="([A-Za-z]+ ?)*"
             />
@@ -242,7 +242,7 @@ class EditItem extends Component {
             type="text"
             name="notes"
             placeholder="Product Notes"
-            value={this.state.notes}
+            value={this.state.notes || ''}
             onChange={this.handleChange}
           />
           <div id="preview">
