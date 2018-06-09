@@ -7,11 +7,12 @@ const moment = require('moment');
 
 const User = require('../db/models/User');
 
-const isAuthenticated = require('../utilities/isAuthenticated');
+// const isAuthenticated = require('../utilities/isAuthenticated');
+const { isAuthenticated, isAuthorizedUser } = require('../utilities/auth');
 const router = express.Router();
 const saltedRounds = 12;
 
-router.route('/:id/items').get(isAuthenticated, (req, res) => {
+router.route('/:id/items').get(isAuthorizedUser, (req, res) => {
   const { id } = req.params;
   const page = req.query.page > 0 ? req.query.page : 1;
   const limit = req.query.limit;
@@ -40,7 +41,7 @@ router.route('/:id/items').get(isAuthenticated, (req, res) => {
 
 router
   .route('/:id/password')
-  .put(passport.authenticate('local'), isAuthenticated, (req, res) => {
+  .put(passport.authenticate('local'), isAuthorizedUser, (req, res) => {
     const id = Number(req.params.id);
     const userId = Number(req.user.id);
     if (id !== userId) {
@@ -74,10 +75,6 @@ router
     });
   });
 
-router.route('/test').get((req, res) => {
-  return res.json({ message: process.env.EMAIL });
-});
-
 router.route('/register').post((req, res) => {
   let { email, password, name } = req.body;
 
@@ -103,7 +100,8 @@ router.route('/register').post((req, res) => {
         name,
         password,
         hash,
-        verified: false
+        verified: false,
+        role_id: 2
       })
         .save()
         .then(user => {
@@ -134,9 +132,10 @@ router.route('/register').post((req, res) => {
   });
 });
 
-router.route('/:id/verify').put(isAuthenticated, (req, res) => {
+router.route('/:id/verify').put((req, res) => {
   const { id } = req.params;
   const { hash } = req.body;
+  const sessionUser = req.user;
 
   if (!id) return res.json({ user: null, verified: false, checked: true });
 
@@ -145,11 +144,9 @@ router.route('/:id/verify').put(isAuthenticated, (req, res) => {
     .save({ verified: true, hash: null }, { method: 'update' })
     .then(user => {
       user = user.toJSON();
-      console.log('Found');
-<<<<<<< HEAD
-=======
       console.log(req.user);
->>>>>>> 9379494871995ec0c388807027397dd807fed84c
+      req.user.verified = true;
+      console.log(req.user);
       return res.json({ user, verified: user.verified, checked: true });
     })
     .catch(err => {
