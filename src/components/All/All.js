@@ -18,7 +18,7 @@ class All extends React.Component {
 
   handleNext() {
     const params = new URL(document.location).searchParams;
-    let { page } = params.get('page');
+    let page = params.get('page');
     if (!page) {
       page = 1;
     }
@@ -29,14 +29,14 @@ class All extends React.Component {
 
   handlePrev() {
     const params = new URL(document.location).searchParams;
-    let { page } = params.get('page');
+    let page = params.get('page');
     page = Number(page) - 1;
     this.props.history.push(`/all?page=${page}`);
     window.scroll(0, 0);
   }
   componentDidUpdate(prevProps, prevState) {
     const params = new URL(document.location).searchParams;
-    let { page } = params.get('page');
+    let page = params.get('page');
     if (prevProps.items === this.props.items) {
       this.props.loadItems(page, 10);
     }
@@ -44,7 +44,8 @@ class All extends React.Component {
 
   componentDidMount() {
     const params = new URL(document.location).searchParams;
-    let { page } = params.get('page');
+    let page = params.get('page');
+    if (!page) page = 1;
     this.props.loadItems(page, 10);
   }
 
