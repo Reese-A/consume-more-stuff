@@ -38,6 +38,11 @@ const Main = props => {
         {/* <Route exact path="/item/new-item" component={NewItem} /> */}
         <Route exact path="/item/:id" component={ItemDetail} />
         <PrivateRoute exact path="/item/:id/edit" component={EditItem} />
+        <Route
+          render={() => {
+            return <Redirect to="/" />;
+          }}
+        />
       </Switch>
     </main>
   );
