@@ -127,9 +127,7 @@ class ChangePassword extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
+  return {};
 };
 
 // const mapDispatchToProps = dispatch => {

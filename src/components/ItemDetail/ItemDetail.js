@@ -19,7 +19,7 @@ class ItemDetail extends Component {
   }
 
   render() {
-    const persistedState = loadState();
+    const user = loadState().user;
     const category = this.props.item.category
       ? this.props.item.category.name
       : null;
@@ -45,7 +45,7 @@ class ItemDetail extends Component {
             <div id="item_updated_at">
               Updated {moment(this.props.item.updated_at).fromNow()}
             </div>
-            {persistedState && persistedState.user.id === Number(owner) ? (
+            {user.id === Number(owner) ? (
               <Link id="edit_button" to={`${this.props.match.params.id}/edit`}>
                 {' '}
                 Edit Item{' '}
