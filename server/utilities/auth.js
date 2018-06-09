@@ -1,3 +1,6 @@
+const User = require('../db/models/User');
+const Item = require('../db/models/Item');
+
 const isAuthenticated = (req, res, next) => {
   console.log('is authenticated');
 
@@ -23,11 +26,14 @@ const isAuthorizedUser = (req, res, next) => {
 
   const { id } = req.params; // user id
 
+  console.log('id', id);
+
   return new User()
     .where({ id })
     .fetch()
     .then(user => {
       const { id } = user;
+      console.log(user);
 
       if (id !== sessionUser.id)
         return res.status(401).json({ authorized: false });
