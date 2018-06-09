@@ -149,9 +149,14 @@ router.route('/:id/verify').put((req, res) => {
     .catch(err => {
       if (err) {
         console.log('Not Found');
-        return new User({ id })
+        console.log(id);
+        return new User()
+          .where({ id })
           .fetch()
           .then(user => {
+            if (!user)
+              return res.json({ user: null, verified: false, checked: true });
+
             user = user.toJSON();
             const { id, name, verified } = user;
             return res.json({ user: { id, name }, verified, checked: true });

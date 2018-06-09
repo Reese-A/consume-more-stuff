@@ -76,6 +76,10 @@ class AuthHome extends React.Component {
     if (this.state.verified && this.state.checked) {
       verify = <div id="verify_text">Account Verified</div>;
     }
+
+    if (this.state.verified) {
+      verify = <div id="verify_text">Account Verified</div>;
+    }
     return <div id="verify">{verify}</div>;
   }
 }
