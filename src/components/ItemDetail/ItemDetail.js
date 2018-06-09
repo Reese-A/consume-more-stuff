@@ -11,6 +11,7 @@ const moment = require('moment');
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   componentDidMount() {
