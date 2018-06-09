@@ -107,7 +107,7 @@ router.route('/register').post((req, res) => {
         .then(user => {
           return req.login(user, err => {
             if (err) throw err;
-            const { id, name, verified, hash } = user.toJSON();
+            const { id, name, verified, role_id, hash } = user.toJSON();
             const sgMail = require('@sendgrid/mail');
             sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -120,13 +120,12 @@ router.route('/register').post((req, res) => {
             };
             sgMail.send(msg);
 
-            return res.json({ id, name, verified });
+            return res.json({ id, name, verified, role_id });
           });
         })
-        .then(user => {})
         .catch(err => {
           console.log(err);
-          return res.json(err);
+          return res.status(500).json(err);
         });
     });
   });
@@ -144,9 +143,7 @@ router.route('/:id/verify').put((req, res) => {
     .save({ verified: true, hash: null }, { method: 'update' })
     .then(user => {
       user = user.toJSON();
-      console.log(req.user);
       req.user.verified = true;
-      console.log(req.user);
       return res.json({ user, verified: user.verified, checked: true });
     })
     .catch(err => {
@@ -189,7 +186,8 @@ router.route('/login').post(passport.authenticate('local'), (req, res) => {
   return res.json({
     id: req.user.id,
     name: req.user.name,
-    verified: req.user.verified
+    verified: req.user.verified,
+    role_id: req.user.role_id
   });
 });
 
