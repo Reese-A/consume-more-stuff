@@ -49,29 +49,34 @@ class AuthHome extends React.Component {
 
   render() {
     console.log(this.state);
-    return (
-      <div id="verify">
-        {!this.state.verified && !this.state.checked ? (
-          <div id="verify_text">
-            {/* Verifying */}
-            <span>V</span>
-            <span>e</span>
-            <span>r</span>
-            <span>i</span>
-            <span>f</span>
-            <span>y</span>
-            <span>i</span>
-            <span>n</span>
-            <span>g</span>
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
-          </div>
-        ) : (
-          <div>You Failure!</div>
-        )}
-      </div>
-    );
+    let verify = null;
+    if (!this.state.verified && !this.state.checked) {
+      verify = (
+        <div id="verify_text">
+          {/* Verifying */}
+          <span>V</span>
+          <span>e</span>
+          <span>r</span>
+          <span>i</span>
+          <span>f</span>
+          <span>y</span>
+          <span>i</span>
+          <span>n</span>
+          <span>g</span>
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
+        </div>
+      );
+    }
+    if (!this.state.verified && this.state.checked) {
+      verify = <div id="verify_text">Could not verify account</div>;
+    }
+
+    if (this.state.verified && this.state.checked) {
+      verify = <div id="verify_text">Account Verified</div>;
+    }
+    return <div id="verify">{verify}</div>;
   }
 }
 
